@@ -7,6 +7,11 @@ class DefaultRolesAndPermissions
   public static function permissions() {
     return [
       /**
+       * stats
+       */
+      'view_stats',
+      
+      /**
        * posts permissions
        */
       'create_posts',
@@ -20,41 +25,12 @@ class DefaultRolesAndPermissions
       'publish_posts',
 
       /**
-       * datasets permissions
+       * platforms
        */
-      'create_datasets',
-      'update_datasets',
-      'update_own_datasets',
-      'view_datasets',
-      'view_own_datasets',
-      'delete_datasets',
-      'delete_own_datasets',
-      'approve_datasets',
-      'publish_datasets',
-
-      /**
-       * dataformats permissions
-       */
-      'create_dataformats',
-      'update_dataformats',
-      'view_dataformats',
-      'delete_dataformats',
-
-      /**
-       * datalicenses permissions
-       */
-      'create_datalicenses',
-      'update_datalicenses',
-      'view_datalicenses',
-      'delete_datalicenses',
-
-      /**
-       * datatopics permissions
-       */
-      'create_datatopics',
-      'update_datatopics',
-      'view_datatopics',
-      'delete_datatopics',
+      'create_platforms',
+      'update_platforms',
+      'view_platforms',
+      'delete_platforms',
 
       /**
        * roles permissions
@@ -86,28 +62,12 @@ class DefaultRolesAndPermissions
       'delete_partners',
 
       /**
-       * designations permissions
-       */
-      'create_designations',
-      'update_designations',
-      'view_designations',
-      'delete_designations',
-
-      /**
        * members permissions
        */
-      'create_members',
-      'update_members',
-      'view_members',
-      'delete_members',
-
-      /**
-       * services permissions
-       */
-      'create_services',
-      'update_services',
-      'view_services',
-      'delete_services',
+      'create_memorial',
+      'update_memorial',
+      'view_memorial',
+      'delete_memorial',
 
       /**
        * trackers permissions
@@ -135,58 +95,6 @@ class DefaultRolesAndPermissions
       'approve_comments',
 
       /**
-       * datasets permissions
-       */
-      'create_datasets',
-      'update_datasets',
-      'update_own_datasets',
-      'view_datasets',
-      'view_own_datasets',
-      'delete_datasets',
-      'delete_own_datasets',
-      'approve_datasets',
-      'publish_datasets',
-
-      /**
-       * dataformats permissions
-       */
-      'create_dataformats',
-      'update_dataformats',
-      'view_dataformats',
-
-      /**
-       * datalicenses permissions
-       */
-      'create_datalicenses',
-      'update_datalicenses',
-      'view_datalicenses',
-      'delete_datalicenses',
-
-      /**
-       * datatopics permissions
-       */
-      'create_datatopics',
-      'update_datatopics',
-      'view_datatopics',
-      'delete_datatopics',
-
-      /**
-       * datatags permissions
-       */
-      'create_datatags',
-      'update_datatags',
-      'view_datatags',
-      'delete_datatags',
-
-      /**
-       * products permissions
-       */
-      'create_products',
-      'update_products',
-      'view_products',
-      'delete_products',
-
-      /**
        * Location permissions
        */
       'view_states', 
@@ -205,9 +113,7 @@ class DefaultRolesAndPermissions
       'Admin',
       'User',
       'Writer',
-      'Editor',
-      'Data Curator',
-      'Data Researcher & Editor'
+      'Editor'
     ];
   }
 
@@ -226,26 +132,6 @@ class DefaultRolesAndPermissions
         'view_own_users',
         'update_own_users',
         'change_users_own_password',
-
-        /**
-         * datasets permissions
-         */
-        'view_datasets',
-
-        /**
-         * dataformats permissions
-         */
-        'view_dataformats',
-
-        /**
-         * datalicenses permissions
-         */
-        'view_datalicenses',
-
-        /**
-         * datatopics permissions
-         */
-        'view_datatopics',
       ],
       'Writer' => [
         /**
@@ -264,35 +150,6 @@ class DefaultRolesAndPermissions
         'view_own_users',
         'update_own_users',
         'change_users_own_password',
-
-        /**
-         * datasets permissions
-         */
-        'view_datasets',
-
-        /**
-         * dataformats permissions
-         */
-        'create_dataformats',
-        'update_dataformats',
-        'view_dataformats',
-        'delete_dataformats',
-
-        /**
-         * datalicenses permissions
-         */
-        'create_datalicenses',
-        'update_datalicenses',
-        'view_datalicenses',
-        'delete_datalicenses',
-
-        /**
-         * datatopics permissions
-         */
-        'create_datatopics',
-        'update_datatopics',
-        'view_datatopics',
-        'delete_datatopics',
       ],
       'Editor' => [
         /**
@@ -314,121 +171,7 @@ class DefaultRolesAndPermissions
         'view_own_users',
         'update_own_users',
         'change_users_own_password',
-
-        /**
-         * datasets permissions
-         */
-        'view_datasets',
-
-        /**
-         * dataformats permissions
-         */
-        'view_dataformats',
-
-        /**
-         * datalicenses permissions
-         */
-        'view_datalicenses',
-
-        /**
-         * datatopics permissions
-         */
-        'view_datatopics',
       ],
-      'Data Curator' => [
-        /**
-         * posts permissions
-         */
-        'view_posts',
-
-        /**
-         * users permissions
-         */
-        'view_own_users',
-        'update_own_users',
-        'change_users_own_password',
-
-        /**
-         * datasets permissions
-         */
-        'create_datasets',
-        'update_datasets',
-        'update_own_datasets',
-        'view_datasets',
-        'view_own_datasets',
-        'delete_datasets',
-        'delete_own_datasets',
-
-        /**
-         * dataformats permissions
-         */
-        'create_dataformats',
-        'update_dataformats',
-        'view_dataformats',
-
-        /**
-         * datalicenses permissions
-         */
-        'create_datalicenses',
-        'update_datalicenses',
-        'view_datalicenses',
-
-        /**
-         * datatopics permissions
-         */
-        'create_datatopics',
-        'update_datatopics',
-        'view_datatopics',
-      ],
-      'Data Researcher & Editor' => [
-        /**
-         * posts permissions
-         */
-        'view_posts',
-
-        /**
-         * users permissions
-         */
-        'view_own_users',
-        'update_own_users',
-        'change_users_own_password',
-
-        /**
-         * datasets permissions
-         */
-        'create_datasets',
-        'update_datasets',
-        'update_own_datasets',
-        'view_datasets',
-        'view_own_datasets',
-        'delete_datasets',
-        'delete_own_datasets',
-        'approve_datasets',
-        'publish_datasets',
-
-        /**
-         * dataformats permissions
-         */
-        'create_dataformats',
-        'update_dataformats',
-        'view_dataformats',
-
-        /**
-         * datalicenses permissions
-         */
-        'create_datalicenses',
-        'update_datalicenses',
-        'view_datalicenses',
-        'delete_datalicenses',
-
-        /**
-         * datatopics permissions
-         */
-        'create_datatopics',
-        'update_datatopics',
-        'view_datatopics',
-        'delete_datatopics',
-      ]
     ];
   }
 }

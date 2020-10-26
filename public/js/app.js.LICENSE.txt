@@ -1,8 +1,3 @@
-/* @preserve
- * Leaflet 1.6.0, a JS library for interactive maps. http://leafletjs.com
- * (c) 2010-2019 Vladimir Agafonkin, (c) 2010-2011 CloudMade
- */
-
 /* NProgress, (c) 2013, 2014 Rico Sta. Cruz - http://ricostacruz.com/nprogress
  * @license MIT */
 
@@ -153,12 +148,6 @@
  */
 
 /*!
- * vue-element-loading v1.1.4
- * (c) 2019-present biig_pongsatorn <biig_pongsatorn@hotmail.com>
- * Released under the MIT License.
- */
-
-/*!
  * vue-filepond v6.0.2
  * A handy FilePond adapter component for Vue
  * 
@@ -186,30 +175,6 @@
  * author : Adam Draper
  * license : MIT
  * http://adamwdraper.github.com/Numeral-js/
- */
-
-/*! Bootstrap 4 integration for DataTables' Responsive
- * ©2016 SpryMedia Ltd - datatables.net/license
- */
-
-/*! Bootstrap 4 styling wrapper for FixedHeader
- * ©2018 SpryMedia Ltd - datatables.net/license
- */
-
-/*! DataTables 1.10.20
- * ©2008-2019 SpryMedia Ltd - datatables.net/license
- */
-
-/*! DataTables Bootstrap 4 integration
- * ©2011-2017 SpryMedia Ltd - datatables.net/license
- */
-
-/*! FixedHeader 3.1.6-dev
- * ©2009-2018 SpryMedia Ltd - datatables.net/license
- */
-
-/*! Responsive 2.2.3
- * 2014-2018 SpryMedia Ltd - datatables.net/license
  */
 
 /**

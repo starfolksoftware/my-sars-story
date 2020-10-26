@@ -250,11 +250,11 @@ export default {
       trans: JSON.parse(CurrentTenant.translations),
       breadcrumbLinks: [
         {
-          title: 'Stats',
+          title: JSON.parse(CurrentTenant.translations).app.stats,
           url: '/admin/stats',
         },
         {
-          title: 'Stat',
+          title: JSON.parse(CurrentTenant.translations).app.stat,
           url: '#',
         }
       ]

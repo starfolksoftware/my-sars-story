@@ -182,12 +182,6 @@ export default {
         'Post': {
           'class': 'App\\Model\\Blog\\Post'
         },
-        'Dataset': {
-          'class': 'App\\Model\\Data\\Dataset'
-        },
-        'Dataresource': {
-          'class': 'App\\Model\\Data\\Dataresource'
-        }
       },
       className: 'App\\Model\\Blog\\Post',
       isReady: false,
@@ -195,7 +189,7 @@ export default {
       infiniteId: +new Date(),
       breadcrumbLinks: [
         {
-          title: 'Stats',
+          title: JSON.parse(CurrentTenant.translations).app.stats,
           url: '/admin/stats',
         }
       ]
@@ -210,14 +204,6 @@ export default {
         case 'App\\Model\\Blog\\Post':
           url = "/api/v1/posts"
           break;
-
-        case 'App\\Model\\Data\\Dataset':
-          url = "/api/v1/datasets"
-          break;
-
-        case 'App\\Model\\Data\\Dataresource':
-          url = "/api/v1/dataresources"
-          break;
       
         default:
           url = "";
@@ -229,8 +215,13 @@ export default {
   },
 
   mounted() {
-    this.fetchStats();
-    this.fetchModels();
+    if (this.hasPermission('view_stats')) {
+      this.fetchStats()
+      this.fetchModels()
+    } else {
+      this.isReady = true
+      NProgress.done()
+    }
   },
 
   methods: {
@@ -278,14 +269,6 @@ export default {
               case 'App\\Model\\Blog\\Post':
                 this.items.push(...response.data.posts.data);
                 break;
-
-              case 'App\\Model\\Data\\Dataset':
-                this.items.push(...response.data.datasets.data);
-                break;
-
-              case 'App\\Model\\Data\\Dataresource':
-                this.items.push(...response.data.dataresources.data);
-                break;
             
               default:
                 break;
@@ -313,14 +296,6 @@ export default {
       switch (this.className) {
         case 'App\\Model\\Blog\\Post':
           isEmpty = _.isEmpty(response.data.posts.data)
-          break;
-
-        case 'App\\Model\\Data\\Dataset':
-          isEmpty = _.isEmpty(response.data.datasets.data)
-          break;
-
-        case 'App\\Model\\Data\\Dataresource':
-          isEmpty = _.isEmpty(response.data.dataresources.data)
           break;
       
         default:

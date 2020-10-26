@@ -67,7 +67,7 @@ export default {
       trans: JSON.parse(CurrentTenant.translations),
       breadcrumbLinks: [
         {
-          title: 'All States',
+          title: JSON.parse(CurrentTenant.translations).app.states,
           url: '/admin/states',
         }
       ]

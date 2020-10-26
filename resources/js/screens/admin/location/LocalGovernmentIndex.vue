@@ -87,7 +87,7 @@ export default {
       trans: JSON.parse(CurrentTenant.translations),
       breadcrumbLinks: [
         {
-          title: 'All Local Governments',
+          title: JSON.parse(CurrentTenant.translations).app.local_governments,
           url: '/admin/local-governments',
         }
       ]

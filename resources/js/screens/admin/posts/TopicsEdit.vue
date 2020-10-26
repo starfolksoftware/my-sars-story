@@ -131,11 +131,11 @@ export default {
       trans: JSON.parse(CurrentTenant.translations),
       breadcrumbLinks: [
         {
-          title: 'All Topics',
+          title: JSON.parse(CurrentTenant.translations).app.topics,
           url: '/admin/posts/topics',
         },
         {
-          title: 'New Topic',
+          title: JSON.parse(CurrentTenant.translations).app.topic,
           url: '/admin/posts/topics/create',
         }
       ]

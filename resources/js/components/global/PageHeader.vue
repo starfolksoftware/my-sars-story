@@ -36,75 +36,6 @@
               }}
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/portfolio">
-              {{
-                trans.app.portfolio
-              }}
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/services">
-              {{
-                trans.app.services
-              }}
-            </router-link>
-          </li>
-          <li class="nav-item dropdown">
-            <a 
-              class="nav-link dropdown-toggle" 
-              href="#" id="productDropdown" 
-              role="button" 
-              data-toggle="dropdown" 
-              aria-haspopup="true" 
-              aria-expanded="false"
-            >
-              {{ trans.app.products }}
-            </a>
-            <div 
-              class="dropdown-menu" 
-              aria-labelledby="productDropdown"
-            >
-              <router-link 
-                v-for="(product, index) in products"
-                :key="index"
-                class="dropdown-item" 
-                :to="{name: 'products-show', params: { id: product.id }}">
-                {{ product.name }}
-              </router-link>
-            </div>
-          </li>
-          <!-- <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="trackerDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >{{ trans.app.trackers }}</a>
-            <div class="dropdown-menu" aria-labelledby="trackerDropdown">
-              <router-link
-                v-for="(tracker, index) in trackers"
-                :key="index"
-                class="dropdown-item"
-                :to="{name: 'trackerItems-main', params: { trackerId: tracker.id }}"
-              >{{ tracker.name }}</router-link>
-            </div>
-          </li> -->
-          <router-link
-            class="nav-item nav-link" 
-            to="/members"
-          >
-            {{ trans.app.team }}
-          </router-link>
-          <!-- <li class="nav-item">
-            <router-link class="nav-link" to="/data">{{ trans.app.data }}</router-link>
-          </li> -->
-          <!-- <li class="nav-item">
-            <router-link class="nav-link" to="/about">{{ trans.app.about }}</router-link>
-          </li> -->
           <li class="nav-item d-none d-md-block">
             <router-link class="nav-link" to="/contact">
               <button class="btn btn-outline-info">
@@ -121,7 +52,7 @@
             </router-link>
           </li>
           <li v-if="CurrentTenant.user && !isUser" class="nav-item d-block d-md-none">
-            <router-link class="nav-link" to="/admin">{{ trans.app.admin }}</router-link>
+            <router-link class="nav-link" to="/admin">{{ trans.app.content }}</router-link>
           </li>
           <li v-if="CurrentTenant.user" class="nav-item d-block d-md-none">
             <router-link class="nav-link" :to="`${isAdminPage ?'/admin' : ''}/settings`">{{ trans.app.settings }}</router-link>
@@ -167,7 +98,7 @@
               <div v-if="!isUser" class="dropdown-divider"></div>
               <router-link v-if="!isUser" to="/admin" class="dropdown-item">
                 <i class="ni ni-single-02"></i>
-                <span>{{ trans.app.admin }}</span>
+                <span>{{ trans.app.content }}</span>
               </router-link>
               <div class="dropdown-divider"></div>
               <router-link :to="`${isAdminPage ?'/admin' : ''}/settings`" class="dropdown-item">

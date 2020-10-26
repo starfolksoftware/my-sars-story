@@ -147,11 +147,11 @@ export default {
       permissions: [],
       breadcrumbLinks: [
         {
-          title: 'All Roles',
+          title: JSON.parse(CurrentTenant.translations).app.roles,
           url: '/admin/roles',
         },
         {
-          title: 'Role',
+          title: JSON.parse(CurrentTenant.translations).app.role,
           url: '#'
         }
       ]

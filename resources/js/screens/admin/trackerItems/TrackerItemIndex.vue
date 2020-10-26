@@ -122,11 +122,11 @@ export default {
       notConfirmedCount: 0,
       breadcrumbLinks: [
         {
-          title: 'All Trackers',
+          title: JSON.parse(CurrentTenant.translations).app.trackers,
           url: '/admin/trackers',
         },
         {
-          title: 'Select Trackers',
+          title: JSON.parse(CurrentTenant.translations).app.select_trackers,
           url: '/admin/trackerItems/select'
         }
       ]

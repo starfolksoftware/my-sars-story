@@ -13,7 +13,7 @@ class PlatformsTableSeeder extends Seeder
     public function run()
     {
       $platform = new Platform();
-      $platform->name = 'Starfolk Software';
+      $platform->name = 'MySarsStory';
       $platform->save();
     }
 }
