@@ -1,0 +1,79 @@
+@import 'variables';
+@import 'overrides';
+
+$body-color: $gray-900;
+
+$link-color: $gray-900;
+$link-hover-color: $gray-900;
+
+$text-muted: $gray-500;
+
+$dropdown-link-active-color: darken($gray-900, 5%);
+$dropdown-link-active-bg: $gray-100;
+
+$custom-control-indicator-bg: $text-muted;
+
+.shadow-inner {
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+.controls {
+    background-color: $white;
+}
+
+.navbar-mini {
+    background-color: $white;
+}
+
+.primary {
+    fill: $gray-500;
+}
+
+.secondary {
+    fill: $gray-700;
+}
+
+.logo-primary {
+    fill: $gray-500;
+}
+
+.logo-secondary {
+    fill: $gray-700;
+}
+
+.fill-bg {
+    fill: $white;
+}
+
+.fill-body-color {
+    fill: $body-color;
+}
+
+.font-serif {
+    font-family: $font-family-serif;
+}
+
+.font-sans {
+    font-family: $font-family-sans-serif;
+}
+
+@import 'vue';
+@import 'nprogress';
+@import 'multiselect';
+@import 'switch';
+@import 'filepond';
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+@import '~bootstrap';
+@import '~leaflet/dist/leaflet.css';
+
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700';
+
+/** Core */
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+@import 'nucleo/css/nucleo.css';
+
+@import 'scss/argon.scss';

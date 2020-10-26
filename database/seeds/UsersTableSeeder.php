@@ -1,0 +1,24 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use App\Model\Auth\User;
+
+class UsersTableSeeder extends Seeder
+{
+  /**
+   * Run the database seeds.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    $user = new User();
+    $user->name = 'Faruk Nasir';
+    $user->email = 'faruk@starfolksoftware.com';
+    $user->password = Hash::make('youngprogrammer2303');
+    $user->save();
+
+    $user->assignRole('Admin');
+  }
+}
