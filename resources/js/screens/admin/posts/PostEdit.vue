@@ -236,11 +236,11 @@ export default {
       trans: JSON.parse(CurrentTenant.translations),
       breadcrumbLinks: [
         {
-          title: 'All Posts',
+          title: JSON.parse(CurrentTenant.translations).app.posts,
           url: '/admin/posts',
         },
         {
-          title: 'New Post',
+          title: JSON.parse(CurrentTenant.translations).app.post,
           url: '/admin/posts/create',
         }
       ]

@@ -73,7 +73,7 @@ export default {
       trans: JSON.parse(CurrentTenant.translations),
       breadcrumbLinks: [
         {
-          title: 'All Topics',
+          title: JSON.parse(CurrentTenant.translations).app.topics,
           url: '/admin/posts/topics',
         }
       ]

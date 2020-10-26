@@ -128,11 +128,11 @@ export default {
       trans: JSON.parse(CurrentTenant.translations),
       breadcrumbLinks: [
         {
-          title: 'All Tags',
+          title: JSON.parse(CurrentTenant.translations).app.tags,
           url: '/admin/posts/tags',
         },
         {
-          title: 'New Tag',
+          title: JSON.parse(CurrentTenant.translations).app.tag,
           url: '/admin/posts/tags/create',
         }
       ]

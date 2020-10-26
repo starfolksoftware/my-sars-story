@@ -403,11 +403,11 @@ export default {
       trans: JSON.parse(CurrentTenant.translations),
       breadcrumbLinks: [
         {
-          title: 'All Platforms',
+          title: JSON.parse(CurrentTenant.translations).app.platforms,
           url: '#',
         },
         {
-          title: 'Platform',
+          title: JSON.parse(CurrentTenant.translations).app.platforms,
           url: '#',
         }
       ]

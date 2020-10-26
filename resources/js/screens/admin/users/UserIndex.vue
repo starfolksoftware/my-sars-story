@@ -100,7 +100,7 @@ export default {
       trans: JSON.parse(CurrentTenant.translations),
       breadcrumbLinks: [
         {
-          title: 'All Users',
+          title: JSON.parse(CurrentTenant.translations).app.users,
           url: '/admin/users',
         }
       ]

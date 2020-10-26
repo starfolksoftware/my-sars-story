@@ -76,7 +76,7 @@ export default {
       trans: JSON.parse(CurrentTenant.translations),
       breadcrumbLinks: [
         {
-          title: 'All Partners',
+          title: JSON.parse(CurrentTenant.translations).app.partners,
           url: '#',
         },
       ]

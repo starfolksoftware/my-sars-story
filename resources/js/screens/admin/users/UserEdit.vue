@@ -224,11 +224,11 @@ export default {
       roles: [],
       breadcrumbLinks: [
         {
-          title: 'All Users',
+          title: JSON.parse(CurrentTenant.translations).app.users,
           url: '/admin/users',
         },
         {
-          title: 'User',
+          title: JSON.parse(CurrentTenant.translations).app.user,
           url: '#',
         }
       ]

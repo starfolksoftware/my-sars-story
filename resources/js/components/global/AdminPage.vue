@@ -38,13 +38,14 @@
                   class="nav-link"
                   :class="{'active': /admin\/stats/.test($route.path)}"
                 >
-                  <i class="ni ni-shop text-primary"></i>
+                  <i class="fa fa-home text-primary"></i>
                   <span class="sidenav-normal">{{ trans.app.dashboard }}</span>
                 </router-link>
               </li>
               <li 
                 v-permission="[
-                  'view_designations', 'create_designations', 'update_designations', 'delete_designations'
+                  'view_partners', 'create_partners', 'update_partners', 'delete_partners',
+                  'view_platforms', 'create_platforms', 'update_platforms', 'delete_platforms',
                 ]" 
                 class="nav-item">
                 <a
@@ -53,44 +54,28 @@
                   aria-expanded="false"
                   class="nav-link"
                   :class="{'active': /admin\/partners/.test($route.path) || 
-                    /admin\/platforms/.test($route.path) || 
-                    /admin\/designations/.test($route.path) || 
-                    /admin\/members/.test($route.path) ||
-                    /admin\/services/.test($route.path)}"
+                    /admin\/platforms/.test($route.path)}"
                 >
                   <i class="ni ni-app text-primary"></i>
                   <span class="sidenav-normal">{{ trans.app.platform }}</span>
                 </a>
                 <div class="collapse" id="platformSubmenu">
                   <ul class="nav nav-sm flex-column">
-                    <li class="nav-item">
+                    <li class="nav-item"
+                      v-permission="[
+                        'view_platforms', 'create_platforms', 'update_platforms', 'delete_platforms',
+                      ]">
                       <router-link :to="`/admin/platforms/${CurrentTenant.platform.id}/edit`" class="nav-link">
                         <span class="sidenav-normal">{{ trans.app.platforms }}</span>
                       </router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item"
+                      v-permission="[
+                        'view_partners', 'create_partners', 'update_partners', 'delete_partners',
+                      ]"
+                    >
                       <router-link to="/admin/partners" class="nav-link">
                         <span class="sidenav-normal">{{ trans.app.partners }}</span>
-                      </router-link>
-                    </li>
-                    <li class="nav-item">
-                      <router-link to="/admin/designations" class="nav-link">
-                        <span class="sidenav-normal">{{ trans.app.designations }}</span>
-                      </router-link>
-                    </li>
-                    <li class="nav-item">
-                      <router-link to="/admin/members" class="nav-link">
-                        <span class="sidenav-normal">{{ trans.app.members }}</span>
-                      </router-link>
-                    </li>
-                    <li class="nav-item">
-                      <router-link to="/admin/services" class="nav-link">
-                        <span class="sidenav-normal">{{ trans.app.services }}</span>
-                      </router-link>
-                    </li>
-                    <li class="nav-item">
-                      <router-link to="/admin/products" class="nav-link">
-                        <span class="sidenav-normal">{{ trans.app.products }}</span>
                       </router-link>
                     </li>
                   </ul>
@@ -98,7 +83,8 @@
               </li>
               <li
                 v-permission="[
-                  'view_states', 'create_states', 'update_states', 'delete_states', 'view_local_governments', 'create_local_governments', 'update_local_governments', 'delete_local_goverments'
+                  'view_states', 'create_states', 'update_states', 'delete_states', 
+                  'view_local_governments', 'create_local_governments', 'update_local_governments', 'delete_local_goverments'
                 ]"
                 class="nav-item"
               >
@@ -135,6 +121,17 @@
                   </ul>
                 </div>
               </li>
+              <li class="nav-item"
+                v-permission="['view_memorial', 'create_memorial', 'update_memorial', 'delete_memorial']">
+                <router-link
+                  to="/admin/memorial"
+                  class="nav-link"
+                  :class="{'active': /admin\/memorial/.test($route.path)}"
+                >
+                  <i class="ni ni-single-02 text-primary"></i>
+                  <span class="sidenav-normal">{{ trans.app.members }}</span>
+                </router-link>
+              </li>
               <li
                 v-permission="['create_posts', 'update_posts', 'update_own_posts', 'view_posts', 'delete_posts', 'delete_own_posts', 'approve_posts', 'publish_posts']"
                 class="nav-item"
@@ -166,74 +163,6 @@
                     <li class="nav-item">
                       <router-link to="/admin/posts/topics" class="nav-link">
                         <span class="sidenav-normal">{{ trans.app.topics }}</span>
-                      </router-link>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li
-                v-permission="[
-                  'create_datasets', 'update_datasets', 'update_own_datasets', 'view_datasets', 'view_own_datasets', 'delete_datasets', 'delete_own_datasets', 'approve_datasets', 'publish_datasets',
-                  'create_datatopics', 'update_datatopics', 'view_datatopics', 'delete_datatopics',
-                  'create_datatags', 'update_datatags', 'view_datatags', 'delete_datatags',
-                  'create_dataformats', 'update_dataformats', 'view_dataformats', 'delete_dataformats',
-                  'create_datalicenses', 'update_datalicenses', 'view_datalicenses', 'delete_datalicenses',
-                  'create_datasets', 'update_datasets', 'update_own_datasets', 'view_datasets', 'view_own_datasets', 'delete_datasets', 'delete_own_datasets', 'approve_datasets', 'publish_datasets'
-                ]"
-                class="nav-item"
-              >
-                <a
-                  class="nav-link"
-                  :class="{'active': /admin\/data/.test($route.path)}"
-                  href="#navbar-data"
-                  data-toggle="collapse"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="navbar-data"
-                >
-                  <i class="ni ni-folder-17 text-primary"></i>
-                  <span class="nav-link-text">{{ trans.app.data }}</span>
-                </a>
-                <div class="collapse" id="navbar-data">
-                  <ul class="nav nav-sm flex-column">
-                    <li
-                      v-permission="['create_datatopics', 'update_datatopics', 'view_datatopics', 'delete_datatopics']"
-                      class="nav-item"
-                    >
-                      <router-link to="/admin/data/topics" class="nav-link">
-                        <span class="sidenav-normal">{{ trans.app.topics }}</span>
-                      </router-link>
-                    </li>
-                    <li
-                      v-permission="['create_datatags', 'update_datatags', 'view_datatags', 'delete_datatags']"
-                      class="nav-item"
-                    >
-                      <router-link to="/admin/data/tags" class="nav-link">
-                        <span class="sidenav-normal">{{ trans.app.tags }}</span>
-                      </router-link>
-                    </li>
-                    <li
-                      v-permission="['create_dataformats', 'update_dataformats', 'view_dataformats', 'delete_dataformats']"
-                      class="nav-item"
-                    >
-                      <router-link to="/admin/data/formats" class="nav-link">
-                        <span class="sidenav-normal">{{ trans.app.format }}</span>
-                      </router-link>
-                    </li>
-                    <li
-                      v-permission="['create_datalicenses', 'update_datalicenses', 'view_datalicenses', 'delete_datalicenses']"
-                      class="nav-item"
-                    >
-                      <router-link to="/admin/data/licenses" class="nav-link">
-                        <span class="sidenav-normal">{{ trans.app.license }}</span>
-                      </router-link>
-                    </li>
-                    <li
-                      v-permission="['create_datasets', 'update_datasets', 'update_own_datasets', 'view_datasets', 'view_own_datasets', 'delete_datasets', 'delete_own_datasets', 'approve_datasets', 'publish_datasets']"
-                      class="nav-item"
-                    >
-                      <router-link to="/admin/data/datasets" class="nav-link">
-                        <span class="sidenav-normal">{{ trans.app.dataset }}</span>
                       </router-link>
                     </li>
                   </ul>

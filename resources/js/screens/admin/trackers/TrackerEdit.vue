@@ -291,7 +291,7 @@ export default {
       trans: JSON.parse(CurrentTenant.translations),
       breadcrumbLinks: [
         {
-          title: 'All Trackers',
+          title: JSON.parse(CurrentTenant.translations).app.trackers,
           url: '/admin/trackers',
         }
       ]

@@ -1,9 +1,7 @@
 import blog from './blog'
-import data from './data'
-import member from './member'
-import product from './product'
+import memorial from './memorial'
 import trackerItem from './trackerItem'
-import tracker from '../admin/tracker'
+// import tracker from '../admin/tracker'
 
 let mainRoutes = [
   {
@@ -11,21 +9,6 @@ let mainRoutes = [
     name: 'home',
     component: require('../../screens/main/home/HomeIndex').default,
   },
-  {
-    path: '/portfolio',
-    name: 'portfolio',
-    component: require('../../screens/main/portfolio/Index').default,
-  },
-  {
-    path: '/services',
-    name: 'services',
-    component: require('../../screens/main/service/Index').default,
-  },
-  // {
-  //   path: '/about',
-  //   name: 'about',
-  //   component: require('../../screens/main/about/AboutIndex').default,
-  // },
   {
     path: '/contact',
     name: 'contact',
@@ -67,11 +50,8 @@ let mainRoutes = [
     redirect: '/',
   },
   ...blog,
-  ...data,
-  ...tracker,
   ...trackerItem,
-  ...member,
-  ...product
+  ...memorial,
 ]
 
 export default mainRoutes

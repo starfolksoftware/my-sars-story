@@ -73,7 +73,7 @@ export default {
       trans: JSON.parse(CurrentTenant.translations),
       breadcrumbLinks: [
         {
-          title: 'All Tags',
+          title: JSON.parse(CurrentTenant.translations).app.tags,
           url: '/admin/posts/tags',
         }
       ]
