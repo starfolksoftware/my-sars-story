@@ -17,6 +17,7 @@ class CreateMemorialsTable extends Migration
       $table->bigIncrements('id');
       $table->string('name');
       $table->string('profession');
+      $table->integer('age');
       $table->uuid('post_id');
       $table->string('avatar')->nullable();
       $table->timestamps();

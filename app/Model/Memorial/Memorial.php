@@ -17,7 +17,7 @@ class Memorial extends Model
    */
   protected $casts = [];
 
-  public function post(): BelongsToMany {
+  public function post(): BelongsTo {
     return $this->belongsTo(Post::class);
   }
 

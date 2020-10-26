@@ -97,6 +97,7 @@ return [
   'draft' => 'Draft',
   'drafts' => 'Draft(s)',
   'edit_post' => 'Edit post',
+  'edit_story' => 'Edit story',
   'edit_profile' => 'Edit profile',
   'embed_content' => 'Embed Content',
   'email_us' => 'Email us',
@@ -217,6 +218,8 @@ return [
   'give_your_member_a_name' => 'Give victim\'s name',
   'give_your_member_a_bio' => 'Give victim\'s bio',
   'give_your_member_an_email' => 'Give victim\'s email',
+  'give_your_member_a_age' => 'Give victim\'s age',
+  'give_your_member_a_profession' => 'Give victim\'s profession',
 
   'give_your_service_a_name' => 'Give service\'s name',
 

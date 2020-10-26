@@ -20,23 +20,23 @@
 
         <div class="mt-2">
           <div
-            v-for="(member, $index) in members"
+            v-for="(memo, $index) in memorial"
             :key="$index"
             class="d-flex border-top py-3 align-items-center"
           >
             <div class="mr-auto">
               <p class="mb-0 py-1">
                 <router-link
-                  :to="{name: 'memorial-edit', params: { id: member.id }}"
+                  :to="{name: 'memorial-edit', params: { id: memo.id }}"
                   class="font-weight-bold text-lg lead text-decoration-none"
-                >{{ member.name }}</router-link>
+                >{{ memo.name }}</router-link>
               </p>
             </div>
             <div class="ml-auto">
               <span
                 class="d-none d-md-inline-block"
               >
-                {{ trans.app.updated }} {{ moment(member.updated_at).locale(CurrentTenant.locale).fromNow() }}
+                {{ trans.app.updated }} {{ moment(memo.updated_at).locale(CurrentTenant.locale).fromNow() }}
               </span>
             </div>
           </div>
@@ -70,7 +70,7 @@ export default {
   data() {
     return {
       page: 1,
-      members: [],
+      memorial: [],
       trans: JSON.parse(CurrentTenant.translations),
       breadcrumbLinks: [
         {
@@ -86,7 +86,7 @@ export default {
   methods: {
     fetchData($state) {
       this.request()
-        .get("/api/v1/members", {
+        .get("/api/v1/memorial", {
           params: {
             page: this.page
           }
@@ -94,7 +94,7 @@ export default {
         .then(response => {
           if (!_.isEmpty(response.data) && !_.isEmpty(response.data.data)) {
             this.page += 1;
-            this.members.push(...response.data.data);
+            this.memorial.push(...response.data.data);
             $state.loaded();
           } else {
             $state.complete();

@@ -14,7 +14,7 @@
         href="#"
         class="btn btn-sm btn-danger font-weight-bold my-auto"
         :class="{ disabled: form.name === '' }"
-        @click="saveMember"
+        @click="saveMemorial"
         :aria-label="trans.app.save"
       >{{ trans.app.save }}</a>
     </template>
@@ -44,6 +44,11 @@
           </svg>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+          <router-link 
+            :to="{name: 'posts-edit', params: { id: form.post_id }}"
+            class="dropdown-item">
+            {{ trans.app.edit_story }}
+          </router-link>
           <a
             href="#"
             class="dropdown-item"
@@ -74,7 +79,7 @@
               autocomplete="off"
               v-model="form.name"
               title="Name"
-              @keyup.enter="saveMember"
+              @keyup.enter="saveMemorial"
               class="form-control-lg form-control border-0 px-0 bg-transparent"
               :placeholder="trans.app.give_your_member_a_name"
             />
@@ -85,141 +90,38 @@
           </div>
 
           <div class="col-lg-12">
-            <label for="">{{ trans.app.bio }}</label>
-            <ckeditor :editor="editor" v-model="form.bio" :config="editorConfig"></ckeditor>
-            <div v-if="form.errors.bio" class="invalid-feedback d-block">
-              <strong>{{ form.errors.bio[0] }}</strong>
-            </div>
-          </div>
-
-          <div class="col-lg-12">
-            <select
-              name="role"
-              v-model="form.designations"
-              title="Role"
-              @keyup.enter="saveMember"
-              multiple
+            <input
+              type="text"
+              name="profession"
+              autofocus
+              autocomplete="off"
+              v-model="form.profession"
+              title="Profession"
+              @keyup.enter="saveMemorial"
               class="form-control-lg form-control border-0 px-0 bg-transparent"
-              :placeholder="trans.app.give_your_member_designations"
-            >
-              <option value disabled>{{trans.app.give_your_member_designations}}</option>
-              <option 
-                v-for="(designation, index) in designations" 
-                :value="designation.id"
-                :key="index"
-              >{{designation.title}}</option>
-            </select>
+              :placeholder="trans.app.give_your_member_a_profession"
+            />
 
-            <div v-if="form.errors.designation" class="invalid-feedback d-block">
-              <strong>{{ form.errors.designation[0] }}</strong>
+            <div v-if="form.errors.profession" class="invalid-feedback d-block">
+              <strong>{{ form.errors.profession[0] }}</strong>
             </div>
           </div>
 
           <div class="col-lg-12">
             <input
-              type="email"
-              name="email"
+              type="text"
+              name="age"
               autofocus
               autocomplete="off"
-              v-model="form.email"
-              title="Email"
-              @keyup.enter="saveMember"
+              v-model="form.age"
+              title="Age"
+              @keyup.enter="saveMemorial"
               class="form-control-lg form-control border-0 px-0 bg-transparent"
-              :placeholder="trans.app.give_your_member_an_email"
+              :placeholder="trans.app.give_your_member_a_age"
             />
 
-            <div v-if="form.errors.email" class="invalid-feedback d-block">
-              <strong>{{ form.errors.email[0] }}</strong>
-            </div>
-          </div>
-
-          <div class="col-lg-12">
-            <input
-              type="phone_number"
-              name="phone_number"
-              autofocus
-              autocomplete="off"
-              v-model="form.phone_number"
-              title="Email"
-              @keyup.enter="saveMember"
-              class="form-control-lg form-control border-0 px-0 bg-transparent"
-              :placeholder="trans.app.give_your_member_a_phone_number"
-            />
-
-            <div v-if="form.errors.phone_number" class="invalid-feedback d-block">
-              <strong>{{ form.errors.phone_number[0] }}</strong>
-            </div>
-          </div>
-
-          <div class="col-lg-12">
-            <input
-              type="twitter_url"
-              name="twitter_url"
-              autofocus
-              autocomplete="off"
-              v-model="form.socials_meta.twitter_url"
-              title="Email"
-              @keyup.enter="saveMember"
-              class="form-control-lg form-control border-0 px-0 bg-transparent"
-              :placeholder="trans.app.give_your_member_a_twitter_url"
-            />
-
-            <div v-if="form.errors.twitter_url" class="invalid-feedback d-block">
-              <strong>{{ form.errors.twitter_url[0] }}</strong>
-            </div>
-          </div>
-
-          <div class="col-lg-12">
-            <input
-              type="instagram_url"
-              name="instagram_url"
-              autofocus
-              autocomplete="off"
-              v-model="form.socials_meta.instagram_url"
-              title="Email"
-              @keyup.enter="saveMember"
-              class="form-control-lg form-control border-0 px-0 bg-transparent"
-              :placeholder="trans.app.give_your_member_a_instagram_url"
-            />
-
-            <div v-if="form.errors.instagram_url" class="invalid-feedback d-block">
-              <strong>{{ form.errors.instagram_url[0] }}</strong>
-            </div>
-          </div>
-
-          <div class="col-lg-12">
-            <input
-              type="facebook_url"
-              name="facebook_url"
-              autofocus
-              autocomplete="off"
-              v-model="form.socials_meta.facebook_url"
-              title="Email"
-              @keyup.enter="saveMember"
-              class="form-control-lg form-control border-0 px-0 bg-transparent"
-              :placeholder="trans.app.give_your_member_a_facebook_url"
-            />
-
-            <div v-if="form.errors.facebook_url" class="invalid-feedback d-block">
-              <strong>{{ form.errors.facebook_url[0] }}</strong>
-            </div>
-          </div>
-
-          <div class="col-lg-12">
-            <input
-              type="linkedin_url"
-              name="linkedin_url"
-              autofocus
-              autocomplete="off"
-              v-model="form.socials_meta.linkedin_url"
-              title="Email"
-              @keyup.enter="saveMember"
-              class="form-control-lg form-control border-0 px-0 bg-transparent"
-              :placeholder="trans.app.give_your_member_a_linkedin_url"
-            />
-
-            <div v-if="form.errors.linkedin_url" class="invalid-feedback d-block">
-              <strong>{{ form.errors.linkedin_url[0] }}</strong>
+            <div v-if="form.errors.age" class="invalid-feedback d-block">
+              <strong>{{ form.errors.age[0] }}</strong>
             </div>
           </div>
 
@@ -235,7 +137,7 @@
 
       <delete-modal
         ref="deleteModal"
-        @delete="deleteMember"
+        @delete="deleteMemorial"
         :header="trans.app.delete"
         :message="trans.app.deleted_types_are_gone_forever"
       ></delete-modal>
@@ -271,22 +173,15 @@ export default {
       form: {
         id: "",
         name: "",
-        bio: "",
-        email: "",
-        phone_number: "",
-        socials_meta: {
-          twitter_url: "",
-          instagram_url: "",
-          facebook_url: "",
-          linkedin_url: "",
-        },
+        profession: "",
+        age: null,
+        post_id: null,
         avatar: "",
-        designations: [],
         errors: [],
         isSaving: false,
         hasSuccess: false
       },
-      designations: [],
+      memorial: [],
       isReady: false,
       trans: JSON.parse(CurrentTenant.translations),
       roles: [],
@@ -311,52 +206,41 @@ export default {
   watch: {
     'form.avatar': function(val) {
       if (val) {
-        this.saveMember()
+        this.saveMemorial()
       } else {
         this.form.avatar = ""
-        this.saveMember()
+        this.saveMemorial()
+      }
+    },
+    'id': function (val) {
+      if (val !== 'create') {
+        this.fetchData()
       }
     }
   },
   methods: {
     fetchData() {
       this.request()
-        .get("/api/v1/members/" + this.id)
+        .get("/api/v1/memorial/" + this.id)
         .then(response => {
           this.status = response.data
-          this.form.id = response.data.member.id
+          this.form.id = response.data.memorial.id
           if (this.id !== "create") {
-            this.form.name = response.data.member.name
-            this.form.bio = response.data.member.bio
-            this.form.email = response.data.member.email
-            this.form.phone_number = response.data.member.phone_number
-            if (response.data.member.socials_meta) {
-              this.form.socials_meta.twitter_url = response.data.member.socials_meta.twitter_url || ''
-              this.form.socials_meta.instagram_url = response.data.member.socials_meta.instagram_url || ''
-              this.form.socials_meta.linkedin_url = response.data.member.socials_meta.linkedin_url || ''
-              this.form.socials_meta.facebook_url = response.data.member.socials_meta.facebook_url || ''
-            } else {
-              this.form.socials_meta = {
-                twitter_url: "",
-                instagram_url: "",
-                facebook_url: "",
-                linkedin_url: "",
-              }
-            }
-            this.form.avatar = response.data.member.avatar
-            this.form.designations = response.data.member.designations.map((designation) => {
-              return designation.id
-            })
+            this.form.name = response.data.memorial.name
+            this.form.profession = response.data.memorial.profession
+            this.form.age = response.data.memorial.age
+            this.form.avatar = response.data.memorial.avatar
+            this.form.post_id = response.data.memorial.post.id
           }
-          this.designations = response.data.designations
+
           this.isReady = true;
           NProgress.done();
         })
-        .catch(error => {
-          // this.$router.push({ name: "designations" });
+        .catch((error) => {
+          this.$router.push({ name: "memorial" });
         });
     },
-    saveMember() {
+    saveMemorial() {
       this.form.errors = [];
       this.form.isSaving = true;
       this.form.hasSuccess = false;
@@ -367,7 +251,7 @@ export default {
         return false;
       }
       this.request()
-        .post("/api/v1/members/" + this.id, this.form)
+        .post("/api/v1/memorial/" + this.id, this.form)
         .then(response => {
           this.form.isSaving = false;
           this.form.hasSuccess = true;
@@ -383,12 +267,12 @@ export default {
         this.form.isSaving = false;
       }, 3000);
     },
-    deleteMember() {
+    deleteMemorial() {
       this.request()
-        .delete("/api/v1/members/" + this.id)
+        .delete("/api/v1/memorial/" + this.id)
         .then(response => {
           $(this.$refs.deleteModal.$el).modal("hide");
-          this.$router.push({ name: "members" });
+          this.$router.push({ name: "memorial" });
         })
         .catch(error => {
           // Add any error debugging...
@@ -402,9 +286,19 @@ export default {
     },
     validate(form) {
       let errors = {};
+
       if (!form.name) {
         errors.name = ["name can not be empty"];
       }
+
+      if (!form.profession) {
+        errors.profession = ["profession can not be empty"];
+      }
+
+      if (!form.age) {
+        errors.age = ["invalid input for age"]
+      }
+
       return errors;
     }
   }

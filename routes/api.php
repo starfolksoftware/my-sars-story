@@ -139,11 +139,11 @@ Route::group(['prefix' => 'v1'], function () {
 
   Route::namespace('Memorial')->group(function () {
     // memorials routes...
-    Route::get('/memorial', 'MemberController@index');
-    Route::get('/memorial/{id?}', 'MemberController@show');
-    Route::post('/memorial/{id}', 'MemberController@store')
+    Route::get('/memorial', 'MemorialController@index');
+    Route::get('/memorial/{id?}', 'MemorialController@show');
+    Route::post('/memorial/{id}', 'MemorialController@store')
       ->middleware(['auth:api', 'permission:create_memorial']);
-    Route::delete('/memmemorialbers/{id}', 'MemberController@destroy')
+    Route::delete('/memmemorialbers/{id}', 'MemorialController@destroy')
       ->middleware(['auth:api', 'permission:delete_memorial']);
   });
 

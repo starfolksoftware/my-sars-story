@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Members;
+namespace App\Http\Controllers\Memorial;
 
 use App\Model\Memorial\Memorial;
+use App\Model\Blog\Post;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
+use App\Model\Blog\Topic;
 
 class MemorialController extends \App\Http\Controllers\Controller
 {
@@ -45,7 +48,7 @@ class MemorialController extends \App\Http\Controllers\Controller
           ]),
         ], 200);
       } else {
-        $memorial = Memorial::findOrFail($id);
+        $memorial = Memorial::with('post')->findOrFail($id);
 
         return response()->json([
           'memorial' => $memorial
@@ -68,6 +71,7 @@ class MemorialController extends \App\Http\Controllers\Controller
       'id' => request('id'),
       'name' => request('name'),
       'profession' => request('profession'),
+      'age' => request('age'),
       'post_id' => request('post_id'),
       'avatar' => request('avatar')
     ];
@@ -79,8 +83,17 @@ class MemorialController extends \App\Http\Controllers\Controller
 
     validator($data, [
       'name' => 'required',
-      'profession' => 'required'
+      'profession' => 'required',
+      'age' => 'required',
     ], $messages)->validate();
+
+    if ($id === 'create') {
+      $data['post_id'] = $this->createStory(
+        $data['name'], 
+        $data['profession'], 
+        $data['age']
+      );
+    }
 
     $memorial = $id !== 'create' ? Memorial::find($id) : new Memorial(['id' => request('id')]);
 
@@ -88,6 +101,73 @@ class MemorialController extends \App\Http\Controllers\Controller
     $memorial->save();
 
     return response()->json($memorial->refresh(), 201);
+  }
+
+  private function createStory($name, $profession, $age) {
+    $name = str_replace(" ", "-", $name);
+    $profession = str_replace(" ", "-", $name);
+
+    $data = [
+      'id' => Uuid::uuid4(),
+      'slug' => "$name-$profession-$age-dead-memorial",
+      'title' => "$name, $profession; dies at $age",
+      'summary' => "",
+      'body' => "the body",
+      'submitted_at' => NULL,
+      'approved_at' => NULL,
+      'editor_id' => NULL,
+      'published_at' => NULL,
+      'featured_image' => NULL,
+      'featured_image_caption' => "",
+      'user_id' => request()->user()->id,
+      'meta' => [
+        'description' => "",
+        'title' => "$name, $profession; dies at $age",
+        'canonical_link' => NULL,
+      ],
+    ];
+
+    $post = new Post(['id' => $data['id']]);
+
+    $post->fill($data);
+    $post->meta = $data['meta'];
+    $post->save();
+
+    $post->topic()->sync(
+      $this->syncTopic([
+        'name' => 'Memorial',
+        'slug' => 'memorial',
+      ])
+    );
+
+    return $post->id;
+  }
+
+  /**
+   * Attach or create a given topic.
+   *
+   * @param $incomingTopic
+   * @return array
+   * @throws Exception
+   */
+  private function syncTopic($incomingTopic): array
+  {
+    if ($incomingTopic) {
+      $topic = Topic::where('slug', $incomingTopic['slug'])->first();
+
+      if (! $topic) {
+        $topic = Topic::create([
+          'id' => $id = Uuid::uuid4(),
+          'name' => $incomingTopic['name'],
+          'slug' => $incomingTopic['slug'],
+          'user_id' => request()->user()->id,
+        ]);
+      }
+
+      return collect((string) $topic->id)->toArray();
+    } else {
+      return [];
+    }
   }
 
   /**
