@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDesignationsTable extends Migration
+class CreateMemorialsTable extends Migration
 {
   /**
    * Run the migrations.
@@ -13,10 +13,12 @@ class CreateDesignationsTable extends Migration
    */
   public function up()
   {
-    Schema::create('designations', function (Blueprint $table) {
+    Schema::create('memorials', function (Blueprint $table) {
       $table->bigIncrements('id');
-      $table->string('title');
-      $table->softDeletes();
+      $table->string('name');
+      $table->string('profession');
+      $table->uuid('post_id');
+      $table->string('avatar')->nullable();
       $table->timestamps();
     });
   }
@@ -28,6 +30,6 @@ class CreateDesignationsTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('designations');
+    Schema::dropIfExists('memorials');
   }
 }

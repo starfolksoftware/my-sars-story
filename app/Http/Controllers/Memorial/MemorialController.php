@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Members;
 
-use App\Model\Members\Member;
-use App\Model\Members\Designation;
+use App\Model\Memorial\Memorial;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class MemberController extends \App\Http\Controllers\Controller
+class MemorialController extends \App\Http\Controllers\Controller
 {
   /**
    * Display a listing of the resource.
@@ -20,21 +19,17 @@ class MemberController extends \App\Http\Controllers\Controller
     $all = request('all') ?? NULL;
     
     if ($all) {
-      $members = Member::orderBy('created_at', 'ASC')
-        ->with('designations:title')
-        ->get();
+      $memorials = Memorial::latest()->all();
     } else {
-      $members = Member::orderBy('name')
-        ->with('designations:title')
-        ->paginate();
+      $memorials = Memorial::latest()->paginate();
     }
     return response()->json(
-      $members, 200
+      $memorials, 200
     );
   }
 
   /**
-   * Get a single member or return an id to create one.
+   * Get a single memorial or return an id to create one.
    *
    * @param null $id
    * @return JsonResponse
@@ -42,20 +37,18 @@ class MemberController extends \App\Http\Controllers\Controller
    */
   public function show($id = null): JsonResponse
   {
-    if (Member::all()->pluck('id')->contains($id) || $this->isNewMember($id)) {
-      if ($this->isNewMember($id)) {
+    if (Memorial::all()->pluck('id')->contains($id) || $this->isNewMemorial($id)) {
+      if ($this->isNewMemorial($id)) {
         return response()->json([
-          'member' => Member::make([
+          'memorial' => Memorial::make([
             'id' => NULL,
           ]),
-          'designations' => Designation::get(['id','title'])
         ], 200);
       } else {
-        $member = Member::with('designations')->find($id);
+        $memorial = Memorial::findOrFail($id);
 
         return response()->json([
-          'member' => $member,
-          'designations' => Designation::get(['id','title'])
+          'memorial' => $memorial
         ], 200);
       }
     } else {
@@ -64,7 +57,7 @@ class MemberController extends \App\Http\Controllers\Controller
   }
 
   /**
-   * Create or update a member.
+   * Create or update a memorial.
    *
    * @param string $id
    * @return JsonResponse
@@ -74,10 +67,8 @@ class MemberController extends \App\Http\Controllers\Controller
     $data = [
       'id' => request('id'),
       'name' => request('name'),
-      'bio' => request('bio'),
-      'email' => request('email'),
-      'phone_number' => request('phone_number'),
-      'socials_meta' => request('socials_meta'),
+      'profession' => request('profession'),
+      'post_id' => request('post_id'),
       'avatar' => request('avatar')
     ];
 
@@ -88,16 +79,15 @@ class MemberController extends \App\Http\Controllers\Controller
 
     validator($data, [
       'name' => 'required',
+      'profession' => 'required'
     ], $messages)->validate();
 
-    $member = $id !== 'create' ? Member::find($id) : new Member(['id' => request('id')]);
+    $memorial = $id !== 'create' ? Memorial::find($id) : new Memorial(['id' => request('id')]);
 
-    $member->fill($data);
-    $member->save();
+    $memorial->fill($data);
+    $memorial->save();
 
-    $member->designations()->sync(request('designations'));
-
-    return response()->json($member->refresh(), 201);
+    return response()->json($memorial->refresh(), 201);
   }
 
   /**
@@ -108,22 +98,22 @@ class MemberController extends \App\Http\Controllers\Controller
    */
   public function destroy($id)
   {
-    $member = Member::find($id);
+    $memorial = Memorial::find($id);
 
-    if ($member) {
-      $member->delete();
+    if ($memorial) {
+      $memorial->delete();
 
       return response()->json([], 204);
     }
   }
 
   /**
-   * Return true if we're creating a new member.
+   * Return true if we're creating a new memorial.
    *
    * @param string $id
    * @return bool
    */
-  private function isNewMember(string $id): bool
+  private function isNewMemorial(string $id): bool
   {
     return $id === 'create';
   }

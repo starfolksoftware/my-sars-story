@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Model\Members;
+namespace App\Model\Memorial;
 
+use App\Model\Blog\Post;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Member extends Model
+class Memorial extends Model
 {
   protected $guarded = [];
 
@@ -14,12 +15,10 @@ class Member extends Model
    *
    * @var array
    */
-  protected $casts = [
-    'socials_meta' => 'array',
-  ];
+  protected $casts = [];
 
-  public function designations(): BelongsToMany {
-    return $this->belongsToMany(Designation::class);
+  public function post(): BelongsToMany {
+    return $this->belongsTo(Post::class);
   }
 
   /**
