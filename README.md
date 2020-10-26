@@ -1,6 +1,6 @@
-# POD
+# MySarsStory.org
 
-The PTCIJ Software that houses all its civic tech platforms.
+Document the end sars protest
 
 ----------
 
@@ -26,11 +26,11 @@ Please check the official Laravel installation guide for server requirements bef
 
 Clone the repository
 
-    git clone https://github.com/CJIDNG/POD.git
+    git clone https://github.com/starfolksoftware/my-sars-story.git
 
 Switch to the repo folder
 
-    cd husk
+    cd my-sars-story
 
 Install all the dependencies using composer
 
