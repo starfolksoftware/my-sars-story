@@ -170,6 +170,10 @@ class PostController extends \App\Http\Controllers\Controller
       $this->syncTags(request('tags'))
     );
 
+    if (request()->has('memorial_id')) {
+      $post->memorial()->associate(request('memorial_id'));
+    }
+
     return response()->json($post->refresh());
   }
 

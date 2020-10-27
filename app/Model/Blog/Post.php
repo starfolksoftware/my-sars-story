@@ -2,13 +2,11 @@
 
 namespace App\Model\Blog;
 
+use App\Model\Memorial\Memorial;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo,BelongsToMany,HasMany,HasOneThrough,HasOne};
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Str;
@@ -126,6 +124,10 @@ class Post extends Model
   public function user(): BelongsTo
   {
     return $this->belongsTo(\App\Model\Auth\User::class);
+  }
+
+  public function memorial(): HasOne {
+    return $this->hasOne(Memorial::class);
   }
 
   /**

@@ -127,71 +127,6 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('/contact', 'ContactController');
   });
 
-  Route::namespace('Data')->group(function () {
-    // Dataset routes...
-    Route::get('/datasets', 'DatasetController@index')
-      ->middleware(['auth:api', 'permission:view_datasets']);
-    Route::get('/datasets/{id?}', 'DatasetController@show')
-      ->middleware(['auth:api', 'permission:view_datasets|view_own_datasets']);
-    Route::post('/datasets/{id}', 'DatasetController@store')
-      ->middleware(['auth:api', 'permission:create_datasets|update_datasets|update_own_datasets|approve_datasets|publish_datasets']);
-    Route::delete('/datasets/{id}', 'DatasetController@destroy')
-      ->middleware(['auth:api', 'permission:delete_datasets|delete_own_datasets']);
-
-    // Data resource routes...
-    Route::get('/dataresources', 'DataresourceController@index');
-    Route::get('/dataresources/{id?}', 'DataresourceController@show');
-    Route::post('/dataresources/{id}', 'DataresourceController@store')
-      ->middleware(['auth:api', 'permission:create_datasets|update_datasets|update_own_datasets|approve_datasets|publish_datasets']);
-    Route::delete('/dataresources/{id}', 'DataresourceController@destroy')
-      ->middleware(['auth:api', 'permission:delete_datasets|delete_own_datasets']);
-    Route::get('/dataresources/download/{id}', 'DataresourceController@download')
-      ->middleware(['auth:api']);
-
-    // Data format routes...
-    Route::get('/dataformats', 'DataformatController@index');
-    Route::get('/dataformats/{id?}', 'DataformatController@show');
-    Route::post('/dataformats/{id}', 'DataformatController@store')
-      ->middleware(['auth:api', 'permission:create_dataformats|update_dataformats']);
-    Route::delete('/dataformats/{id}', 'DataformatController@destroy')
-      ->middleware(['auth:api', 'permission:delete_dataformats']);
-
-    // Data license routes...
-    Route::get('/datalicenses', 'DatalicenseController@index');
-    Route::get('/datalicenses/{id?}', 'DatalicenseController@show');
-    Route::post('/datalicenses/{id}', 'DatalicenseController@store')
-      ->middleware(['auth:api', 'permission:create_datalicenses|update_datalicenses']);
-    Route::delete('/datalicenses/{id}', 'DatalicenseController@destroy')
-      ->middleware(['auth:api', 'permission:delete_datalicenses']);
-
-    // Data topics routes...
-    Route::get('/datatopics', 'DatatopicController@index');
-    Route::get('/datatopics/{id?}', 'DatatopicController@show');
-    Route::post('/datatopics/{id}', 'DatatopicController@store')
-      ->middleware(['auth:api', 'permission:create_datatopics|update_datatopics']);
-    Route::delete('/datatopics/{id}', 'DatatopicController@destroy')
-      ->middleware(['auth:api', 'permission:delete_datatopics']);
-
-    // Data tags routes...
-    Route::get('/datatags', 'DatatagController@index');
-    Route::get('/datatags/{id?}', 'DatatagController@show');
-    Route::post('/datatags/{id}', 'DatatagController@store')
-      ->middleware(['auth:api', 'permission:create_datatags|update_datatags']);
-    Route::delete('/datatags/{id}', 'DatatagController@destroy')
-      ->middleware(['auth:api', 'permission:delete_datatags']);
-
-    // Media routes...
-    Route::post('/resource/uploads', 'DataResourceUploadController@store')
-      ->middleware(['auth:api', 'role:Admin|Data Curator|Data Researcher & Editor']);
-    Route::delete('/resource/uploads', 'DataResourceUploadController@destroy')
-      ->middleware(['auth:api', 'role:Admin|Data Curator|Data Researcher & Editor']);
-
-    Route::group(['prefix' => 'data'], function () {
-      Route::get('/', 'DatasetController@indexPublishedOnly')->name('data.index');
-      Route::middleware('throttle:60,1')->get('/{id}', 'DatasetController@showPublishedOnly')->name('data.show');
-    });
-  });
-
   Route::namespace('Partners')->group(function () {
     // Partners routes...
     Route::get('/partners', 'PartnerController@index');
@@ -202,42 +137,14 @@ Route::group(['prefix' => 'v1'], function () {
       ->middleware(['auth:api', 'permission:delete_partners']);
   });
 
-  Route::namespace('Members')->group(function () {
-    // designations routes...
-    Route::get('/designations', 'DesignationController@index');
-    Route::get('/designations/{id?}', 'DesignationController@show');
-    Route::post('/designations/{id}', 'DesignationController@store')
-      ->middleware(['auth:api', 'permission:create_designations']);
-    Route::delete('/designations/{id}', 'DesignationController@destroy')
-      ->middleware(['auth:api', 'permission:delete_designations']);
-
-    // members routes...
-    Route::get('/members', 'MemberController@index');
-    Route::get('/members/{id?}', 'MemberController@show');
-    Route::post('/members/{id}', 'MemberController@store')
-      ->middleware(['auth:api', 'permission:create_designations']);
-    Route::delete('/members/{id}', 'MemberController@destroy')
-      ->middleware(['auth:api', 'permission:delete_designations']);
-  });
-
-  Route::namespace('Services')->group(function () {
-    // services routes...
-    Route::get('/services', 'ServiceController@index');
-    Route::get('/services/{id?}', 'ServiceController@show');
-    Route::post('/services/{id}', 'ServiceController@store')
-      ->middleware(['auth:api', 'permission:create_services']);
-    Route::delete('/services/{id}', 'ServiceController@destroy')
-      ->middleware(['auth:api', 'permission:delete_services']);
-  });
-
-  Route::namespace('Products')->group(function () {
-    // products routes...
-    Route::get('/products', 'ProductController@index');
-    Route::get('/products/{id?}', 'ProductController@show');
-    Route::post('/products/{id}', 'ProductController@store')
-      ->middleware(['auth:api', 'permission:create_products']);
-    Route::delete('/products/{id}', 'ProductController@destroy')
-      ->middleware(['auth:api', 'permission:delete_products']);
+  Route::namespace('Memorial')->group(function () {
+    // memorials routes...
+    Route::get('/memorial', 'MemorialController@index');
+    Route::get('/memorial/{id?}', 'MemorialController@show');
+    Route::post('/memorial/{id}', 'MemorialController@store')
+      ->middleware(['auth:api', 'permission:create_memorial']);
+    Route::delete('/memmemorialbers/{id}', 'MemorialController@destroy')
+      ->middleware(['auth:api', 'permission:delete_memorial']);
   });
 
   Route::namespace('Tracker')->group(function () {

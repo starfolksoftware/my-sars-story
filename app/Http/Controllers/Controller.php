@@ -88,7 +88,7 @@ class Controller extends BaseController
       }
 
       $currentTenant = new CurrentTenant();
-
+      
       return view('layout', [
         'currentTenant' => $currentTenant->getState(),
         'meta' => $meta
