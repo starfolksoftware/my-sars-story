@@ -180,10 +180,10 @@ export default {
       visitTrend: {},
       models: {
         'Post': {
-          'class': 'App\\Model\\Blog\\Post'
+          'class': 'App\\Models\\Blog\\Post'
         },
       },
-      className: 'App\\Model\\Blog\\Post',
+      className: 'App\\Models\\Blog\\Post',
       isReady: false,
       trans: JSON.parse(CurrentTenant.translations),
       infiniteId: +new Date(),
@@ -201,7 +201,7 @@ export default {
       let url = ''
 
       switch (this.className) {
-        case 'App\\Model\\Blog\\Post':
+        case 'App\\Models\\Blog\\Post':
           url = "/api/v1/posts"
           break;
       
@@ -266,7 +266,7 @@ export default {
           if (!_.isEmpty(response.data) && !isItemsArrayEmpty) {
             this.page += 1;
             switch (this.className) {
-              case 'App\\Model\\Blog\\Post':
+              case 'App\\Models\\Blog\\Post':
                 this.items.push(...response.data.posts.data);
                 break;
             
@@ -294,7 +294,7 @@ export default {
       let isEmpty
 
       switch (this.className) {
-        case 'App\\Model\\Blog\\Post':
+        case 'App\\Models\\Blog\\Post':
           isEmpty = _.isEmpty(response.data.posts.data)
           break;
       

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Settings;
 
-use App\Model\Settings\Platform;
+use App\Models\Settings\Platform;
 use Illuminate\Http\Request;
 use Auth;
 use DB;

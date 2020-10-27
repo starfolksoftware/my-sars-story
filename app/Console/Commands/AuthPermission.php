@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use App\Model\Auth\Permission;
-use App\Model\Auth\Role;
+use App\Models\Auth\Permission;
+use App\Models\Auth\Role;
 
 class AuthPermission extends Command
 {

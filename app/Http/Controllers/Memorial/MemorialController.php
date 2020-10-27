@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Memorial;
 
-use App\Model\Memorial\Memorial;
-use App\Model\Blog\Post;
+use App\Models\Memorial\Memorial;
+use App\Models\Blog\Post;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
-use App\Model\Blog\Topic;
+use App\Models\Blog\Topic;
 
 class MemorialController extends \App\Http\Controllers\Controller
 {

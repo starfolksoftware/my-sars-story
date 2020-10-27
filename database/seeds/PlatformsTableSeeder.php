@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Model\Settings\Platform;
+use App\Models\Settings\Platform;
 
 class PlatformsTableSeeder extends Seeder
 {

@@ -121,6 +121,14 @@ class DefaultRolesAndPermissions
       'create_local_governments', 
       'update_local_governments', 
       'delete_local_goverments',
+
+      /**
+       * resources
+       */
+      'create_resources',
+      'update_resources',
+      'view_resources',
+      'delete_resources',
     ];
   }
 

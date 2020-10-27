@@ -55,6 +55,6 @@ class MediaController extends \App\Http\Controllers\Controller
      */
     private function baseStoragePath(): string
     {
-      return sprintf('%s/%s', config('custom.storage_path'), 'images');
+      return sprintf('%s/%s', config('custom.storage_path'), 'files');
     }
 }

@@ -86,7 +86,7 @@ Route::group(['prefix' => 'v1'], function () {
 
     // Permission routes...
     Route::get('/permissions', function () {
-      return response()->json(\App\Model\Auth\Permission::all()->pluck('name'));
+      return response()->json(\App\Models\Auth\Permission::all()->pluck('name'));
     })->middleware(['auth:api', 'role:Admin']);
   });
 
@@ -168,6 +168,14 @@ Route::group(['prefix' => 'v1'], function () {
   Route::namespace('Location')->group(function () {
     Route::get('/states', 'StateController@index');
     Route::get('/localGovernments', 'LocalGovernmentController@index');
+  });
+
+  Route::namespace('Resources')->group(function () {
+    // resources routes...
+    Route::get('/resources', 'ResourceController@index')->middleware(['auth:api', 'permission:view_resources']);
+    Route::get('/resources/{id?}', 'ResourceController@show')->middleware(['auth:api', 'permission:view_resources']);
+    Route::post('/resources/{id}', 'ResourceController@store')->middleware(['auth:api', 'permission:create_resources|update_resources']);
+    Route::delete('/resources/{id}', 'ResourceController@destroy')->middleware(['auth:api', 'permission:delete_resources']);
   });
 
   Route::namespace('')->group(function () {

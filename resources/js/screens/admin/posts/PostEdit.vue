@@ -87,7 +87,7 @@
         <div class="dropdown-menu dropdown-menu-right">
           <router-link
             v-if="isPublished"
-            :to="{ name: 'stats-show', params: { id: id, className: 'App\\Model\\Blog\\Post' } }"
+            :to="{ name: 'stats-show', params: { id: id, className: 'App\\Models\\Blog\\Post' } }"
             class="dropdown-item"
           >{{ trans.app.view_stats }}</router-link>
           <div v-if="isPublished" class="dropdown-divider"></div>

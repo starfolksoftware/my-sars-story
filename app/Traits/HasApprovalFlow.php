@@ -14,7 +14,7 @@ trait HasApprovalFlow {
    */
   public function editor(): BelongsTo
   {
-    return $this->belongsTo(\App\Model\Auth\User::class, 'editor_id');
+    return $this->belongsTo(\App\Models\Auth\User::class, 'editor_id');
   }
 
   /**
@@ -24,7 +24,7 @@ trait HasApprovalFlow {
    */
   public function approvedBy(): BelongsTo
   {
-    return $this->belongsTo(\App\Model\Auth\User::class, 'approved_by');
+    return $this->belongsTo(\App\Models\Auth\User::class, 'approved_by');
   }
 
   /**

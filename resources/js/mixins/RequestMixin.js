@@ -24,6 +24,8 @@ export default {
           case 405:
           case 401:
             this.logout()
+          case 419:
+            window.location.replace("/");
             break
           default:
             break
