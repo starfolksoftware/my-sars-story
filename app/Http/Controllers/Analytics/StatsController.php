@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Analytics;
 
-use App\Model\Blog\Post;
+use App\Models\Blog\Post;
 use App\Traits\Trends;
-use App\Model\Analytics\View;
-use App\Model\Analytics\Visit;
+use App\Models\Analytics\View;
+use App\Models\Analytics\Visit;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 

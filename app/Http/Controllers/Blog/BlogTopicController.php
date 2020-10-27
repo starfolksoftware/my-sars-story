@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Blog;
 
-use App\Model\Blog\Post;
-use App\Model\Blog\Topic;
+use App\Models\Blog\Post;
+use App\Models\Blog\Topic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

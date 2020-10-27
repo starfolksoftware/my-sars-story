@@ -86,7 +86,7 @@ Route::group(['prefix' => 'v1'], function () {
 
     // Permission routes...
     Route::get('/permissions', function () {
-      return response()->json(\App\Model\Auth\Permission::all()->pluck('name'));
+      return response()->json(\App\Models\Auth\Permission::all()->pluck('name'));
     })->middleware(['auth:api', 'role:Admin']);
   });
 

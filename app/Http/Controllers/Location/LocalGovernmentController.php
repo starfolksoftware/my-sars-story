@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Location;
 
-use App\Model\Location\{LocalGovernment,State};
+use App\Models\Location\{LocalGovernment,State};
 use Illuminate\Http\Request;
 
 class LocalGovernmentController extends \App\Http\Controllers\Controller

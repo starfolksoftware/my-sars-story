@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Model\Auth\Permission;
-use App\Model\Auth\Role;
+use App\Models\Auth\Permission;
+use App\Models\Auth\Role;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

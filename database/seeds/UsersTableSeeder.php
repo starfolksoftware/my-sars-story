@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use App\Model\Auth\User;
+use App\Models\Auth\User;
 
 class UsersTableSeeder extends Seeder
 {

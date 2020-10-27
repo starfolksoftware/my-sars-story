@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Model\Location\{State,LocalGovernment};
+use App\Models\Location\{State,LocalGovernment};
 
 class LocationSeeder extends Seeder
 {

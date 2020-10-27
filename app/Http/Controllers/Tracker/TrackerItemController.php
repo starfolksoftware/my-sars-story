@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Tracker;
 
-use App\Model\Tracker\TrackerItem;
-use App\Model\Tracker\Tracker;
+use App\Models\Tracker\TrackerItem;
+use App\Models\Tracker\Tracker;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

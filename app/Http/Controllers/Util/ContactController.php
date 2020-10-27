@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Mail;
-use App\Model\Util\CurrentTenant;
+use App\Models\Util\CurrentTenant;
 
 class ContactController extends Controller
 {

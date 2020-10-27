@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Blog;
 
-use App\Model\Blog\Post;
-use App\Model\Blog\Tag;
-use App\Model\Blog\Topic;
+use App\Models\Blog\Post;
+use App\Models\Blog\Tag;
+use App\Models\Blog\Topic;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;

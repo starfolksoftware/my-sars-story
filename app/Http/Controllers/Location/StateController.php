@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Location;
 
-use App\Model\Location\{State,LocalGovernment};
+use App\Models\Location\{State,LocalGovernment};
 use Illuminate\Http\Request;
 
 class StateController extends \App\Http\Controllers\Controller
