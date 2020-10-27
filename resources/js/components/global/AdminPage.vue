@@ -218,7 +218,7 @@
               </li>
               <li
                 v-permission="[
-                  'view_users', 'view_own_users', 'create_users', 'update_users', 'update_own_users', 'delete_users', 'delete_own_users', 'change_users_password', 'change_users_own_password',
+                  'view_users', 'create_users', 'update_users', 'delete_users',
                   'create_roles', 'update_roles', 'view_roles', 'delete_roles'
                 ]"
                 class="nav-item"
@@ -246,7 +246,7 @@
                       </router-link>
                     </li>
                     <li
-                      v-permission="['view_users', 'view_own_users', 'create_users', 'update_users', 'update_own_users', 'delete_users', 'delete_own_users', 'change_users_password', 'change_users_own_password']"
+                      v-permission="['view_users', 'create_users', 'update_users', 'delete_users']"
                       class="nav-item"
                     >
                       <router-link to="/admin/users" class="nav-link">

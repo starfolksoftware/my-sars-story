@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Model\Auth\Role;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\JsonResponse;
+use App\Notifications\CustomUserAdded;
 
 class UserController extends \App\Http\Controllers\Controller
 {
@@ -97,6 +98,20 @@ class UserController extends \App\Http\Controllers\Controller
         if($user->save()) {
             // Handle the user roles
             $user->syncRoles($data['role']);
+
+            if ($id === 'create') {
+                $customUserDetails = array(
+                    "name" => $user->name,
+                    "email" => $user->email,
+                    "plainPassword" => $data['password']
+                );
+                try {
+                    $user->notify(new CustomUserAdded($customUserDetails));
+                } catch (Exception $e) {
+                    throw $e;
+                }
+            }
+
             return response()->json($user->refresh(), 201);
         } else {
             return response()->json([
