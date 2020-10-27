@@ -8,7 +8,7 @@
       data-background="../assets/img/illustrations/signin.svg"
       style="background-image: url('/images/auth_bg.jpg');"
     >
-      <div class="col-12 d-flex align-items-center justify-content-center">
+      <div class="col-12 col-md-5 d-flex align-items-center justify-content-center">
         <div
           class="signin-inner mt-3 mt-lg-0 bg-white shadow-soft border border-light rounded p-4 p-lg-5 w-100 fmxw-500"
         >

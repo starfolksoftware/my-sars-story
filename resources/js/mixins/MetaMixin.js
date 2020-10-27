@@ -9,7 +9,7 @@ export default {
     return {
       metaTitle: window.CurrentTenant.platform.name,
       metaDescription: window.CurrentTenant.platform.description,
-      metaUrl: `https://${window.CurrentTenant.platform.name}${this.$route.fullPath}`,
+      metaUrl: ``,
       metaImageUrl: '',
     }
   },

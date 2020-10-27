@@ -25,6 +25,22 @@ class DefaultRolesAndPermissions
       'publish_posts',
 
       /**
+       * tags
+       */
+      'create_tags',
+      'update_tags',
+      'view_tags',
+      'delete_tags',
+
+      /**
+       * topics
+       */
+      'create_topics',
+      'update_topics',
+      'view_topics',
+      'delete_topics',
+
+      /**
        * platforms
        */
       'create_platforms',

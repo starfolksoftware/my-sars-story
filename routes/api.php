@@ -14,8 +14,8 @@
 Route::group(['prefix' => 'v1'], function () {
   // Stats routes...
   Route::namespace('Analytics')->group(function () {
-    Route::get('/stats', 'StatsController@index')->middleware(['auth:api']);
-    Route::get('/stats/{id}', 'StatsController@show')->middleware(['auth:api']);  
+    Route::get('/stats', 'StatsController@index')->middleware(['auth:api', 'permission:view_stats']);
+    Route::get('/stats/{id}', 'StatsController@show')->middleware(['auth:api', 'permission:view_stats']);  
   });
 
   // Blog routes...
@@ -30,16 +30,16 @@ Route::group(['prefix' => 'v1'], function () {
       ->middleware(['auth:api', 'permission:delete_posts|delete_own_posts']);
 
     // Tag routes...
-    Route::get('/tags', 'TagController@index')->middleware(['auth:api']);
-    Route::get('/tags/{id?}', 'TagController@show')->middleware(['auth:api']);
-    Route::post('/tags/{id}', 'TagController@store')->middleware(['auth:api']);
-    Route::delete('/tags/{id}', 'TagController@destroy')->middleware(['auth:api']);
+    Route::get('/tags', 'TagController@index')->middleware(['auth:api', 'permission:view_tags']);
+    Route::get('/tags/{id?}', 'TagController@show')->middleware(['auth:api', 'permission:view_tags']);
+    Route::post('/tags/{id}', 'TagController@store')->middleware(['auth:api', 'permission:create_tags|update_tags']);
+    Route::delete('/tags/{id}', 'TagController@destroy')->middleware(['auth:api', 'permission:delete_tags']);
 
     // Topic routes...
-    Route::get('/topics', 'TopicController@index')->middleware(['auth:api']);
-    Route::get('/topics/{id?}', 'TopicController@show')->middleware(['auth:api']);
-    Route::post('/topics/{id}', 'TopicController@store')->middleware(['auth:api']);
-    Route::delete('/topics/{id}', 'TopicController@destroy')->middleware(['auth:api']);
+    Route::get('/topics', 'TopicController@index')->middleware(['auth:api', 'permission:view_topics']);
+    Route::get('/topics/{id?}', 'TopicController@show')->middleware(['auth:api', 'permission:view_topics']);
+    Route::post('/topics/{id}', 'TopicController@store')->middleware(['auth:api', 'permission:create_topics|update_topics']);
+    Route::delete('/topics/{id}', 'TopicController@destroy')->middleware(['auth:api', 'permission:delete_topics']);
 
     Route::prefix('blog')->group(function () {
       Route::prefix('posts')->group(function () {

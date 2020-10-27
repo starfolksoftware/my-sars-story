@@ -85,7 +85,7 @@
             </div>
           </div>
 
-          <div class="col-lg-12">
+          <!-- <div class="col-lg-12">
             <select
               name="has_location"
               v-model="form.has_location"
@@ -106,7 +106,7 @@
             <div v-if="form.errors.has_location" class="invalid-feedback d-block">
               <strong>{{ form.errors.has_location[0] }}</strong>
             </div>
-          </div>
+          </div> -->
 
           <div class="col-lg-12">
             <select
@@ -131,7 +131,7 @@
             </div>
           </div>
 
-          <div class="col-lg-12">
+          <!-- <div class="col-lg-12">
             <select
               name="has_bot"
               v-model="form.has_bot"
@@ -170,7 +170,7 @@
             <div v-if="form.errors.bot_name" class="invalid-feedback d-block">
               <strong>{{ form.errors.bot_name[0] }}</strong>
             </div>
-          </div>
+          </div> -->
 
         </div>
 
@@ -278,7 +278,7 @@ export default {
         name: "",
         description: "",
         fields: [],
-        has_location: "0",
+        has_location: "1",
         has_user_reporting: "0",
         has_bot: "0",
         bot_name: "",
