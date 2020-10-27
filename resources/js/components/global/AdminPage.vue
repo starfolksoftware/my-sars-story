@@ -133,7 +133,11 @@
                 </router-link>
               </li>
               <li
-                v-permission="['create_posts', 'update_posts', 'update_own_posts', 'view_posts', 'delete_posts', 'delete_own_posts', 'approve_posts', 'publish_posts']"
+                v-permission="[
+                  'create_posts', 'update_posts', 'update_own_posts', 'view_posts', 'delete_posts', 'delete_own_posts', 'approve_posts', 'publish_posts',
+                  'create_tags', 'update_tags', 'view_tags', 'delete_tags',
+                  'create_topics', 'update_topics', 'view_topics', 'delete_topics',
+                ]"
                 class="nav-item"
               >
                 <a
@@ -150,17 +154,21 @@
                 </a>
                 <div class="collapse" id="navbar-posts">
                   <ul class="nav nav-sm flex-column">
-                    <li class="nav-item">
+                    <li 
+                      class="nav-item"
+                      v-permission="['create_posts', 'update_posts', 'update_own_posts', 'view_posts', 'delete_posts', 'delete_own_posts', 'approve_posts', 'publish_posts']">
                       <router-link to="/admin/posts" class="nav-link">
                         <span class="sidenav-normal">{{ trans.app.posts_simple }}</span>
                       </router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item"
+                      v-permission="['create_tags', 'update_tags', 'view_tags', 'delete_tags']">
                       <router-link to="/admin/posts/tags" class="nav-link">
                         <span class="sidenav-normal">{{ trans.app.tags }}</span>
                       </router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item"
+                      v-permission="['create_topics', 'update_topics', 'view_topics', 'delete_topics']">
                       <router-link to="/admin/posts/topics" class="nav-link">
                         <span class="sidenav-normal">{{ trans.app.topics }}</span>
                       </router-link>

@@ -175,7 +175,7 @@ export default {
         name: "",
         profession: "",
         age: null,
-        post_id: null,
+        post_id: "coming-soon",
         avatar: "",
         errors: [],
         isSaving: false,
