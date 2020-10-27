@@ -42,6 +42,28 @@
                   <span class="sidenav-normal">{{ trans.app.dashboard }}</span>
                 </router-link>
               </li>
+              <li class="nav-item"
+                v-permission="['view_memorial', 'create_memorial', 'update_memorial', 'delete_memorial']">
+                <router-link
+                  to="/admin/memorial"
+                  class="nav-link"
+                  :class="{'active': /admin\/memorial/.test($route.path)}"
+                >
+                  <i class="ni ni-single-02 text-primary"></i>
+                  <span class="sidenav-normal">{{ trans.app.members }}</span>
+                </router-link>
+              </li>
+              <li class="nav-item"
+                v-permission="['view_resources', 'create_resources', 'update_resources', 'delete_resources']">
+                <router-link
+                  to="/admin/resources"
+                  class="nav-link"
+                  :class="{'active': /admin\/resources/.test($route.path)}"
+                >
+                  <i class="ni ni-cloud-download-95 text-primary"></i>
+                  <span class="sidenav-normal">{{ trans.app.resources }}</span>
+                </router-link>
+              </li>
               <li 
                 v-permission="[
                   'view_partners', 'create_partners', 'update_partners', 'delete_partners',
@@ -120,17 +142,6 @@
                     </li>
                   </ul>
                 </div>
-              </li>
-              <li class="nav-item"
-                v-permission="['view_memorial', 'create_memorial', 'update_memorial', 'delete_memorial']">
-                <router-link
-                  to="/admin/memorial"
-                  class="nav-link"
-                  :class="{'active': /admin\/memorial/.test($route.path)}"
-                >
-                  <i class="ni ni-single-02 text-primary"></i>
-                  <span class="sidenav-normal">{{ trans.app.members }}</span>
-                </router-link>
               </li>
               <li
                 v-permission="[

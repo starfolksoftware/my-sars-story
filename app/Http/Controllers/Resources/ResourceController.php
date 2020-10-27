@@ -69,10 +69,9 @@ class ResourceController extends \App\Http\Controllers\Controller
         ];
 
         validator($data, [
-            'name' => 'required',
-            'title' => 'required|string|size:120',
-            'description' => 'required|string|size:255',
-            'path' => 'required|string|size:255',
+            'title' => 'required|string|max:120',
+            'description' => 'required|string|max:255',
+            'path' => 'required|string|max:255',
             'user_id' => 'required|integer',
         ], $messages)->validate();
 

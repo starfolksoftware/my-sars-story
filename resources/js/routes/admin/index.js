@@ -9,6 +9,7 @@ import tracker from './tracker'
 import trackerItem from './trackerItem'
 import users from './users'
 import location from './location'
+import resources from './resources'
 
 let adminRoutes = [
   {
@@ -26,7 +27,8 @@ let adminRoutes = [
   ...partner,
   ...posts,
   ...tracker,
-  ...trackerItem
+  ...trackerItem,
+  ...resources,
 ]
 
 export default adminRoutes
