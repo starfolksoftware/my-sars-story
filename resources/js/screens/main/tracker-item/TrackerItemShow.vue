@@ -17,6 +17,13 @@
           <span class="d-block d-lg-none">{{ trans.app.new_update }}</span>
           <span class="d-none d-lg-block">{{ trans.app.new_update }}</span>
         </a>
+
+        <a
+          href="#"
+          class="btn btn-sm btn-outline-success font-weight-bold my-auto"
+        >
+          <span>{{ trans.app.report }}</span>
+        </a>
       </template>
     </page-header>
 

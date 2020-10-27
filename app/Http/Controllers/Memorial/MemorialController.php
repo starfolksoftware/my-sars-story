@@ -22,9 +22,9 @@ class MemorialController extends \App\Http\Controllers\Controller
     $all = request('all') ?? NULL;
     
     if ($all) {
-      $memorials = Memorial::latest()->all();
+      $memorials = Memorial::with('post')->latest()->all();
     } else {
-      $memorials = Memorial::latest()->paginate();
+      $memorials = Memorial::with('post')->latest()->paginate();
     }
     return response()->json(
       $memorials, 200

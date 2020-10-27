@@ -33,7 +33,7 @@
               <div class="ml-auto pl-3">
                 <div class="align-middle">
                   <button
-                    class="btn btn-sm btn-outline-success font-weight-bold"
+                    class="btn btn-sm btn-outline-primary font-weight-bold"
                     @click="showProfileModal"
                   >{{ trans.app.edit_profile }}</button>
                 </div>

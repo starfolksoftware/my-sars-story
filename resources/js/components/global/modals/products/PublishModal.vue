@@ -114,7 +114,7 @@
               <a
                 href="#"
                 v-if="shouldPublish"
-                class="btn btn-success btn-block font-weight-bold mt-0"
+                class="btn btn-primary btn-block font-weight-bold mt-0"
                 @click="scheduleOrPublish"
                 data-dismiss="modal"
               >{{ trans.app.publish_now }}</a>
@@ -122,7 +122,7 @@
               <a
                 href="#"
                 v-else
-                class="btn btn-success btn-block font-weight-bold mt-0"
+                class="btn btn-primary btn-block font-weight-bold mt-0"
                 @click="scheduleOrPublish"
               >{{ trans.app.schedule_to_publish }}</a>
             </div>

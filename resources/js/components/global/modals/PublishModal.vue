@@ -68,11 +68,11 @@
                 <div class="modal-footer">
                     <div class="row w-100">
                         <div class="col-lg order-lg-last px-0">
-                            <a href="#" v-if="shouldPublish" class="btn btn-success btn-block font-weight-bold mt-0" @click="scheduleOrPublish" data-dismiss="modal">
+                            <a href="#" v-if="shouldPublish" class="btn btn-primary btn-block font-weight-bold mt-0" @click="scheduleOrPublish" data-dismiss="modal">
                                 {{ trans.app.publish_now }}
                             </a>
 
-                            <a href="#" v-else class="btn btn-success btn-block font-weight-bold mt-0" @click="scheduleOrPublish">
+                            <a href="#" v-else class="btn btn-primary btn-block font-weight-bold mt-0" @click="scheduleOrPublish">
                                 {{ trans.app.schedule_to_publish }}
                             </a>
                         </div>

@@ -4,9 +4,7 @@
 <section class="vh-100 bg-soft d-flex align-items-center">
   <div class="container-fluid">
     <div
-      class="row justify-content-center form-bg-image vh-100"
-      data-background="../assets/img/illustrations/signin.svg"
-      style="background-image: url('/images/auth_bg.jpg');"
+      class="row justify-content-center"
     >
       <div class="col-12 col-md-5 d-flex align-items-center justify-content-center">
         <div
@@ -122,7 +120,7 @@
               <button type="submit" class="btn btn-block btn-primary">{{ __('Register') }}</button>
             </div>
           </form>
-          <div class="mt-3 mb-4 text-center">
+          <!-- <div class="mt-3 mb-4 text-center">
             <span class="font-weight-normal">or</span>
           </div>
           <div class="btn-wrapper my-4 text-center">
@@ -141,7 +139,7 @@
                 <i class="fab fa-google"></i>
               </span>
             </button>
-          </div>
+          </div> -->
           <div class="d-block d-sm-flex justify-content-center align-items-center mt-4">
             <span class="font-weight-normal">
               Already have an account?

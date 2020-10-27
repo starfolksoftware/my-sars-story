@@ -11,10 +11,20 @@ $gray-900: #1a202c;
 $black: #000;
 
 $red: #cc5454;
-$green: #03a87c;
+$green: rgb(49, 216, 167);
 $green-500: rgba(3, 168, 124, .6);
 $blue: rgb(84, 175, 204);
-$blue-500: rgba(158, 213, 237, 0.6);
+$blue-500: rgba(0, 96, 98);
+$claret: rgb(119, 28, 48);
+$bone: rgb(226, 217, 188);
+$vegas-gold: rgb(190, 169, 81);
+$dingy-dungeon: rgb(193, 53, 74);
+
+$primary:       $claret !default;
+$secondary:     $bone !default;
+$success:       $green !default;
+$warning:       $vegas-gold !default;
+$danger:        $dingy-dungeon !default;
 
 // $font-family-sans-serif: "Karla", sans-serif;
 $font-family-sans-serif:
@@ -31,7 +41,7 @@ $font-family-sans-serif:
   // Emoji fonts
   "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
 $font-family-serif: "Merriweather", serif;
-$line-height-base: 1.6;
+$line-height-base: 2;
 
 $box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 

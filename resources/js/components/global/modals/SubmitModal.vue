@@ -20,7 +20,7 @@
                         <div class="col-lg order-lg-last px-0">
                             <a
                                 href="#"
-                                class="btn btn-success btn-block font-weight-bold mt-0"
+                                class="btn btn-primary btn-block font-weight-bold mt-0"
                                 aria-label="Submit"
                                 @click.prevent="confirmProceed()">
                                 {{ trans.app.submit }}

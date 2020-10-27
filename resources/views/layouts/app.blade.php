@@ -49,7 +49,7 @@
 </head>
 <body>
     <div id="app">
-        <main>
+        <main class="bg-primary">
           @yield('content')
         </main>
     </div>

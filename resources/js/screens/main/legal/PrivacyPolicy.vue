@@ -7,16 +7,16 @@
       :image="metaImageUrl"
       :url="metaUrl"
     />
-    <div class="d-none d-md-block flex-column col-md-4 vh-100 position-fixed" style="background-image: url('/images/auth_bg.jpg');">
+    <div class="d-none d-md-block flex-column col-md-4 vh-100 position-fixed bg-warning">
       <section class="section section-lg mt-3">
-        <h1 class="display-4 font-weight-700">
-          Starfolk Software
+        <h1 class="display-4 font-weight-700 text-white">
+          #MySarsStory
         </h1>
       </section>
     </div>
     <div class="col-12 flex-column col-md-8 vh-100 overflow-auto position-absolute right-0">
       <router-link 
-        class="btn btn-sm btn-outline-info mt-3" 
+        class="btn btn-outline-primary mt-3" 
         :to="{ name: 'home' }">
         <span class="fas fa-long-arrow-alt-left ml-2"></span>
         {{ trans.app.home }}

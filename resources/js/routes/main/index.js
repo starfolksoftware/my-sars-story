@@ -1,6 +1,7 @@
 import blog from './blog'
 import memorial from './memorial'
 import trackerItem from './trackerItem'
+import resource from './resource'
 // import tracker from '../admin/tracker'
 
 let mainRoutes = [
@@ -52,6 +53,7 @@ let mainRoutes = [
   ...blog,
   ...trackerItem,
   ...memorial,
+  ...resource,
 ]
 
 export default mainRoutes

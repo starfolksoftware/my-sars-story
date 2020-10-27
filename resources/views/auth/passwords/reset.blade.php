@@ -5,8 +5,6 @@
   <div class="container-fluid">
     <div
       class="row justify-content-center form-bg-image vh-100"
-      data-background="../assets/img/illustrations/signin.svg"
-      style="background-image: url('/images/auth_bg.jpg');"
     >
       <div class="col-12 col-md-5 d-flex align-items-center justify-content-center">
         <div
