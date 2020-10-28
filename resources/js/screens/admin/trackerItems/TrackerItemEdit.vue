@@ -11,13 +11,13 @@
       <breadcrumb :links="breadcrumbLinks" />
     </template>
     <template slot="action">
-      <a
+      <!-- <a
         href="#"
         v-permission="['update_tracker_items']"
         class="btn btn-sm btn-danger font-weight-bold my-auto mr-3"
         @click="saveTrackedItem"
         :aria-label="trans.app.save"
-      >{{ trans.app.save }}</a>
+      >{{ trans.app.save }}</a> -->
 
       <a
         v-if="!form.confirmed"
@@ -73,18 +73,7 @@
     </template>
     <template slot="main" v-if="isReady">
       <div class="col">
-        <div class="form-group">
-          <div class="col-lg-12">
-            <div v-for="(error, index) in form.errors" :key="index" class="invalid-feedback d-block">
-              <strong>{{ error[0] }}</strong>
-            </div>
-          </div>
-        </div>
-        <h1>
-          {{ trans.app.general_information }}
-          <hr/>
-        </h1>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <textarea-autosize
             :placeholder="trans.app.title"
             class="form-control"
@@ -100,9 +89,14 @@
           <div v-if="form.errors.description" class="invalid-feedback d-block">
             <strong>{{ form.errors.description[0] }}</strong>
           </div>
-        </div>
+        </div> -->
+        <!-- <vue-form-generator :schema="schema" :model="form" :options="formOptions"></vue-form-generator> -->
         <div class="row">
-          <div class="col">
+          <div class="col mx-auto">
+            <h1>
+              {{ trans.app.general_information }}
+              <hr/>
+            </h1>
             <div class="form-group">
               <div class="col-lg-12">
                 <select 
@@ -120,12 +114,10 @@
                 </select>
 
                 <div v-if="form.errors.state_id" class="invalid-feedback d-block">
-                  <strong>{{ form.errors.state_id[0] }}</strong>
+                  <strong>{{ form.errors.state_id }}</strong>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col">
             <div class="form-group">
               <div class="col-lg-12">
                 <select 
@@ -143,17 +135,55 @@
                 </select>
 
                 <div v-if="form.errors.local_government_id" class="invalid-feedback d-block">
-                  <strong>{{ form.errors.local_government_id[0] }}</strong>
+                  <strong>{{ form.errors.local_government_id }}</strong>
                 </div>
               </div>
             </div>
+            <div class="form-group">
+              <div class="col-lg-12">
+                <input type="text"
+                  name="email"
+                  autofocus
+                  autocomplete="off"
+                  v-model="form.email"
+                  title="Email"
+                  class="form-control"
+                  :placeholder="trans.app.email" />
+
+                <div
+                  v-if="form.errors.email"
+                  class="invalid-feedback d-block"
+                >
+                  <strong>{{ form.errors.email }}</strong>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-lg-12">
+                <input type="text"
+                  name="phone_number"
+                  autofocus
+                  autocomplete="off"
+                  v-model="form.phone_number"
+                  title="Phone Number"
+                  class="form-control"
+                  :placeholder="trans.app.phone_number" />
+
+                <div
+                  v-if="form.errors.phone_number"
+                  class="invalid-feedback d-block"
+                >
+                  <strong>{{ form.errors.phone_number }}</strong>
+                </div>
+              </div>
+            </div>
+            <FormulateForm
+              @submit="saveTrackedItem"
+              v-model="form"
+              :schema="tracker.fields"
+            />
           </div>
         </div>
-        <h1>
-          {{ trans.app.meta }}
-          <hr/>
-        </h1>
-        <vue-form-generator :schema="schema" :model="form" :options="formOptions"></vue-form-generator>
       </div>
 
       <delete-modal
@@ -184,6 +214,23 @@ import ImageUploadModal from "../../../components/global/modals/ImageUploadModal
 import VueTextAreaAutosize from "vue-textarea-autosize"
 import QuillEditor from "../../../components/global/basic-editor/QuillEditor"
 
+const VueFormulate = require('@braid/vue-formulate')
+Vue.use(VueFormulate.default, {
+  classes: {
+    outer: 'mb-4',
+    input (context) {
+      switch (context.classification) {
+        case 'button':
+          return 'btn btn-primary'
+        default:
+          return 'form-control'
+      }
+    },
+    label: 'form-label text-primary',
+    help: 'help helper helpText',
+    error: 'invalid-feedback d-block'
+  }
+})
 Vue.use(VueTextAreaAutosize)
 
 export default {
@@ -202,8 +249,8 @@ export default {
       id: this.$route.params.id || "create",
       form: {
         id: '',
-        title: '',
-        description: '',
+        title: 'Title',
+        description: 'Description',
         confirmed: true,
         featured_image: '',
         user_id: '',
@@ -239,13 +286,11 @@ export default {
     };
   },
 
-  computed: {
-    schema() {
-      return {
-        fields: this.tracker.fields
-      }
-    }
-  },
+  // computed: {
+  //   schema() {
+  //     return this.tracker.fields
+  //   }
+  // },
 
   beforeRouteEnter(to, from, next) {
     next(vm => {
@@ -255,7 +300,7 @@ export default {
           vm.tracker = response.data
 
           vm.tracker.fields.forEach((field) => {
-            vm.form[field.model] = field.default || ''
+            vm.form[field.name] = ''
           });
 
           vm.fetchData()
@@ -292,6 +337,8 @@ export default {
             this.form.description = response.data.description
             this.form.state_id = response.data.state_id
             this.form.local_government_id = response.data.local_government_id
+            this.form.email = response.data.email
+            this.form.phone_number = response.data.phone_number
           }
 
           this.isReady = true;
@@ -319,15 +366,17 @@ export default {
       let meta = {}
 
       this.tracker.fields.forEach((field) => {
-        meta[field.model] = this.form[field.model]
+        meta[field.name] = this.form[field.name]
       });
 
       let formData = {
         id: this.form.id,
         tracker_id: this.$route.params.trackerId,
-        title: this.form.title,
+        title: this.form.description,
         description: this.form.description,
         confirmed: this.form.confirmed,
+        email: this.form.email,
+        phone_number: this.form.phone_number,
         featured_image: this.form.featured_image,
         meta,
         user_id: this.form.user_id,
@@ -375,13 +424,21 @@ export default {
     validate(form) {
       let errors = {}
 
-      let formKeyArr = Object.keys(form)
-
       this.tracker.fields.forEach((field) => {
         if (!form[field.model] && field.required == 1) {
           errors[field.model] = [`${field.model} can not be empty`]
         }
       })
+
+      if (this.tracker.has_location === "1") {
+        if (!form.state_id) {
+          errors['state_id'] = 'state can not be empty'
+        }
+
+        if (!form.local_government_id) {
+          errors['local_government_id'] = 'local government can not be empty'
+        }
+      }
 
       return errors
     },

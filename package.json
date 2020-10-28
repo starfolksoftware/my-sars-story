@@ -48,6 +48,7 @@
         "worker-loader": "^2.0.0"
     },
     "dependencies": {
+        "@braid/vue-formulate": "^2.4.5",
         "@ckeditor/ckeditor5-build-classic": "^18.0.0",
         "@ckeditor/ckeditor5-vue": "^1.0.1",
         "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -68,6 +69,7 @@
         "vue-form-generator": "^2.3.4",
         "vue-headful": "^2.1.0",
         "vue-tableau": "^0.1.7",
+        "vue-toast-notification": "^0.5.4",
         "vue2-leaflet": "^2.5.2"
     }
 }

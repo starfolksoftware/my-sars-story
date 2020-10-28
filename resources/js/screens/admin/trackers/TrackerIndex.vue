@@ -1,12 +1,12 @@
 <template>
   <admin-page>
-    <template slot="action">
+    <!-- <template slot="action">
       <router-link
         v-permission="['create_trackers']"
         :to="{ name: 'trackers-create' }"
         class="btn btn-sm btn-danger font-weight-bold my-auto"
       >{{ trans.app.new_tracker }}</router-link>
-    </template>
+    </template> -->
     <template slot="page-title">
       {{ trans.app.trackers }}
     </template>
