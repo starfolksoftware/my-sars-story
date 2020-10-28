@@ -103,7 +103,7 @@
         </ul>
       </div>
       <div class="d-flex align-items-center">
-        <div v-if="CurrentTenant.user" class="my-auto ml-auto d-flex align-items-end align-middle">
+        <div class="my-auto ml-auto d-flex align-items-end align-middle">
           <slot name="action" />
         </div>
         <ul v-if="CurrentTenant.user && !isAdminPage" class="navbar-nav align-items-center mr-auto mr-md-0 d-none d-md-block">

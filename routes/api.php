@@ -159,8 +159,7 @@ Route::group(['prefix' => 'v1'], function () {
     // trackerItems routes...
     Route::get('/trackerItems/{trackerId}', 'TrackerItemController@index');
     Route::get('/trackerItems/{trackerId}/{id?}', 'TrackerItemController@show');
-    Route::post('/trackerItems/{trackerId}/{id}', 'TrackerItemController@store')
-      ->middleware(['auth:api', 'permission:create_tracker_items|update_tracker_items']);
+    Route::post('/trackerItems/{trackerId}/{id}', 'TrackerItemController@store');
     Route::delete('/trackerItems/{trackerId}/{id}', 'TrackerItemController@destroy')
       ->middleware(['auth:api', 'permission:delete_tracker_items']);
   });

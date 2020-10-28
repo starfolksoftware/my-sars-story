@@ -69,9 +69,10 @@
                 <router-link
                   :to="{name: 'trackerItems-edit', params: { id: trackerItem.id }}"
                   class="font-weight-bold text-lg lead text-decoration-none"
-                >{{ trackerItem.title || trackerItem.meta.title }}</router-link>
+                  v-if="trackerItem.description" v-html="trim(trackerItem.description, 200)"
+                ></router-link>
               </p>
-              <p class="mb-1" v-if="trackerItem.description" v-html="trim(trackerItem.description, 200)"></p>
+              <!-- <p class="mb-1" v-if="trackerItem.description" v-html="trim(trackerItem.description, 200)"></p> -->
             </div>
             <div class="ml-auto">
               <span class="text-muted mr-3">{{  }}</span>

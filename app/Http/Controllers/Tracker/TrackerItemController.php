@@ -92,6 +92,8 @@ class TrackerItemController extends \App\Http\Controllers\Controller
       'description' => request('description'),
       'meta' => request('meta'),
       'confirmed' => request('confirmed'),
+      'email' => request('email'),
+      'phone_number' => request('phone_number'),
       'featured_image' => request('featured_image'),
       'state_id' => request('state_id'),
       'local_government_id' => request('local_government_id'),

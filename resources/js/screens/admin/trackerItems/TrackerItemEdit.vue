@@ -139,6 +139,44 @@
                 </div>
               </div>
             </div>
+            <div class="form-group">
+              <div class="col-lg-12">
+                <input type="text"
+                  name="email"
+                  autofocus
+                  autocomplete="off"
+                  v-model="form.email"
+                  title="Email"
+                  class="form-control"
+                  :placeholder="trans.app.email" />
+
+                <div
+                  v-if="form.errors.email"
+                  class="invalid-feedback d-block"
+                >
+                  <strong>{{ form.errors.email }}</strong>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-lg-12">
+                <input type="text"
+                  name="phone_number"
+                  autofocus
+                  autocomplete="off"
+                  v-model="form.phone_number"
+                  title="Phone Number"
+                  class="form-control"
+                  :placeholder="trans.app.phone_number" />
+
+                <div
+                  v-if="form.errors.phone_number"
+                  class="invalid-feedback d-block"
+                >
+                  <strong>{{ form.errors.phone_number }}</strong>
+                </div>
+              </div>
+            </div>
             <FormulateForm
               @submit="saveTrackedItem"
               v-model="form"
@@ -248,11 +286,11 @@ export default {
     };
   },
 
-  computed: {
-    schema() {
-      return this.tracker.fields
-    }
-  },
+  // computed: {
+  //   schema() {
+  //     return this.tracker.fields
+  //   }
+  // },
 
   beforeRouteEnter(to, from, next) {
     next(vm => {
@@ -299,6 +337,8 @@ export default {
             this.form.description = response.data.description
             this.form.state_id = response.data.state_id
             this.form.local_government_id = response.data.local_government_id
+            this.form.email = response.data.email
+            this.form.phone_number = response.data.phone_number
           }
 
           this.isReady = true;
@@ -332,9 +372,11 @@ export default {
       let formData = {
         id: this.form.id,
         tracker_id: this.$route.params.trackerId,
-        title: this.form.title,
+        title: this.form.description,
         description: this.form.description,
         confirmed: this.form.confirmed,
+        email: this.form.email,
+        phone_number: this.form.phone_number,
         featured_image: this.form.featured_image,
         meta,
         user_id: this.form.user_id,

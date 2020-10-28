@@ -7,7 +7,7 @@
       :url="metaUrl"
     />
     <page-header>
-      <template slot="status">
+      <template slot="action">
         <ul class="navbar-nav mr-auto flex-row float-right">
           <li class="text-muted font-weight-bold">
             <span v-if="form.isSaving">{{ trans.app.saving }}</span>
@@ -15,34 +15,63 @@
           </li>
         </ul>
       </template>
-
-      <template slot="action">
-        <a
-          href="#"
-          class="btn btn-sm btn-outline-success font-weight-bold my-auto"
-          @click="saveTrackedItem"
-          :aria-label="trans.app.save"
-        >{{ trans.app.save }}</a>
-      </template>
     </page-header>
 
     <main v-if="isReady" class="py-4" v-cloak>
       <div class="col-md-10 my-auto mx-auto">
-        <div class="row mt-5">
-          <div class="col-md-6 text-center">
-            <h4 class="display-4 mb-5">{{ trans.app.submit_to_us }}</h4>
-            <img width="300" src="/images/undraw_collection_u2np.png" alt="" class="img-fluid">
-            <p class="mt-5" v-html="tracker.description"></p>
-          </div>
-          <div class="col-md-6 border rounded">
+        <div class="row">
+          <div class="col mx-auto">
+            <h1>
+              {{ trans.app.general_information }}
+              <hr/>
+            </h1>
             <div class="form-group">
               <div class="col-lg-12">
-                <div v-for="(error, index) in form.errors" :key="index" class="invalid-feedback d-block">
-                  <strong>{{ error[0] }}</strong>
+                <select 
+                  name="state_id" 
+                  id="state_id"
+                  v-model="form.state_id"
+                  class="form-control"
+                >
+                  <option value="" disabled>{{ trans.app.states }}</option>
+                  <option 
+                    :value="state.id"
+                    v-for="(state,index) in states" :key="index">
+                    {{ state.name }}
+                  </option>
+                </select>
+
+                <div v-if="form.errors.state_id" class="invalid-feedback d-block">
+                  <strong>{{ form.errors.state_id }}</strong>
                 </div>
               </div>
             </div>
-            <vue-form-generator :schema="schema" :model="form" :options="formOptions"></vue-form-generator>
+            <div class="form-group">
+              <div class="col-lg-12">
+                <select 
+                  name="local_government_id" 
+                  id="local_government_id"
+                  v-model="form.local_government_id"
+                  class="form-control"
+                >
+                  <option value="" disabled>{{ trans.app.local_governments }}</option>
+                  <option 
+                    :value="localGovernment.id"
+                    v-for="(localGovernment,index) in localGovernments" :key="index">
+                    {{ localGovernment.name }}
+                  </option>
+                </select>
+
+                <div v-if="form.errors.local_government_id" class="invalid-feedback d-block">
+                  <strong>{{ form.errors.local_government_id }}</strong>
+                </div>
+              </div>
+            </div>
+            <FormulateForm
+              @submit="saveTrackedItem"
+              v-model="form"
+              :schema="tracker.fields"
+            />
           </div>
         </div>
       </div>
@@ -51,15 +80,34 @@
 </template>
 
 <script>
+import Vue from "vue"
 import $ from "jquery";
 import NProgress from "nprogress";
-import VueFormGenerator from 'vue-form-generator/dist/vfg-core.js'
+// import VueFormGenerator from 'vue-form-generator/dist/vfg-core.js'
+
+const VueFormulate = require('@braid/vue-formulate')
+Vue.use(VueFormulate.default, {
+  classes: {
+    outer: 'mb-4',
+    input (context) {
+      switch (context.classification) {
+        case 'button':
+          return 'btn btn-primary'
+        default:
+          return 'form-control'
+      }
+    },
+    label: 'form-label text-primary',
+    help: 'help helper helpText',
+    error: 'invalid-feedback d-block'
+  }
+})
 
 export default {
   name: "incident-submit",
 
   components: {
-    VueFormGenerator: VueFormGenerator.component
+    // VueFormGenerator: VueFormGenerator.component
   },
 
   data() {
@@ -74,6 +122,8 @@ export default {
         hasSuccess: false
       },
       tracker: {},
+      states: [],
+      localGovernments: [],
       isReady: false,
       trans: JSON.parse(CurrentTenant.translations),
       formOptions: {
@@ -83,13 +133,13 @@ export default {
     };
   },
 
-  computed: {
-    schema() {
-      return {
-        fields: this.tracker.fields
-      }
-    }
-  },
+  // computed: {
+  //   schema() {
+  //     return {
+  //       fields: this.tracker.fields
+  //     }
+  //   }
+  // },
 
   created() {
     if (!this.isLoggedIn) {
@@ -109,15 +159,25 @@ export default {
           vm.tracker = response.data
 
           vm.tracker.fields.forEach((field) => {
-            vm.form[field.model] = field.default || ''
+            vm.form[field.name] = ''
           });
 
           vm.fetchData()
+          vm.loadStates()
         })
     })
   },
 
-  watch: {},
+  watch: {
+    // "form.featured_image": function(val) {
+    //   if (val && (this.id != 'create')) {
+    //     this.saveTrackedItem()
+    //   }
+    // },
+    "form.state_id": function (val) {
+      this.loadLocalGovernments(val)
+    }
+  },
 
   methods: {
     fetchData() {
@@ -158,7 +218,7 @@ export default {
       let meta = {}
 
       this.tracker.fields.forEach((field) => {
-        meta[field.model] = this.form[field.model]
+        meta[field.name] = this.form[field.name]
       });
 
       let formData = {
@@ -211,15 +271,51 @@ export default {
     validate(form) {
       let errors = {}
 
-      let formKeyArr = Object.keys(form)
-
       this.tracker.fields.forEach((field) => {
         if (!form[field.model] && field.required == 1) {
           errors[field.model] = [`${field.model} can not be empty`]
         }
       })
 
+      if (this.tracker.has_location === "1") {
+        if (!form.state_id) {
+          errors['state_id'] = 'state can not be empty'
+        }
+
+        if (!form.local_government_id) {
+          errors['local_government_id'] = 'local government can not be empty'
+        }
+      }
+
       return errors
+    },
+
+    loadStates() {
+      this.request()
+        .get("/api/v1/states?all=1")
+        .then(response => {
+          this.states = response.data
+          NProgress.done();
+        })
+        .catch(error => {
+          NProgress.done();
+        });
+    },
+
+    loadLocalGovernments(stateId = null) {
+      this.request()
+        .get("/api/v1/localGovernments?all=1", {
+          params: {
+            state: stateId
+          }
+        })
+        .then(response => {
+          this.localGovernments = response.data.data
+          NProgress.done();
+        })
+        .catch(error => {
+          NProgress.done();
+        });
     }
   }
 };

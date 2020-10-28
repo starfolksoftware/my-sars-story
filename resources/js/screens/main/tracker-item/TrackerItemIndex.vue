@@ -7,11 +7,12 @@
       :url="metaUrl"
     />
     <page-header>
-      <template v-if="tracker.has_user_reporting === 1" slot="action">
-        <router-link
-          :to="{ name: 'trackerItems-submit' }"
-          class="btn btn-sm btn-outline-success font-weight-bold my-auto"
-        >{{ trans.app.report }}</router-link>
+      <template v-if="tracker.has_user_reporting === '1'" slot="action">
+        <a
+          @click.prevent="showReportModal"
+          href="#"
+          class="btn btn-sm btn-outline-primary font-weight-bold my-auto"
+        >{{ trans.app.report }}</a>
       </template>
     </page-header>
 
@@ -102,6 +103,11 @@
     </div>
 
     <page-footer></page-footer>
+
+    <report-modal 
+      v-if="tracker.id" ref="reportModal"
+      :trackerId="tracker.id"
+    />
   </div>
 </template>
 
@@ -110,12 +116,14 @@ import _ from "lodash"
 import moment from "moment";
 import NProgress from "nprogress";
 import InfiniteLoading from "vue-infinite-loading";
+import ReportModal from "../../../components/global/modals/ReportModal"
 
 export default {
   name: "trackerItems-index",
 
   components: {
-    InfiniteLoading
+    InfiniteLoading,
+    ReportModal
   },
 
   data() {
@@ -210,7 +218,11 @@ export default {
         .then(response => {
           this.tracker = response.data
         })
-    }
+    },
+
+    showReportModal() {
+      $(this.$refs.reportModal.$el).modal("show");
+    },
   }
 };
 </script>
