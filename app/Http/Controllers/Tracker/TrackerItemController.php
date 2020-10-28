@@ -7,6 +7,7 @@ use App\Models\Tracker\Tracker;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Auth;
 
 class TrackerItemController extends \App\Http\Controllers\Controller
 {
@@ -94,7 +95,7 @@ class TrackerItemController extends \App\Http\Controllers\Controller
       'featured_image' => request('featured_image'),
       'state_id' => request('state_id'),
       'local_government_id' => request('local_government_id'),
-      'user_id' => $this->isNewTrackerItem(request('id')) ? request()->user()->id : request('user_id')
+      'user_id' => Auth::check() ? request()->user()->id : NULL
     ];
 
     $messages = [
@@ -108,7 +109,6 @@ class TrackerItemController extends \App\Http\Controllers\Controller
       'description' => 'required',
       'meta' => 'required',
       'confirmed' => 'required',
-      'user_id' => 'required',
       'state_id' => 'required',
       'local_government_id' => 'required',
     ], $messages)->validate();

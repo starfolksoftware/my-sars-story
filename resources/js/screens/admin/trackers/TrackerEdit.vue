@@ -5,7 +5,7 @@
       <span v-if="form.hasSuccess">{{ trans.app.saved }}</span>
     </template>
 
-    <template slot="action">
+    <!-- <template slot="action">
       <a
         href="#"
         v-permission="['update_trackers']"
@@ -14,9 +14,9 @@
         @click="saveTracker"
         :aria-label="trans.app.save"
       >{{ trans.app.save }}</a>
-    </template>
+    </template> -->
 
-    <template slot="menu">
+    <!-- <template slot="menu">
       <div class="dropdown" v-if="id !== 'create'">
         <a
           id="navbarDropdown"
@@ -49,7 +49,7 @@
           >{{ trans.app.delete }}</a>
         </div>
       </div>
-    </template>
+    </template> -->
     <template slot="page-title">
       {{ trans.app.trackers }}
     </template>
@@ -70,6 +70,7 @@
               @keyup.enter="saveTracker"
               class="form-control-lg form-control border-0 px-0 bg-transparent"
               :placeholder="trans.app.give_your_tracker_a_name"
+              disabled
             />
 
             <div v-if="form.errors.name" class="invalid-feedback d-block">
@@ -79,34 +80,12 @@
 
           <div class="col-lg-12">
             <label class="display-6">{{ trans.app.give_your_tracker_a_description }}</label>
-            <ckeditor :editor="editor" v-model="form.description" :config="editorConfig"></ckeditor>
+            <p class="lead" v-html="form.description"></p>
+            <!-- <ckeditor :editor="editor" v-model="form.description" :config="editorConfig"></ckeditor> -->
             <div v-if="form.errors.description" class="invalid-feedback d-block">
               <strong>{{ form.errors.description[0] }}</strong>
             </div>
           </div>
-
-          <!-- <div class="col-lg-12">
-            <select
-              name="has_location"
-              v-model="form.has_location"
-              title="Has Location"
-              @keyup.enter="saveTracker"
-              class="form-control-lg form-control border-0 px-0 bg-transparent"
-              :placeholder="trans.app.give_your_tracker_has_location"
-            >
-              <option value disabled>{{trans.app.give_your_tracker_has_location}}</option>
-              <option 
-                value="1"
-              >{{ trans.app.true }}</option>
-              <option 
-                value="0"
-              >{{ trans.app.false }}</option>
-            </select>
-
-            <div v-if="form.errors.has_location" class="invalid-feedback d-block">
-              <strong>{{ form.errors.has_location[0] }}</strong>
-            </div>
-          </div> -->
 
           <div class="col-lg-12">
             <select
@@ -116,6 +95,7 @@
               @keyup.enter="saveTracker"
               class="form-control-lg form-control border-0 px-0 bg-transparent"
               :placeholder="trans.app.give_your_tracker_has_user_reporting"
+              disabled
             >
               <option value disabled>{{trans.app.give_your_tracker_has_user_reporting}}</option>
               <option 
@@ -131,61 +111,20 @@
             </div>
           </div>
 
-          <!-- <div class="col-lg-12">
-            <select
-              name="has_bot"
-              v-model="form.has_bot"
-              title="Has Bot"
-              @keyup.enter="saveTracker"
-              class="form-control-lg form-control border-0 px-0 bg-transparent"
-              :placeholder="trans.app.give_your_tracker_has_bot"
-            >
-              <option value disabled>{{trans.app.give_your_tracker_has_bot}}</option>
-              <option 
-                value="1"
-              >{{ trans.app.true }}</option>
-              <option 
-                value="0"
-              >{{ trans.app.false }}</option>
-            </select>
-
-            <div v-if="form.errors.has_bot" class="invalid-feedback d-block">
-              <strong>{{ form.errors.has_bot[0] }}</strong>
-            </div>
-          </div>
-
-          <div class="col-lg-12">
-            <input
-              type="text"
-              name="bot_name"
-              autofocus
-              autocomplete="off"
-              v-model="form.bot_name"
-              title="Bot name"
-              @keyup.enter="saveTracker"
-              class="form-control-lg form-control border-0 px-0 bg-transparent"
-              :placeholder="trans.app.give_your_tracker_bot_a_name"
-            />
-
-            <div v-if="form.errors.bot_name" class="invalid-feedback d-block">
-              <strong>{{ form.errors.bot_name[0] }}</strong>
-            </div>
-          </div> -->
-
         </div>
 
         <div class="form-group">
           <h1>
             {{trans.app.fields}} 
-            <button
+            <!-- <button
               class="btn btn-info btn-sm"
               @click="showNewFieldModal"
             >
               {{ trans.app.add_field }}
-            </button>
+            </button> -->
             <hr>
           </h1>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col">
               <table class="table table-hover">
                 <thead>
@@ -215,7 +154,7 @@
                 </tbody>
               </table>
             </div>
-          </div>
+          </div> -->
         </div>
 
         <div class="form-group">

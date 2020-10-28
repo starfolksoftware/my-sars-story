@@ -117,6 +117,7 @@ return [
   'formats' => 'Formats',
   'from' => 'From',
   'from_last_month' => 'from last month',
+  'general_information' => 'General Information',
   'general_settings' => 'General settings',
   'get_connected_with_us' => 'Get connected with us on social networks!',
   'give_your_role_a_name' => 'Give role a name',

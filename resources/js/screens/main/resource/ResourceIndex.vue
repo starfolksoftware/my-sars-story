@@ -112,7 +112,7 @@ export default {
 }
 
 .page-title h2:after {
-  background-image: linear-gradient(180deg,transparent,transparent 6.25%,#000 0,#000 25%,transparent 0,transparent 40.625%,#000 0,#000 59.375%,transparent 0,transparent 75%,#000 0,#000 93.75%,transparent 0,transparent);
+  background-image: linear-gradient(180deg,transparent,transparent 6.25%,rgb(190, 169, 81) 0,rgb(190, 169, 81) 25%,transparent 0,transparent 40.625%,rgb(190, 169, 81) 0,rgb(190, 169, 81) 59.375%,transparent 0,transparent 75%,rgb(190, 169, 81) 0,rgb(190, 169, 81) 93.75%,transparent 0,transparent);
   content: "";
   height: .75em;
   /* left: .2em; */

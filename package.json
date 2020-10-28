@@ -69,6 +69,7 @@
         "vue-form-generator": "^2.3.4",
         "vue-headful": "^2.1.0",
         "vue-tableau": "^0.1.7",
+        "vue-toast-notification": "^0.5.4",
         "vue2-leaflet": "^2.5.2"
     }
 }

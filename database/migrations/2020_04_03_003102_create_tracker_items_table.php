@@ -18,7 +18,7 @@ class CreateTrackerItemsTable extends Migration
       $table->unsignedBigInteger('tracker_id');
       $table->json('meta');
       $table->boolean('confirmed');
-      $table->unsignedBigInteger('user_id');
+      $table->unsignedBigInteger('user_id')->nullable();
       $table->timestamps();
 
       $table->engine = 'InnoDB';

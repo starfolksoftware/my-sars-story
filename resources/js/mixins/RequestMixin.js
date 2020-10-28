@@ -1,4 +1,11 @@
 import axios from 'axios'
+import Vue from 'vue';
+import VueToast from 'vue-toast-notification';
+// Import one of available themes
+// import 'vue-toast-notification/dist/theme-default.css';
+import 'vue-toast-notification/dist/theme-sugar.css';
+
+Vue.use(VueToast);
 
 export default {
   methods: {
@@ -19,6 +26,11 @@ export default {
       }
 
       const errorHandler = error => {
+        Vue.$toast.open({
+          message: error.response.message,
+          type: 'error',
+          // all of other options may go here
+        });
         // Add any error modifiers...
         switch (error.response.status) {
           case 405:
@@ -35,6 +47,13 @@ export default {
       }
 
       const successHandler = response => {
+        if ([200, 204, 201].includes(response.status) && response.config.method != "get") {
+          Vue.$toast.open({
+            message: 'Success!',
+            type: 'success',
+            // all of other options may go here
+          });
+        }
         // Add any response modifiers...
         return response
       }
