@@ -56,7 +56,10 @@ class BlogPostController extends Controller
                      ->get();
 
         if ($limit) {
-          $posts = Post::all()->take(5);
+          $posts = Post::published()
+                    ->withUserMeta()
+                    ->with(['user'])
+                    ->orderByDesc('published_at')->take(5)->get();
         }
 
         $posts->each->append('read_time');

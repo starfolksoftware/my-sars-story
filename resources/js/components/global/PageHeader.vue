@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-horizontal navbar-expand-lg navbar-light border-bottom">
     <div class="container">
-      <router-link to="/" class="navbar-brand mr-lg-3 text-primary font-weight-900">
+      <router-link to="/" class="navbar-brand mr-lg-3 text-primary display-name text-lg">
         {{ platform.name || platform.display_name }}
         <!-- <div class="logo"> 
           <img src="/images/starfolk_logo.png" width="60" height="60"> 
@@ -219,3 +219,13 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+/* @import url('https://fonts.googleapis.com/css2?family=Frijole&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
+
+.display-name {
+  /* font-family: 'Frijole', cursive; */
+  font-family: 'Bungee Shade', cursive;
+}
+</style>

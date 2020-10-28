@@ -89,6 +89,14 @@ export default {
       return "/api/v1/media/uploads";
     },
 
+    mediaFormat(path) {
+      let pathArray = path.split('/')
+      let lastElementOfPathArray = pathArray[pathArray.length-1].split('.')
+      let format = lastElementOfPathArray[lastElementOfPathArray.length-1]
+
+      return format
+    },
+
     resourceUploadPath() {
       return "/api/v1/resource/uploads"
     },

@@ -7,7 +7,7 @@
       :url="metaUrl"
     />
     <page-header>
-      <template slot="status">
+      <template slot="action">
         <ul class="navbar-nav mr-auto flex-row float-right">
           <li class="text-muted font-weight-bold">
             <span v-if="form.isSaving">{{ trans.app.saving }}</span>
@@ -20,15 +20,15 @@
     <main class="py-4">
       <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-12 my-3">
         <div class="d-flex justify-content-between my-3">
-          <h1>{{ trans.app.your_profile }}</h1>
+          <h1 class="text-primary">{{ trans.app.your_profile }}</h1>
         </div>
 
         <div class="mt-2 card shadow border-0" v-if="isReady">
           <div class="card-body p-0">
             <div class="d-flex p-3 align-items-center">
               <div class="mr-auto py-1">
-                <p class="mb-1 font-weight-bold text-lg lead">{{ trans.app.your_profile }}</p>
-                <p class="mb-1 d-none d-lg-block">{{ trans.app.choose_a_unique_username }}</p>
+                <p class="mb-1 font-weight-bold text-lg lead text-primary">{{ trans.app.your_profile }}</p>
+                <p class="mb-1 d-none d-lg-block text-primary">{{ trans.app.choose_a_unique_username }}</p>
               </div>
               <div class="ml-auto pl-3">
                 <div class="align-middle">
@@ -90,8 +90,8 @@
 
             <div class="d-flex border-top p-3 align-items-center">
               <div class="mr-auto py-1">
-                <p class="mb-1 font-weight-bold text-lg lead">{{ trans.app.locale }}</p>
-                <p class="mb-1 d-none d-lg-block">{{ trans.app.select_your_language_or_region }}</p>
+                <p class="mb-1 font-weight-bold text-lg lead text-primary">{{ trans.app.locale }}</p>
+                <p class="mb-1 d-none d-lg-block text-primary">{{ trans.app.select_your_language_or_region }}</p>
               </div>
               <div class="ml-auto pl-3">
                 <div class="align-middle">

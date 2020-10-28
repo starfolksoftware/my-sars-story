@@ -17,7 +17,7 @@
         <div class="col-12 col-md-6 flex-column p-5 p-md-9">
           <div class="row h-100">
             <div class="mx-auto my-auto text-center">
-              <h1 class="font-weight-700">
+              <h1 class="font-weight-700 text-primary">
                 {{ post.title }}
               </h1>
               <router-link :to="{name: 'blog-user', params: { identifier: publicIdentifier(post) }}">
@@ -28,8 +28,8 @@
                   :alt="user.name"
                 />
               </router-link>
-              <small class="text-muted">by {{ post.user.name }} on {{ post.published_at }}</small>
-              <p class="lead">
+              <small class="text-primary">by {{ post.user.name }} on {{ post.published_at }}</small>
+              <p class="lead text-primary">
                 {{ post.summary }}
               </p>
             </div>
@@ -62,7 +62,7 @@
                   @click="linkedinShare(post.title)"
                 />
               </div>
-              <div class="flex-column">
+              <div class="flex-column text-primary">
                 {{ post.read_time }}
               </div>
             </div>
@@ -80,13 +80,13 @@
                 v-for="tag in tags"
                 :key="tag.id"
                 :to="{ name: 'blog-tag-posts', params: { slug: tag.slug } }"
-                class="badge badge-light p-2 my-1 mr-2 text-decoration-none text-uppercase"
+                class="badge badge-light p-2 my-1 mr-2 text-decoration-none text-uppercase text-primary"
               >{{ tag.name }}</router-link>
             </div>
           </div>
 
           <div class="col-4 mt-5">
-            <h1>{{ trans.app.recently_published }}</h1>
+            <h1 class="text-primary">{{ trans.app.recently_published }}</h1>
 
             <div>
               <router-link 
@@ -121,7 +121,7 @@
         class="post-content position-relative align-items-center overflow-y-visible font-serif"
       >
         <hr />
-        <p class="text-center font-italic pt-3 my-5">
+        <p class="text-center font-italic pt-3 my-5 text-primary">
           This post was originally published on
           <a
             :href="meta.canonical_link"
@@ -134,7 +134,7 @@
       <main role="main" class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-12">
         <div v-if="related.length > 0">
           <h4 class="mb-4 border-bottom pb-2">
-            <span class="border-bottom border-dark pb-2">Related</span>
+            <span class="border-bottom border-dark pb-2 text-primary">Related</span>
           </h4>
 
           <post-list :posts="related"></post-list>
