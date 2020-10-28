@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+SC:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400;1,500;1,700;1,800;1,900&display=swap');
+
 $white: #fff;
 $gray-100: #f7fafc;
 $gray-200: #edf2f7;
@@ -27,19 +29,7 @@ $warning:       $vegas-gold !default;
 $danger:        $dingy-dungeon !default;
 
 // $font-family-sans-serif: "Karla", sans-serif;
-$font-family-sans-serif:
-  // Safari for macOS and iOS (San Francisco)
-  -apple-system,
-  // Chrome < 56 for macOS (San Francisco)
-  BlinkMacSystemFont,
-  // Windows
-  "Segoe UI",
-  // Android
-  "Roboto",
-  // Basic web fallback
-  "Helvetica Neue", Arial, sans-serif,
-  // Emoji fonts
-  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-family-sans-serif: 'Alegreya SC', serif;
 $font-family-serif: "Merriweather", serif;
 $line-height-base: 2;
 

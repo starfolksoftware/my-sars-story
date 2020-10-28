@@ -3,7 +3,7 @@
     <page-header></page-header>
     <main class="text-primary">
 
-      <h1 class="display-4 mt-5 font-weight-700 text-center">
+      <h1 class="display-4 mt-5 font-weight-700 text-center text-primary">
         {{ trans.app.contact_information }}
       </h1>
       <p class="lead text-center">

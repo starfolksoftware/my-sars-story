@@ -94,6 +94,7 @@ return [
   'deleted_services_are_gone_forever' => 'Deleted services are gone forever. Are you sure?',
   'details' => 'Details',
   'done' => 'Done',
+  'download' => 'Download',
   'draft' => 'Draft',
   'drafts' => 'Draft(s)',
   'edit_post' => 'Edit post',

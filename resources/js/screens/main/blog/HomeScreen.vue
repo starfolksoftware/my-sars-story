@@ -11,18 +11,18 @@
       <section v-if="featuredPost" class="section d-md-flex" style="height: 80vh">
         <div class="col-12 col-md-6 flex-column h-100" :style="{'background-image': 'url(' + featuredPost.featured_image + ')'}">
         </div>
-        <div class="col-12 col-md-6 flex-column p-5 p-md-9">
-          <div class="row h-100">
-            <div class="mx-auto my-auto text-center">
-              <h1 class="font-weight-700">
+        <div class="col-12 col-md-6 flex-column p-5 p-md-9 text-primary">
+          <div class="row h-100 text-primary">
+            <div class="mx-auto my-auto text-center text-primary">
+              <h1 class="font-weight-700 text-primary">
                 {{ featuredPost.title }}
               </h1>
-              <small class="text-muted">by {{ featuredPost.user.name }} on {{ moment(featuredPost.published_at).format('MMM D, Y') }} — {{ featuredPost.read_time }}</small>
-              <p class="lead">
+              <small class="text-primary">by {{ featuredPost.user.name }} on {{ moment(featuredPost.published_at).format('MMM D, Y') }} — {{ featuredPost.read_time }}</small>
+              <p class="lead text-primary">
                 {{ featuredPost.summary }}
               </p>
               <router-link
-                class="btn btn-sm btn-outline-default" 
+                class="btn btn-sm btn-outline-primary" 
                 :to="{ name: 'blog-post', params: { identifier: publicIdentifier(featuredPost), slug: featuredPost.slug } }">
                 {{ trans.app.view_story }}
                 <span class="fas fa-long-arrow-alt-right mr-2"></span>
