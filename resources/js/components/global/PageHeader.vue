@@ -81,7 +81,7 @@
               }}
             </router-link>
           </li>
-          <li class="nav-item d-block d-md-none">
+          <li v-if="!CurrentTenant.user" class="nav-item d-block d-md-none">
             <a
               class="nav-link text-primary" 
               href="/login"
@@ -153,6 +153,7 @@
         </ul>
         
         <a 
+          v-if="!CurrentTenant.user"
           href="/login"
           class="btn btn-link text-decoration-none text-primary nav-item d-none d-md-block">
           {{ trans.app.login }}
