@@ -1,196 +1,307 @@
 <template>
-  <div class="row">
-    <div class="col-12 col-md-10">
-      <l-map
-        style="height: 600px; width: 100%"
-        :zoom="zoom"
-        :center="center"
+  <div>
+    <l-map
+      :zoom.sync="zoom"
+      :options="mapOptions"
+      :center="center"
+      :min-zoom="minZoom"
+      :max-zoom="maxZoom"
+      style="height: 500px; width: 100%"
+    >
+      <l-control-layers
+        :position="layersPosition"
+        :collapsed="false"
+        :sort-layers="true"
+      />
+      <l-tile-layer
+        v-for="tileProvider in tileProviders"
+        :key="tileProvider.name"
+        :name="tileProvider.name"
+        :visible="tileProvider.visible"
+        :url="tileProvider.url"
+        :attribution="tileProvider.attribution"
+        :token="token"
+        layer-type="base"
+      />
+      <l-control-zoom :position="zoomPosition" />
+      <l-control-attribution
+        :position="attributionPosition"
+        :prefix="attributionPrefix"
+      />
+      <l-control-scale :imperial="imperial" />
+      <l-marker
+        v-for="marker in markers"
+        :key="marker.id"
+        :visible="marker.visible"
+        :draggable="marker.draggable"
+        :lat-lng.sync="marker.position"
+        :icon="marker.icon"
       >
-        <l-tile-layer :url="url"></l-tile-layer>
-        <!-- <l-geo-json :geojson="geojson"></l-geo-json> -->
-        <l-marker 
-          v-for="(marker, index) in markers" 
-          :key="index" 
-          :lat-lng="marker.latLng">
-          <l-popup>
-            <p>{{ marker.label }}</p>
-          </l-popup>
-        </l-marker>
-      </l-map>
-    </div>
-    <div class="col-12 col-md-2">
-      <form>
-        <div class="form-group">
-          <label for="label">{{ $parent.trans.app.label_field }}</label>
-          <select v-model="labelField" class="form-control" id="label">
-            <option value="" disabled>{{ $parent.trans.app.select_label_field }}</option>
-            <option 
-              v-for="(column, index) in columns" 
-              :key="index"
-              :value="column.index">
-              {{ column.title }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="latitude">{{ $parent.trans.app.latitude_field }}</label>
-          <select v-model="latitudeField" class="form-control" id="latitude">
-            <option value="" disabled>{{ $parent.trans.app.select_latitude_field }}</option>
-            <option 
-              v-for="(column, index) in columns" 
-              :key="index"
-              :value="column.index">
-              {{ column.title }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="longitude">{{ $parent.trans.app.longitude_field }}</label>
-          <select v-model="longitudeField" class="form-control" id="longitude">
-            <option value="" disabled>{{ $parent.trans.app.select_longitude_field }}</option>
-            <option 
-              v-for="(column, index) in columns" 
-              :key="index"
-              :value="column.index">
-              {{ column.title }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <vue-element-loading :active="loading" />
-          <button @click.prevent="loadMap" type="button" class="btn btn-info">
-            {{ $parent.trans.app.load_map }}
-          </button>
-        </div>
-      </form>
-    </div>
+        <l-popup :content="marker.details" />
+        <l-tooltip :content="marker.tooltip" />
+      </l-marker>
+      <!-- <l-layer-group
+        layer-type="overlay"
+        name="Layer polyline"
+      >
+        <l-polyline
+          v-for="item in polylines"
+          :key="item.id"
+          :lat-lngs="item.points"
+          :visible="item.visible"
+        />
+      </l-layer-group>
+      <l-layer-group
+        v-for="item in stuff"
+        :key="item.id"
+        :visible.sync="item.visible"
+        layer-type="overlay"
+        name="Layer 1"
+      >
+        <l-layer-group :visible="item.markersVisible">
+          <l-marker
+            v-for="marker in item.markers"
+            :key="marker.id"
+            :visible="marker.visible"
+            :draggable="marker.draggable"
+            :lat-lng="marker.position"
+          />
+        </l-layer-group>
+        <l-polyline
+          :lat-lngs="item.polyline.points"
+          :visible="item.polyline.visible"
+        />
+      </l-layer-group> -->
+    </l-map>
+
   </div>
 </template>
 
 <script>
-import L from 'leaflet'
-import { 
-  LMap, 
-  LTileLayer, 
-  LMarker, 
-  LPopup, 
-  // LGeoJson 
-} from 'vue2-leaflet'
-import { Icon, latLng } from 'leaflet'
-import VueElementLoading from 'vue-element-loading'
+import L, { Icon, latLng } from 'leaflet'
+// import { latLngBounds } from 'leaflet';
+import {
+  LMap,
+  LTileLayer,
+  LMarker,
+  LPolyline,
+  LLayerGroup,
+  LTooltip,
+  LPopup,
+  LControlZoom,
+  LControlAttribution,
+  LControlScale,
+  LControlLayers
+} from 'vue2-leaflet';
+
 delete Icon.Default.prototype._getIconUrl
+
 Icon.Default.mergeOptions({
   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
   iconUrl: require('leaflet/dist/images/marker-icon.png'),
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-})
+});
+
+// const markers1 = [
+//   {
+//     position: { lng: -1.219482, lat: 47.41322 },
+//     visible: true,
+//     draggable: true,
+//   },
+//   { position: { lng: -1.571045, lat: 47.457809 } },
+//   { position: { lng: -1.560059, lat: 47.739323 } },
+//   { position: { lng: -0.922852, lat: 47.886881 } },
+//   { position: { lng: -0.769043, lat: 48.231991 } },
+//   { position: { lng: 0.395508, lat: 48.268569 } },
+//   { position: { lng: 0.604248, lat: 48.026672 } },
+//   { position: { lng: 1.2854, lat: 47.982568 } },
+//   { position: { lng: 1.318359, lat: 47.894248 } },
+//   { position: { lng: 1.373291, lat: 47.879513 } },
+//   { position: { lng: 1.384277, lat: 47.798397 } },
+//   { position: { lng: 1.329346, lat: 47.754098 } },
+//   { position: { lng: 1.329346, lat: 47.680183 } },
+//   { position: { lng: 0.999756, lat: 47.635784 } },
+//   { position: { lng: 0.86792, lat: 47.820532 } },
+//   { position: { lng: 0.571289, lat: 47.820532 } },
+//   { position: { lng: 0.439453, lat: 47.717154 } },
+//   { position: { lng: 0.439453, lat: 47.61357 } },
+//   { position: { lng: -0.571289, lat: 47.487513 } },
+//   { position: { lng: -0.615234, lat: 47.680183 } },
+//   { position: { lng: -0.812988, lat: 47.724545 } },
+//   { position: { lng: -1.054688, lat: 47.680183 } },
+//   { position: { lng: -1.219482, lat: 47.41322 } },
+// ];
+
+// const poly1 = [
+//   { lng: -1.219482, lat: 47.41322 },
+//   { lng: -1.571045, lat: 47.457809 },
+//   { lng: -1.560059, lat: 47.739323 },
+//   { lng: -0.922852, lat: 47.886881 },
+//   { lng: -0.769043, lat: 48.231991 },
+//   { lng: 0.395508, lat: 48.268569 },
+//   { lng: 0.604248, lat: 48.026672 },
+//   { lng: 1.2854, lat: 47.982568 },
+//   { lng: 1.318359, lat: 47.894248 },
+//   { lng: 1.373291, lat: 47.879513 },
+//   { lng: 1.384277, lat: 47.798397 },
+//   { lng: 1.329346, lat: 47.754098 },
+//   { lng: 1.329346, lat: 47.680183 },
+//   { lng: 0.999756, lat: 47.635784 },
+//   { lng: 0.86792, lat: 47.820532 },
+//   { lng: 0.571289, lat: 47.820532 },
+//   { lng: 0.439453, lat: 47.717154 },
+//   { lng: 0.439453, lat: 47.61357 },
+//   { lng: -0.571289, lat: 47.487513 },
+//   { lng: -0.615234, lat: 47.680183 },
+//   { lng: -0.812988, lat: 47.724545 },
+//   { lng: -1.054688, lat: 47.680183 },
+//   { lng: -1.219482, lat: 47.41322 },
+// ];
+
+const tileProviders = [
+  {
+    name: 'OpenStreetMap',
+    visible: true,
+    attribution:
+      '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  },
+  {
+    name: 'OpenTopoMap',
+    visible: false,
+    url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+    attribution:
+      'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+  },
+];
 
 export default {
-  name: 'MapPreview',
-
-  props: {
-    data: {
-      type: Array,
-      required: true
-    },
-    columns: {
-      type: Array,
-      required: true  
-    },
-    resource: {
-      type: Object,
-      required: true
-    },
-    activeSheetName: {
-      type: String,
-      required: true
-    }
-  },
-
+  name: 'Example',
   components: {
     LMap,
     LTileLayer,
     LMarker,
+    LPolyline,
+    LLayerGroup,
+    LTooltip,
     LPopup,
-    // LGeoJson,
-    VueElementLoading
+    LControlZoom,
+    LControlAttribution,
+    LControlScale,
+    LControlLayers,
   },
-
+  props: {
+    markers: {
+      type: Array,
+      required: true,
+    }
+  },
   data() {
     return {
-      loading: false,
-      latitudeField: '',
-      longitudeField: '',
-      labelField: '',
-      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      zoom: 4,
       center: [9.0765, 7.3986],
-      // geojson: null,
-      withPopup: latLng(9.0765, 7.3986),
-      markers: []
-    }
+      opacity: 0.6,
+      token: 'your token if using mapbox',
+      mapOptions: {
+        zoomControl: false,
+        attributionControl: false,
+        zoomSnap: true,
+      },
+      zoom: 6,
+      minZoom: 6,
+      maxZoom: 10,
+      zoomPosition: 'topleft',
+      attributionPosition: 'bottomright',
+      layersPosition: 'topright',
+      attributionPrefix: 'Vue2Leaflet',
+      imperial: false,
+      Positions: ['topleft', 'topright', 'bottomleft', 'bottomright'],
+      tileProviders: tileProviders,
+      // markers: [
+      //   {
+      //     id: 'm1',
+      //     position: { lat: 9.0765, lng: 7.3986 },
+      //     details: "<button class='btn btn-primary'>A button</button>",
+      //     tooltip: "A Button",
+      //     draggable: true,
+      //     visible: true,
+      //   },
+      //   {
+      //     id: 'm2',
+      //     position: { lat: 9.8765, lng: 7.3986 },
+      //     details: "<button class='btn btn-primary'>A button</button>",
+      //     tooltip: "A Button",
+      //     draggable: true,
+      //     visible: false,
+      //   },
+      //   {
+      //     id: 'm3',
+      //     position: { lat: 9.0865, lng: 7.3986 },
+      //     details: "<button class='btn btn-primary'>A button</button>",
+      //     tooltip: "A Button",
+      //     draggable: true,
+      //     visible: true,
+      //   },
+      //   {
+      //     id: 'm4',
+      //     position: { lat: 9.0765, lng: 7.3986 },
+      //     details: "<button class='btn btn-primary'>A button</button>",
+      //     tooltip: "A Button",
+      //     draggable: true,
+      //     visible: false,
+      //   },
+      // ],
+      // polylines: [
+      //   {
+      //     id: 'p1',
+      //     points: [
+      //       { lat: 37.772, lng: -122.214 },
+      //       { lat: 21.291, lng: -157.821 },
+      //       { lat: -18.142, lng: -181.569 },
+      //       { lat: -27.467, lng: -206.973 },
+      //     ],
+      //     visible: true,
+      //   },
+      //   {
+      //     id: 'p2',
+      //     points: [
+      //       [-73.91, 40.78],
+      //       [-87.62, 41.83],
+      //       [-96.72, 32.76],
+      //     ],
+      //     visible: true,
+      //   },
+      // ],
+      // stuff: [
+      //   {
+      //     id: 's1',
+      //     markers: markers1,
+      //     polyline: { points: poly1, visible: true },
+      //     visible: true,
+      //     markersVisible: true,
+      //   },
+      // ],
+      // bounds: latLngBounds(
+      //   { lat: 51.476483373501964, lng: -0.14668464136775586 },
+      //   { lat: 51.52948330894063, lng: -0.019140238291583955 }
+      // ),
+    };
   },
-
-  mounted() {
-    this.$nextTick(() => {
-      
-    });
-  },
-
   methods: {
-    loadMap() {
-      this.loading = true
-      let queryableWorker = new this.QueryableWorker('/workers/tasks.worker.js')
-
-      let updateEssentials = (response) => {
-        console.log(response)
-        this.markers = response
-        this.loading = false
-      }
-
-      if (window.Worker) {
-        this.validate()
-        console.info('worker available !!! using worker')
-        let queryableWorker = new this.QueryableWorker('/workers/tasks.worker.js')
-
-        try {
-          queryableWorker.addListener('success', (response) => {
-            updateEssentials(response)
-            queryableWorker.terminate()
-            this.loading = false
-          })
-
-          queryableWorker.addListener('error', (error) => {
-            queryableWorker.terminate()
-            this.loading = false
-          })
-
-          queryableWorker.sendQuery(
-            'buildMarkers', 
-            this.labelField, 
-            this.latitudeField, 
-            this.longitudeField,
-            this.data,
-            this.columns
-          )
-        } catch (error) {
-          queryableWorker.terminate()
-          this.loading = false
-        }
-      }
-    },
-
-    validate() {
-      if (this.labelField == null || !this.latitudeField || !this.longitudeField) {
-        console.log(this.labelField, this.latitudeField, this.longitudeField)
-        throw new TypeError('error - some required parameters are not provided')
-        this.loading = false
-      }
-    }
-  }
-}
+    // addMarker: function() {
+    //   const newMarker = {
+    //     position: { lat: 50.5505, lng: 7.3986 },
+    //     draggable: true,
+    //     visible: true,
+    //   };
+    //   this.markers.push(newMarker);
+    // },
+    // removeMarker: function(index) {
+    //   this.markers.splice(index, 1);
+    // },
+    // fitPolyline: function() {
+    //   const bounds = latLngBounds(markers1.map(o => o.position));
+    //   this.bounds = bounds;
+    // },
+  },
+};
 </script>
-
-<style>
-
-</style>

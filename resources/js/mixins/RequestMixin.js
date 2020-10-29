@@ -27,7 +27,7 @@ export default {
 
       const errorHandler = error => {
         Vue.$toast.open({
-          message: error.response.message,
+          message: error.message,
           type: 'error',
           // all of other options may go here
         });

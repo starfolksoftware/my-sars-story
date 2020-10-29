@@ -26,14 +26,6 @@ export default {
     columns: {
       type: Array,
       required: true  
-    },
-    resource: {
-      type: Object,
-      required: true
-    },
-    activeSheetName: {
-      type: String,
-      required: true
     }
   },
 

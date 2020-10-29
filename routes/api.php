@@ -171,8 +171,8 @@ Route::group(['prefix' => 'v1'], function () {
 
   Route::namespace('Resources')->group(function () {
     // resources routes...
-    Route::get('/resources', 'ResourceController@index')->middleware(['auth:api', 'permission:view_resources']);
-    Route::get('/resources/{id?}', 'ResourceController@show')->middleware(['auth:api', 'permission:view_resources']);
+    Route::get('/resources', 'ResourceController@index');
+    Route::get('/resources/{id?}', 'ResourceController@show');
     Route::post('/resources/{id}', 'ResourceController@store')->middleware(['auth:api', 'permission:create_resources|update_resources']);
     Route::delete('/resources/{id}', 'ResourceController@destroy')->middleware(['auth:api', 'permission:delete_resources']);
   });

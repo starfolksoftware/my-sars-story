@@ -16,25 +16,26 @@
       </template>
     </page-header>
 
-    <div class="py-5">
+    <div class="pt-5">
       <div class="col-xl-10 offset-xl-1 px-xl-5 col-md-12">
         <div class="row">
           <div class="col-4 d-none d-sm-block">
-            <h1>
+            <h1 class="text-primary">
               {{ tracker.name }}
               <hr>
             </h1>
+            <p class="lead text-secondary" v-html="tracker.description"></p>
             <div class="p-3">
               <div v-for="(field, index) in tracker.fields" :key="index">
                 <div v-if="field.type === 'select'" class="form-group mb-3">
-                  <label :for="field.model">{{ field.label }}</label>
-                  <select v-model="query" class="form-control" :id="field.model">
+                  <label :for="field.name" class="text-primary">{{ field.label }}</label>
+                  <select v-model="query" class="form-control" :id="field.name">
                     <option value="" disabled>{{ trans.app.select }}</option>
                     <option 
-                      v-for="(value, index) in field.values" 
+                      v-for="(option, index) in field.options" 
                       :key="index"
-                      :value="value">
-                      {{ value }}
+                      :value="option.value">
+                      {{ option.label }}
                     </option>
                   </select>
                 </div>
@@ -47,56 +48,12 @@
                   aria-label="Search"
                   v-model="query"
                 >
-                <small>showing from {{ from }} to {{ to }} of {{ total }}</small>
+                <!-- <small>showing from {{ from }} to {{ to }} of {{ total }}</small> -->
               </div>
             </div>
           </div>
           <div class="col-12 col-sm-8">
-            <main>
-              <div class="mt-2">
-                <div 
-                  v-for="(trackerItem, $index) in trackerItems" 
-                  :key="$index" 
-                  class="card flex-md-row mb-4 h-md-250 shadown-sm">
-                  <div class="card-body d-flex flex-column align-items-start">
-                    <!-- <strong class="d-inline-block mb-2 text-success"></strong> -->
-                    <h3 class="mb-0">
-                      <router-link
-                        :to="{name: 'trackerItems-show', params: { trackerId: $route.params.trackerId, id: trackerItem.id }}"
-                        class="text-dark"
-                      >
-                        {{ trackerItem.title }}
-                      </router-link>
-                    </h3>
-                    <p class="lead" v-html="trackerItem.description"></p>
-                    <div class="mb-1 text-muted">{{moment(trackerItem.created_at).locale(CurrentTenant.locale).fromNow()}}</div>
-                    <router-link :to="{name: 'trackerItems-show', params: { trackerId: $route.params.trackerId, id: trackerItem.id }}">
-                      {{ trans.app.view }}
-                    </router-link>
-                  </div>
-                  <div class="flex-auto d-none d-lg-block"></div>
-                </div>
-
-                <infinite-loading 
-                  :identifier="infiniteId"
-                  @infinite="fetchData" 
-                  spinner="spiral" 
-                  style="position: relative; top: 0">
-                  <span slot="no-more"></span>
-                  <div slot="no-results" class="text-left">
-                    <div class="mt-5">
-                      <p class="lead text-center text-muted mt-5 pt-5">
-                        <span>
-                          {{trans.app.you_have_no_results}}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                </infinite-loading>
-
-
-              </div>
-            </main>
+            <map-preview :markers="markers" />
           </div>
         </div>
       </div>
@@ -106,57 +63,85 @@
 
     <report-modal 
       v-if="tracker.id" ref="reportModal"
-      :trackerId="tracker.id"
+      :tracker="tracker"
     />
   </div>
 </template>
 
 <script>
 import _ from "lodash"
-import moment from "moment";
-import NProgress from "nprogress";
-import InfiniteLoading from "vue-infinite-loading";
+import moment from "moment"
+import NProgress from "nprogress"
+import InfiniteLoading from "vue-infinite-loading"
 import ReportModal from "../../../components/global/modals/ReportModal"
+import MapPreview from "../../../components/global/previews/MapPreview"
 
 export default {
   name: "trackerItems-index",
 
   components: {
     InfiniteLoading,
-    ReportModal
+    ReportModal,
+    MapPreview
   },
 
   data() {
     return {
-      page: 1,
       trackerItems: [],
       tracker: {},
       trans: JSON.parse(CurrentTenant.translations),
-      infiniteId: +new Date(),
       query: "",
-      url: `/api/v1/trackerItems/${this.$route.params.trackerId}`,
+      url: `/api/v1/trackerItems/${this.$route.params.trackerId}?forMap=1`,
       from: "",
       to: "",
       total: "",
+      markers: [
+        {
+          id: 'm1',
+          position: { lat: 9.0765, lng: 7.3986 },
+          details: "<button class='btn btn-primary'>A button</button>",
+          tooltip: "A Button",
+          draggable: true,
+          visible: true,
+        },
+        {
+          id: 'm2',
+          position: { lat: 9.8765, lng: 7.3986 },
+          details: "<button class='btn btn-primary'>A button</button>",
+          tooltip: "A Button",
+          draggable: true,
+          visible: false,
+        },
+        {
+          id: 'm3',
+          position: { lat: 9.0865, lng: 7.3986 },
+          details: "<button class='btn btn-primary'>A button</button>",
+          tooltip: "A Button",
+          draggable: true,
+          visible: true,
+        },
+        {
+          id: 'm4',
+          position: { lat: 9.0765, lng: 7.3986 },
+          details: "<button class='btn btn-primary'>A button</button>",
+          tooltip: "A Button",
+          draggable: true,
+          visible: false,
+        },
+      ]
     };
-  },
-
-  created() {
-    
   },
 
   watch: {
     query: function (val) {
 
       if (val === "") {
-        this.url = `/api/v1/trackerItems/${this.$route.params.trackerId}`
+        this.url = `/api/v1/trackerItems/${this.$route.params.trackerId}?forMap=1`
       } else {
-        this.url = `/api/v1/trackerItems/${this.$route.params.trackerId}?query=${this.query}`
+        this.url = `/api/v1/trackerItems/${this.$route.params.trackerId}?forMap=1&&query=${this.query}`
       }
       
-      this.page = 1;
-      this.trackerItems = [];
-      this.infiniteId += 1;
+      this.fetchData()
 
     }, 
 
@@ -171,31 +156,26 @@ export default {
         .get("/api/v1/trackers/" + to.params.trackerId)
         .then(response => {
           vm.tracker = response.data
+          NProgress.done()
         })
+
+      vm.fetchData()
     })
   },
 
   methods: {
-    fetchData($state) {
+    fetchData() {
+      this.markers = []
       this.request()
         .get(this.url, {
           params: {
-            page: this.page,
             confirmationStatus: 'confirmed'
           }
         })
         .then(response => {
-          if (!_.isEmpty(response.data) && !_.isEmpty(response.data.trackerItems.data)) {
-            this.page += 1;
-            this.trackerItems.push(...response.data.trackerItems.data);
-            this.from = response.data.trackerItems.from
-            this.to = response.data.trackerItems.data.to
-            this.total = response.data.trackerItems.total
-
-            $state.loaded();
-          } else {
-            $state.complete();
-          }
+          if (!_.isEmpty(response.data)) {
+            this.markers = response.data;
+          } 
 
           NProgress.done();
         })
@@ -207,16 +187,16 @@ export default {
     },
 
     refreshLoader() {
-      this.page = 1;
-      this.trackerItems = [];
-      this.url = `/api/v1/trackerItems/${this.$route.params.trackerId}`
-      this.infiniteId += 1
+      this.markers = [];
+      this.url = `/api/v1/trackerItems/${this.$route.params.trackerId}?forMap=1`
       this.query = ""
+      this.fetchData()
 
       this.request()
         .get("/api/v1/trackers/" + this.$route.params.trackerId)
         .then(response => {
           this.tracker = response.data
+          NProgress.done()
         })
     },
 

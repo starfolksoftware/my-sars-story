@@ -14,7 +14,7 @@
           <h1 class="col-12 mb-1 font-weight-700 text-primary">
             Those We've Lost
           </h1>
-          <p class="lead col-12 col-md-6 mx-auto font-weight-500 text-primary mb-9">
+          <p class="lead col-12 col-md-6 mx-auto font-weight-500 text-secondary mb-9">
             The #EndSARS protest has taken a death toll. 
             We are putting names and faces to the numbers.
           </p>

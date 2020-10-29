@@ -37,6 +37,11 @@ class TrackerItemController extends \App\Http\Controllers\Controller
         AGAINST('$query' IN NATURAL LANGUAGE MODE)");
     }
 
+    if (request()->has('forMap') && request('forMap') == 1) {
+      $markers = $this->buildMarkers($trackerItems);
+      return response()->json($markers, 200);
+    }
+
     return response()->json([
       'trackerItems' => $trackerItems
         ->with(['user', 'tracker', 'state', 'localGovernment'])
@@ -45,6 +50,53 @@ class TrackerItemController extends \App\Http\Controllers\Controller
       'confirmedCount' => $confirmedCount,
       'notConfirmedCount' => $notConfirmedCount
     ], 200);
+  }
+
+  private function buildMarkers($builder) {
+    $trackers = $builder->with(['user', 'tracker', 'state', 'localGovernment'])->latest()->get();
+    return collect($trackers)->map(function ($item, $key) {
+      if (data_get($item, 'meta.latitude') && data_get($item, 'meta.longitude')) {
+        $latitude = data_get($item, 'meta.latitude');
+        $longitude = data_get($item, 'meta.longitude');
+      } else {
+        $latitude = $item->localGovernment->latitude;
+        $longitude = $item->localGovernment->longitude;
+      }
+
+      return array(
+        "id" => $item["id"],
+        "position" => array(
+          $latitude,
+          $longitude
+        ),
+        "details" => $this->buildDetails($item->meta),
+        "tooltip" => $item->tracker->name,
+        "draggable" => FALSE,
+        "visible" => TRUE
+      );
+    })->toArray();
+  }
+
+  private function buildDetails($meta) {
+    $html = "<ul class='list-group list-group-flush'>";
+
+    foreach ($meta as $key => $value) {
+      if (collect(['undefined', 'latitude', 'longitude'])->contains($key)) {
+        continue;
+      }
+
+      $value = preg_replace(
+        '#((https?|ftp)://(\S*?\.\S*?))([\s)\[\]{},;"\':<]|\.\s|$)#i',
+        "<a href=\"$1\" target=\"_blank\">$3</a>$4",
+        $value
+      );
+
+      $html .= "<li class='list-group-item'>$key: $value</li>";
+    }
+
+    $html .= "</ul>";
+
+    return $html;
   }
 
   /**
