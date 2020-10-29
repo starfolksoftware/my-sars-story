@@ -13,8 +13,23 @@
 
 Auth::routes(['register'=>false]);
 
+// contact us route
+Route::get('/contact', 'Controller')->name('contact');
+
+// resource route
+Route::get('/resources', 'Controller')->name('resources');
+
+// memorial route
+Route::get('/memorial', 'Controller')->name('memorial');
+
+// blog route
+Route::get('/blog', 'Controller')->name('memorial');
+
 // blog post show route
 Route::get('/blog/{identifier}/{slug}', 'Controller')->name('blog-show');
+
+// maps route
+Route::get('/trackerItems/{id}', 'Controller')->name('maps');
 
 // Catch-all routes...
 Route::get('/{view?}', 'Controller')->where('view', '(.*)')->name('tenant');
