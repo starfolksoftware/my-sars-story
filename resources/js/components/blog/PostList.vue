@@ -9,7 +9,7 @@
           <div class="row no-gutters">
             <div :class="post.featured_image ? 'col-9' : ''">
               <div class="card-body">
-                <h4 class="card-title mt-0">{{ post.title }}</h4>
+                <h4 class="card-title mt-0 text-primary">{{ post.title }}</h4>
                 <p class="card-text text-secondary">{{ post.summary }}</p>
                 <p class="card-text">
                   <small

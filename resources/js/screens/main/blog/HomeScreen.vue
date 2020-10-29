@@ -7,26 +7,29 @@
 
     <page-header></page-header>
 
-    <div v-if="posts.length > 0">
-      <section v-if="featuredPost" class="section d-md-flex" style="height: 80vh">
-        <div class="col-12 col-md-6 flex-column h-100" :style="{'background-image': 'url(' + featuredPost.featured_image + ')'}">
-        </div>
-        <div class="col-12 col-md-6 flex-column p-5 p-md-9 text-primary">
-          <div class="row h-100 text-primary">
-            <div class="mx-auto my-auto text-center text-primary">
-              <h1 class="font-weight-700 text-primary">
-                {{ featuredPost.title }}
-              </h1>
-              <small class="text-primary">by {{ featuredPost.user.name }} on {{ moment(featuredPost.published_at).format('MMM D, Y') }} — {{ featuredPost.read_time }}</small>
-              <p class="lead text-primary">
-                {{ featuredPost.summary }}
-              </p>
-              <router-link
-                class="btn btn-sm btn-outline-primary" 
-                :to="{ name: 'blog-post', params: { identifier: publicIdentifier(featuredPost), slug: featuredPost.slug } }">
-                {{ trans.app.view_story }}
-                <span class="fas fa-long-arrow-alt-right mr-2"></span>
-              </router-link>
+    <div v-if="posts.length > 0" class="container-fluid">
+      <section v-if="featuredPost" class="section">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <img :src="featuredPost.featured_image" class="img-fluid" alt="" srcset="">
+          </div>
+          <div class="col-12 col-md-6 p-5">
+            <div class="text-md-center">
+              <div class="text-center text-primary">
+                <h1 class="font-weight-700 text-primary">
+                  {{ featuredPost.title }}
+                </h1>
+                <small class="text-primary">by {{ featuredPost.user.name }} on {{ moment(featuredPost.published_at).format('MMM D, Y') }} — {{ featuredPost.read_time }}</small>
+                <p class="lead text-primary">
+                  {{ featuredPost.summary }}
+                </p>
+                <router-link
+                  class="btn btn-sm btn-outline-primary" 
+                  :to="{ name: 'blog-post', params: { identifier: publicIdentifier(featuredPost), slug: featuredPost.slug } }">
+                  {{ trans.app.view_story }}
+                  <span class="fas fa-long-arrow-alt-right mr-2"></span>
+                </router-link>
+              </div>
             </div>
           </div>
         </div>
@@ -47,7 +50,7 @@
         <main role="main" class="mt-5">
           <div v-if="posts.length > 0">
             <h4 class="mb-4 border-bottom pb-2">
-              <span class="border-bottom border-dark pb-2">Featured</span>
+              <span class="border-bottom border-dark pb-2 text-primary">Featured</span>
             </h4>
 
             <featured-post-list :posts="posts.slice(0, featuredPostCount)"></featured-post-list>
@@ -56,7 +59,7 @@
               v-if="posts.slice(featuredPostCount).length > 0"
               class="my-4 border-bottom mt-5 pb-2"
             >
-              <span class="border-bottom border-dark pb-2">All Posts</span>
+              <span class="pb-2 text-primary">All Posts</span>
             </h4>
 
             <post-list :posts="posts.slice(featuredPostCount)"></post-list>
@@ -103,7 +106,7 @@ export default {
 
   data() {
     return {
-      featuredPostCount: 1,
+      featuredPostCount: 4,
       posts: [],
       trans: JSON.parse(CurrentTenant.translations)
     };
