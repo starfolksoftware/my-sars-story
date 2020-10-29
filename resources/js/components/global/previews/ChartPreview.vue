@@ -74,14 +74,10 @@ export default {
       type: Array,
       required: true  
     },
-    resource: {
-      type: Object,
-      required: true
-    },
-    activeSheetName: {
+    title: {
       type: String,
       required: true
-    }
+    },
   },
 
   components: {
@@ -129,7 +125,7 @@ export default {
 
           queryableWorker.sendQuery(
             'buildChartOptions', 
-            this.resource.title, 
+            this.title, 
             this.chartType, 
             this.xColumnId,
             this.yColumnIds,

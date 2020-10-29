@@ -172,8 +172,8 @@ export default {
   name: "report-modal",
 
   props: {
-    trackerId: {
-      type: Number,
+    tracker: {
+      type: Object,
       required: true,
     },
   },
@@ -197,7 +197,6 @@ export default {
         isSaving: false,
         hasSuccess: false,
       },
-      tracker: {},
       states: [],
       localGovernments: [],
       isReady: false,
@@ -208,28 +207,18 @@ export default {
   watch: {
     "form.state_id": function (val) {
       this.loadLocalGovernments(val);
-    },
+    }
   },
 
   mounted() {
-    this.request()
-      .get("/api/v1/trackers/" + this.trackerId)
-      .then((response) => {
-        this.tracker = response.data;
-
-        this.tracker.fields.forEach((field) => {
-          this.form[field.name] = "";
-        });
-
-        this.fetchData();
-        this.loadStates();
-      });
+    this.fetchData();
+    this.loadStates();
   },
 
   methods: {
     fetchData() {
       this.request()
-        .get("/api/v1/trackerItems/" + this.trackerId + "/" + this.id)
+        .get("/api/v1/trackerItems/" + this.tracker.id + "/" + this.id)
         .then((response) => {
           this.status = response.data;
           this.form.id = response.data.id;
@@ -269,7 +258,7 @@ export default {
 
       let formData = {
         id: this.form.id,
-        tracker_id: this.$route.params.trackerId,
+        tracker_id: this.tracker.id,
         title: this.form.description,
         description: this.form.description,
         confirmed: this.form.confirmed,
@@ -283,12 +272,14 @@ export default {
       };
 
       this.request()
-        .post(`/api/v1/trackerItems/${this.trackerId}/${this.id}`, formData)
+        .post(`/api/v1/trackerItems/${this.tracker.id}/${this.id}`, formData)
         .then((response) => {
           this.form.isSaving = false;
           this.form.hasSuccess = true;
           this.id = this.form.id = response.data.id;
           this.status = response.data;
+
+          NProgress.done();
 
           this.hideModal();
 
