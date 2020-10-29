@@ -10,7 +10,7 @@ $factory->define(Resource::class, function (Faker $faker) {
         "id" => $faker->uuid,
         "title" => $faker->realText(150),
         "description" => $faker->text(1000),
-        "path" => $faker->file(__DIR__.'/../../public/images', __DIR__.'/../../public/storage/files', false),
+        "path" => "/images/portfolio/bg/bg5.jpg",
         "user_id" => 1
     ];
 });
