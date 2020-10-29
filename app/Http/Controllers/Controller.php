@@ -27,51 +27,43 @@ class Controller extends BaseController
       $determinant = $pathArray[count($pathArray) - 1];
 
       $meta = array(
-        'title' => 'Starfolk Software Tech. Ltd. - A Software Company',
-        'summary' => 'We dont gather requirements; We dig for them. We build products around customer experience. We like to work with users at every stage of development. We believe it is the best way to gain insight into how the system will really be used.',
-        'summaryFromBody' => 'We dont gather requirements; We dig for them. We build products around customer experience. We like to work with users at every stage of development. We believe it is the best way to gain insight into how the system will really be used.',
-        'image' => '/images/feel_the_quality.jpg',
+        'title' => env('APP_NAME', '#MySarsStory').'Now is the time to demand bold, radical, systemic changes for Nigeria\'s betterment, and our own good.',
+        'summary' => 'Now is the time to demand bold, radical, systemic changes for Nigeria\'s betterment, and our own good.',
+        'summaryFromBody' => 'Now is the time to demand bold, radical, systemic changes for Nigeria\'s betterment, and our own good.',
+        'image' => env('APP_URL').'/images/protests/protest_9.jpg',
         'url' => url()->current()
       );
 
       if ($determinant == 'contact') {
         $meta = array(
-          'title' => 'Contact - Starfolk Software Tech. Ltd.',
-          'summary' => 'We\'d love to discuss your ideas and problems. Let\'s build the future together!',
-          'summaryFromBody' => 'We\'d love to discuss your ideas and problems. Let\'s build the future together!',
-          'image' => '/images/feel_the_quality.jpg',
+          'title' => 'Contact - '.env('APP_NAME', '#MySarsStory'),
+          'summary' => 'Fill up the form and get a response within 24 hour!',
+          'summaryFromBody' => 'Fill up the form and get a response within 24 hour!',
+          'image' => env('APP_URL').'/images/protests/protest_9.jpg',
           'url' => url()->current()
         );
-      } else if ($determinant == 'portfolio') {
+      } else if ($determinant == 'resources') {
         $meta = array(
-          'title' => 'Portfolio - Starfolk Software Tech. Ltd.',
-          'summary' => 'We understand you just don\'t want a product that works. You want a solution that reminds you of the beauty of life. Design is at the heart of everything we do! We setup workshops to make sure we capture the brand of our clients\' businesses.',
-          'summaryFromBody' => 'We understand you just don\'t want a product that works. You want a solution that reminds you of the beauty of life. Design is at the heart of everything we do! We setup workshops to make sure we capture the brand of our clients\' businesses.',
-          'image' => '/images/feel_the_quality.jpg',
+          'title' => 'Resources - '.env('APP_NAME', '#MySarsStory'),
+          'summary' => 'Knowledge is power. Educate yourself about the movement. Download and share.',
+          'summaryFromBody' => 'Knowledge is power. Educate yourself about the movement. Download and share.',
+          'image' => env('APP_URL').'/images/protests/protest_9.jpg',
           'url' => url()->current()
         );
       } else if ($determinant == 'blog') {
         $meta = array(
-          'title' => 'Blog - Starfolk Software Tech. Ltd.',
-          'summary' => 'How we work. What we\'ve learnt. What we are doing different',
-          'summaryFromBody' => 'How we work. What we\'ve learnt. What we are doing different',
-          'image' => '/images/feel_the_quality.jpg',
+          'title' => 'Blog - '.env('APP_NAME', '#MySarsStory'),
+          'summary' => 'Get the latest news and developments around the movement',
+          'summaryFromBody' => 'Get the latest news and developments around the movement',
+          'image' => env('APP_URL').'/images/protests/protest_9.jpg',
           'url' => url()->current()
         );
-      } else if ($determinant == 'services') {
+      } else if ($determinant == 'memorial') {
         $meta = array(
-          'title' => 'Services - Starfolk Software Tech. Ltd.',
-          'summary' => 'We dont gather requirements; We dig for them. We build products around customer experience. We like to work with users at every stage of development. We believe it is the best way to gain insight into how the system will really be used.',
-          'summaryFromBody' => 'We dont gather requirements; We dig for them. We build products around customer experience. We like to work with users at every stage of development. We believe it is the best way to gain insight into how the system will really be used.',
-          'image' => '/images/feel_the_quality.jpg',
-          'url' => url()->current()
-        );
-      } else if ($determinant == 'team') {
-        $meta = array(
-          'title' => 'Team - Starfolk Software Tech. Ltd.',
-          'summary' => 'We believe that to produce a great product, we have to start from the customer experience. To be the company that accomplishes just that, it takes an eclectic group experienced, driven and passionate about it. Get to know the people at Starfolk!',
-          'summaryFromBody' => 'We believe that to produce a great product, we have to start from the customer experience. To be the company that accomplishes just that, it takes an eclectic group experienced, driven and passionate about it. Get to know the people at Starfolk!',
-          'image' => '/images/feel_the_quality.jpg',
+          'title' => 'Memorial - '.env('APP_NAME', '#MySarsStory'),
+          'summary' => 'Those We\'ve Lost. The #EndSARS protest has taken a death toll. We are putting names and faces to the numbers.',
+          'summaryFromBody' => 'Those We\'ve Lost. The #EndSARS protest has taken a death toll. We are putting names and faces to the numbers.',
+          'image' => env('APP_URL').'/images/protests/protest_9.jpg',
           'url' => url()->current()
         );
       }

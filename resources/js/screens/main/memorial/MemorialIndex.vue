@@ -38,7 +38,7 @@
                     alt="..."
                   >
                 </div>
-                <div class="col-md-6 text-left">
+                <div class="col-md-6 text-md-left mt-5 mt-md-0">
                   <h3 class="font-weight-800 text-primary">{{ `${memo.name}, ${memo.age}` }}</h3>
                   <div class="font-weight-500 text-primary">{{ memo.profession }}</div>
                   <p v-if="memo.post.published_at" class="lead">

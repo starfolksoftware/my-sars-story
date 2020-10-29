@@ -14,7 +14,7 @@
               :alt="post.featured_image_caption"
             />
             <div class="card-body">
-              <h5 class="card-title mt-0">{{ post.title }}</h5>
+              <h5 class="card-title mt-0 text-primary">{{ post.title }}</h5>
               <p class="card-text text-secondary">{{ post.summary }}</p>
             </div>
             <div

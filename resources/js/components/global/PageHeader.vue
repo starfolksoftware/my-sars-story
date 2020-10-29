@@ -2,7 +2,7 @@
   <nav class="navbar navbar-horizontal navbar-expand-lg navbar-light" style="z-index: 1050">
     <div class="container">
       <router-link to="/" class="navbar-brand mr-lg-3 text-primary display-name text-lg">
-        {{ platform.name || platform.display_name }}
+        {{ platform.display_name || platform.name }}
         <!-- <div class="logo"> 
           <img src="/images/starfolk_logo.png" width="60" height="60"> 
         </div> -->
@@ -12,7 +12,7 @@
           <div class="row">
             <div class="col-6 collapse-brand">
               <router-link to="/">
-              {{ platform.name || platform.display_name }}
+              {{ platform.display_name || platform.name }}
             </router-link>
             </div>
             <div class="col-6 collapse-close">
@@ -82,12 +82,12 @@
             </router-link>
           </li>
           <li class="nav-item d-block d-md-none">
-            <router-link
+            <a
               class="nav-link text-primary" 
-              to="/contact"
+              href="/login"
             >
-              {{ trans.app.contact }}
-            </router-link>
+              {{ trans.app.login }}
+            </a>
           </li>
           <li v-if="CurrentTenant.user && !isUser" class="nav-item d-block d-md-none">
             <router-link class="nav-link text-primary" to="/admin">{{ trans.app.admin }}</router-link>
@@ -151,22 +151,12 @@
             </div>
           </li>
         </ul>
-
-        <li v-if="!CurrentTenant.user" class="nav-item d-none d-md-block">
-          <a 
-            href="/login"
-            class="btn btn-link text-decoration-none text-primary">
-            {{ trans.app.login }}
-          </a>
-        </li>
-
-        <li v-if="!CurrentTenant.user" class="nav-item d-none d-md-block">
-          <a 
-            class="btn btn-outline-primary" 
-            href="/register">
-            {{ trans.app.register }}
-          </a>
-        </li>
+        
+        <a 
+          href="/login"
+          class="btn btn-link text-decoration-none text-primary nav-item d-none d-md-block">
+          {{ trans.app.login }}
+        </a>
 
         <button
           class="navbar-toggler ml-2"

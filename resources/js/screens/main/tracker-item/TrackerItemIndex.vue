@@ -17,9 +17,9 @@
     </page-header>
 
     <div class="pt-5">
-      <div class="col-xl-10 offset-xl-1 px-xl-5 col-md-12">
+      <div class="col-xl-10 offset-xl-1 px-xl-5 col-12">
         <div class="row">
-          <div class="col-4 d-none d-sm-block">
+          <div class="col-12 col-md-4">
             <h1 class="text-primary">
               {{ tracker.name }}
               <hr>
@@ -52,7 +52,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-sm-8">
+          <div class="col-12 col-md-8">
             <map-preview :markers="markers" />
           </div>
         </div>

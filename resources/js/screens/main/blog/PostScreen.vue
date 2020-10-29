@@ -10,13 +10,14 @@
 
     <page-header></page-header>
 
-    <div v-if="isReady" class>
-      <section v-if="post" class="section d-md-flex" style="height: 80vh">
-        <div class="col-12 col-md-6 flex-column h-100" :style="{'background-image': 'url(' + post.featured_image + ')'}">
-        </div>
-        <div class="col-12 col-md-6 flex-column p-5 p-md-9">
-          <div class="row h-100">
-            <div class="mx-auto my-auto text-center">
+    <div v-if="isReady" class="container-fluid">
+      <section v-if="post">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <img :src="post.featured_image" class="img-fluid" alt="" srcset="">
+          </div>
+          <div class="col-12 col-md-6 p-5">
+            <div class="text-md-center">
               <h1 class="font-weight-700 text-primary">
                 {{ post.title }}
               </h1>
@@ -38,7 +39,7 @@
       </section>
       <div class="col col-md-10 mx-auto">
         <div class="row">
-          <div class="col-8">
+          <div class="col-12 col-xl-8">
             <div class="d-flex justify-content-between mt-5">
               <div class="flex-column">
                 <font-awesome-icon
@@ -85,7 +86,7 @@
             </div>
           </div>
 
-          <div class="col-4 mt-5">
+          <div class="col-12 col-xl-4 mt-5 d-none d-xl-block">
             <h1 class="text-primary">{{ trans.app.recently_published }}</h1>
 
             <div>
@@ -97,12 +98,12 @@
                   <img class="card-img" :src="recentPost.featured_image" alt="Card image">
                   <div class="card-img-overlay d-flex align-items-center">
                     <div>
-                      <h5 class="h2 card-title text-white mb-2">
+                      <h5 class="card-title text-primary mb-2">
                         {{ recentPost.title }}
                       </h5>
-                      <p class="card-text">
+                      <!-- <p class="card-text">
                         {{ recentPost.summary }}
-                      </p>
+                      </p> -->
                       <p class="card-text text-sm font-weight-bold">
                         {{ moment(recentPost.published_at).fromNow() }}
                       </p>
@@ -375,9 +376,9 @@ div.post-content hr:before {
   content: "...";
 }
 
-.post-content > p > code {
-  // background-color: $text-muted;
-}
+// .post-content > p > code {
+//   background-color: $text-muted;
+// }
 
 pre.ql-syntax {
   margin-top: 2em;
