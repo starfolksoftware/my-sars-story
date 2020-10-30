@@ -122,6 +122,27 @@
             </div>
           </div>
 
+          <!-- Partners section -->
+          <div>
+            <div class="page-title w-full">
+              <h2 class="font-weight-900 display-4 text-primary mt-5">
+                {{ trans.app.partners }}
+              </h2>
+              <div class="row">
+                <div v-for="(partner, index) in partners" :key="index" class="col-12 col-sm-4 col-md-3 text-center">
+                  <a
+                    target="_blank"
+                    :href="partner.url"
+                    ><img
+                      :src="partner.logo"
+                      alt=""
+                      class="img-fluid mb-5 mt-5"
+                  /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Follow us on socials -->
           <div>
             <div class="page-title w-full">
