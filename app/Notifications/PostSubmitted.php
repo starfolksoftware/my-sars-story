@@ -49,7 +49,7 @@ class PostSubmitted extends Notification
                     ->line('The following post has been successfully submitted for approval')
                     ->line("Title: ".$this->post->title)
                     ->line("Summary: ".$this->post->summary)
-                    ->action('View it here', url('/admin/posts/'.$this->post->slug.'/edit'))
+                    ->action('View it here', url('/admin/posts/'.$this->post->id.'/edit'))
                     ->line('Thank you!');
         } else {
             return (new MailMessage)
@@ -58,7 +58,7 @@ class PostSubmitted extends Notification
                     ->line('The following post needs your approval')
                     ->line("Title: ".$this->post->title)
                     ->line("Summary: ".$this->post->summary)
-                    ->action('View it here', url('/admin/posts/'.$this->post->slug.'/edit'))
+                    ->action('View it here', url('/admin/posts/'.$this->post->id.'/edit'))
                     ->line('Thank you!');
         }
         

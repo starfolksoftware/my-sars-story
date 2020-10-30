@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
 use Ramsey\Uuid\Uuid;
 use StarfolkSoftware\Analytics\Events\Viewed;
 use Illuminate\Database\Eloquent\Model;
-use App\Notications\PostSubmitted;
+use App\Notifications\PostSubmitted;
 use Notification;
 
 class PostController extends \App\Http\Controllers\Controller
