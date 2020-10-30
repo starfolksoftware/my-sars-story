@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Tracker;
 
 use App\Models\Tracker\TrackerItem;
 use App\Models\Tracker\Tracker;
+use App\Models\Auth\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Notifications\{ NewReportSubmission };
+use Notification;
 use Auth;
 
 class TrackerItemController extends \App\Http\Controllers\Controller
@@ -171,6 +174,11 @@ class TrackerItemController extends \App\Http\Controllers\Controller
 
     $trackerItem->fill($data);
     $trackerItem->save();
+
+    if (is_null($data['user_id'])) {
+      $users = User::all();
+      Notification::send($users, new NewReportSubmission($trackerItem));
+    }
 
     $trackerItem = $trackerItem->refresh();
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Blog;
 use App\Models\Blog\Post;
 use App\Models\Blog\Tag;
 use App\Models\Blog\Topic;
+use App\Models\Auth\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -12,6 +13,8 @@ use Illuminate\Validation\Rule;
 use Ramsey\Uuid\Uuid;
 use StarfolkSoftware\Analytics\Events\Viewed;
 use Illuminate\Database\Eloquent\Model;
+use App\Notifications\{ PostSubmitted, PostApproved, PostPublished };
+use Notification;
 
 class PostController extends \App\Http\Controllers\Controller
 {
@@ -55,7 +58,7 @@ class PostController extends \App\Http\Controllers\Controller
         Post::forCurrentUser()->published()->latest()->withCount('views')->with('user')->with('editor')->paginate();
     }
 
-    return response()->json($results, 200);
+    return response()->json($results, 201);
   }
 
   /**
@@ -161,6 +164,24 @@ class PostController extends \App\Http\Controllers\Controller
     $post->fill($data);
     $post->meta = $data['meta'];
     $post->save();
+
+    //send notifications
+    if ($post->submitted_at && 
+      is_null($post->approved_at) && 
+      is_null($post->published_at)) {
+      $post->user->notify(new PostSubmitted($post));
+      $users = User::permission('approve_posts')->get();
+      Notification::send($users, new PostSubmitted($post));
+    } else if($post->submitted_at && 
+      $post->approved_at && 
+      is_null($post->published_at)) {
+      $post->user->notify(new PostApproved($post));
+    } else if($post->submitted_at && 
+      $post->approved_at && 
+      $post->published_at) {
+      $users = User::all();
+      Notification::send($users, new PostPublished($post));
+    }
 
     $post->topic()->sync(
       $this->syncTopic(request('topic'))
