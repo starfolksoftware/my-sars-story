@@ -28,7 +28,7 @@
                 </router-link>
               </h1>
               <div class="d-flex d-md-flex flex-wrap-reverse flex-md-nowrap mt-5">
-                <div class="pl-md-5 pl-0">
+                <div class="pr-md-3 pr-0">
                   <small class="text-muted">by {{ post.user.name }} on {{ moment(post.published_at).format('MMM D, Y') }} — {{ post.read_time }}</small>
                   <p class="lead">
                     {{ post.summary }}
