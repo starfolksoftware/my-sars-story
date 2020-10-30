@@ -19,8 +19,8 @@
                 <h1 class="font-weight-700 text-primary">
                   {{ featuredPost.title }}
                 </h1>
-                <small class="text-primary">by {{ featuredPost.user.name }} on {{ moment(featuredPost.published_at).format('MMM D, Y') }} — {{ featuredPost.read_time }}</small>
-                <p class="lead text-primary">
+                <small class="text-muted">by {{ featuredPost.user.name }} on {{ moment(featuredPost.published_at).format('MMM D, Y') }} — {{ featuredPost.read_time }}</small>
+                <p class="lead text-gray-dark">
                   {{ featuredPost.summary }}
                 </p>
                 <router-link

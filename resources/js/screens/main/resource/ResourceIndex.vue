@@ -21,7 +21,7 @@
             <div class="col-md-8 text-left d-flex flex-column justify-content-between">
               <div>
                 <h3 class="font-weight-800 text-primary mt-0">{{ resource.title }}</h3>
-                <p class="font-weight-500 lead" v-html="resource.description"></p>
+                <p class="font-weight-500 lead text-black-50" v-html="resource.description"></p>
               </div>
               <div class="w-full">
                 <a

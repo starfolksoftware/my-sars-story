@@ -15,7 +15,7 @@
             />
             <div class="card-body">
               <h5 class="card-title mt-0 text-primary">{{ post.title }}</h5>
-              <p class="card-text text-secondary">{{ post.summary }}</p>
+              <p class="card-text">{{ post.summary }}</p>
             </div>
             <div
               class="card-footer text-muted bg-transparent border-0 small d-flex justify-content-between"

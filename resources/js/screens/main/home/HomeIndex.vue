@@ -21,23 +21,24 @@
 
           <!-- Latest Posts -->
           <div>
-            <div v-for="(post, index) in featuredPosts" :key="index">
+            <div class="mb-5" v-for="(post, index) in featuredPosts" :key="index">
               <h1 class="font-weight-700 text-primary">
                 <router-link :to="{ name: 'blog-post', params: { identifier: publicIdentifier(post), slug: post.slug } }">
                   {{ post.title }}
                 </router-link>
               </h1>
-              <div class="d-block d-md-flex flex-wrap-reverse flex-md-nowrap">
-                <div>
+              <div class="d-flex d-md-flex flex-wrap-reverse flex-md-nowrap mt-5">
+                <div class="pl-md-5 pl-0">
                   <small class="text-muted">by {{ post.user.name }} on {{ moment(post.published_at).format('MMM D, Y') }} — {{ post.read_time }}</small>
                   <p class="lead">
                     {{ post.summary }}
                   </p>
                 </div>
-                <div class="">
+                <div class="flex-post-width">
                   <img :src="post.featured_image" class="img-fluid" alt="" srcset="">
                 </div>
               </div>
+              <hr>
             </div>
           </div>
 
@@ -261,6 +262,16 @@ export default {
 </script>
 
 <style scoped>
+.flex-post-width {
+  flex: 0 0 40%
+}
+
+@media (max-width: 767.98px) { 
+  .flex-post-width {
+    flex: 0 0 100%
+  }
+}
+
 .img-grayscale {
   filter: grayscale(100%);
 }
