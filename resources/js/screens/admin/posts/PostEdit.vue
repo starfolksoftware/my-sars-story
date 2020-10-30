@@ -52,7 +52,7 @@
       </a>
 
       <a
-        v-if="isPublished"
+        v-if="!isPublished"
         href="#"
         class="btn btn-sm btn-danger font-weight-bold my-auto"
         @click="save"

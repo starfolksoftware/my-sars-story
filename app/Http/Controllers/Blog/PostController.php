@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
 use Ramsey\Uuid\Uuid;
 use StarfolkSoftware\Analytics\Events\Viewed;
 use Illuminate\Database\Eloquent\Model;
-use App\Notifications\PostSubmitted;
+use App\Notifications\{ PostSubmitted, PostApproved, PostPublished };
 use Notification;
 
 class PostController extends \App\Http\Controllers\Controller
@@ -58,7 +58,7 @@ class PostController extends \App\Http\Controllers\Controller
         Post::forCurrentUser()->published()->latest()->withCount('views')->with('user')->with('editor')->paginate();
     }
 
-    return response()->json($results, 200);
+    return response()->json($results, 201);
   }
 
   /**
@@ -175,11 +175,12 @@ class PostController extends \App\Http\Controllers\Controller
     } else if($post->submitted_at && 
       $post->approved_at && 
       is_null($post->published_at)) {
-      
+      $post->user->notify(new PostApproved($post));
     } else if($post->submitted_at && 
       $post->approved_at && 
       $post->published_at) {
-      
+      $users = User::all();
+      Notification::send($users, new PostPublished($post));
     }
 
     $post->topic()->sync(

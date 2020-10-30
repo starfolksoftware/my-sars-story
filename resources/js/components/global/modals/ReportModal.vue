@@ -238,6 +238,10 @@ export default {
     },
 
     saveTrackedItem() {
+      if (this.form.isSaving) {
+        return false
+      }
+      
       this.form.errors = [];
       this.form.isSaving = true;
       this.form.hasSuccess = false;
