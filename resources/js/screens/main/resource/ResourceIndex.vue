@@ -4,7 +4,7 @@
     <main class="text-primary px-4">
       <div class="page-title w-full">
         <h2 class="font-weight-900 display-4 text-primary mt-5">
-          {{ trans.app.resources }}
+          Download Resources
         </h2>
       </div>
       <div class="mt-5">

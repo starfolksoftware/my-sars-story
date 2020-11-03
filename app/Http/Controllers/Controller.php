@@ -27,9 +27,9 @@ class Controller extends BaseController
       $determinant = $pathArray[count($pathArray) - 1];
 
       $meta = array(
-        'title' => env('APP_NAME', '#MySarsStory').'Now is the time to demand bold, radical, systemic changes for Nigeria\'s betterment, and our own good.',
-        'summary' => 'Now is the time to demand bold, radical, systemic changes for Nigeria\'s betterment, and our own good.',
-        'summaryFromBody' => 'Now is the time to demand bold, radical, systemic changes for Nigeria\'s betterment, and our own good.',
+        'title' => env('APP_NAME', '#MySarsStory').'The Special Anti-Robbery Squad (SARS), a unit of the Nigerian Police has a long record of human rights abuses and violations. Many lives have been lost, dreams shattered and many others have experienced incalculable losses as a result of their activities. As part of the #ENDSARS movement, we’re documenting the toll of SARS across Nigeria - putting names and faces to the numbers.',
+        'summary' => 'The Special Anti-Robbery Squad (SARS), a unit of the Nigerian Police has a long record of human rights abuses and violations. Many lives have been lost, dreams shattered and many others have experienced incalculable losses as a result of their activities. As part of the #ENDSARS movement, we’re documenting the toll of SARS across Nigeria - putting names and faces to the numbers.',
+        'summaryFromBody' => 'The Special Anti-Robbery Squad (SARS), a unit of the Nigerian Police has a long record of human rights abuses and violations. Many lives have been lost, dreams shattered and many others have experienced incalculable losses as a result of their activities. As part of the #ENDSARS movement, we’re documenting the toll of SARS across Nigeria - putting names and faces to the numbers.',
         'image' => env('APP_URL').'/images/protests/protest_9.jpg',
         'url' => url()->current()
       );
