@@ -42,6 +42,7 @@ return [
   'claims' => 'Claims',
   'click_to_see_insights' => 'Click on an item below to see more detailed insights.',
   'collectibles' => 'Collectibles',
+  'comments' => 'Comments',
   'conclusions' => 'Conclusions',
   'config' => 'Configuration',
   'confirm' => 'Confirm',
