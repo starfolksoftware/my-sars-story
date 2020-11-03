@@ -1,5 +1,5 @@
 <template>
-  <carousel-3d :height="500">
+  <carousel-3d>
     <slide v-for="(image, index) in images" :key="index" :index=index>
       <img :src="image" class="img-fluid">
     </slide>

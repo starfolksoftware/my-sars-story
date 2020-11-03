@@ -30,7 +30,7 @@
         <div class="modal-body">
           <div class="col mx-auto">
             <h1>
-              {{ trans.app.general_information }}
+              {{ trans.app.location }}
               <hr />
             </h1>
             <div class="form-group">
@@ -87,6 +87,10 @@
                 </div>
               </div>
             </div>
+            <h1>
+              {{ trans.app.contact_information }}
+              <hr />
+            </h1>
             <div class="form-group">
               <div class="col-lg-12">
                 <input type="text"
@@ -158,6 +162,8 @@ Vue.use(VueFormulate.default, {
       switch (context.classification) {
         case "button":
           return "btn btn-primary";
+        case "box":
+          return "form-control";
         default:
           return "form-control";
       }
@@ -335,15 +341,19 @@ export default {
         }
       }
 
+      if (form.is_anonymous) {
+        return errors
+      }
+
       if (!form.email) {
-        errors["email"] = "email can not be empty";
+        errors["email"] = "email can not be empty"
       }
 
       if (!form.phone_number) {
-        errors["phone_number"] = "phone number can not be empty";
+        errors["phone_number"] = "phone number can not be empty"
       }
 
-      return errors;
+      return errors
     },
 
     loadStates() {

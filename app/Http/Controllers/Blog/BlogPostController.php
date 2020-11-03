@@ -101,6 +101,7 @@ class BlogPostController extends Controller
             'user' => $post->user,
             'username' => optional($this->userMeta)->username,
             'avatar' => optional($metaData)->avatar && ! empty(optional($metaData)->avatar) ? $metaData->avatar : "https://secure.gravatar.com/avatar/{$emailHash}?s=500",
+            'memorial' => $post->memorial,
             'meta' => $post->meta,
             'related' => $this->showRelated ? $this->getRelatedViaTaxonomy($post, $posts) : [],
           ]);

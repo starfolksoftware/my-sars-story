@@ -66,6 +66,7 @@
         "leaflet": "^1.6.0",
         "medium-zoom": "^1.0.5",
         "vue-carousel-3d": "^1.0.1",
+        "vue-disqus": "^4.0.1",
         "vue-element-loading": "^1.1.5",
         "vue-flux": "^6.3.0",
         "vue-form-generator": "^2.3.4",

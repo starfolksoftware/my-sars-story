@@ -140,6 +140,9 @@
 
           <post-list :posts="related"></post-list>
         </div>
+        <div v-if="post.memorial && post.memorial.id" class='comments'>
+          <Disqus :shortname="'spoorafrica'" :pageConfig='disqusConfig' />
+        </div>
       </main>
     </div>
 
@@ -153,13 +156,15 @@ import PostList from "../../../components/blog/PostList";
 import NProgress from "nprogress";
 import vueHeadful from "vue-headful";
 import mediumZoom from "medium-zoom";
+import { Disqus } from 'vue-disqus'
 
 export default {
   name: "post-screen",
 
   components: {
     PostList,
-    vueHeadful
+    vueHeadful,
+    Disqus
   },
 
   data () {
@@ -175,6 +180,7 @@ export default {
       isReady: false,
       trans: JSON.parse(CurrentTenant.translations),
       postUrl: window.location.toString(),
+      disqus_shortname: process.env.MIX_DISQUS_SHORTNAME,
       recent_posts: [],
     };
   },
@@ -275,6 +281,13 @@ export default {
         return this.user.id === CurrentTenant.user.id;
       } else {
         return false;
+      }
+    },
+
+    disqusConfig() {
+      return {
+        title: this.trans.app.comments,
+        slug: this.post.slug
       }
     }
   }
