@@ -6,7 +6,7 @@
       <div class="row">
 
 
-        <div class="col-12 col-md-7">
+        <div class="col-12">
           <!-- Protest Images -->
           <div>
             <slider :images="protest_images" />
@@ -66,7 +66,7 @@
 
 
 
-        <div class="col-12 col-md-5">
+        <div class="col-12">
           <!-- Take Action -->
           <div>
             <div class="page-title w-full">

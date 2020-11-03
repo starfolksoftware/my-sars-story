@@ -31,9 +31,7 @@
         <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
           <li class="nav-item">
             <router-link class="nav-link text-primary" to="/blog">
-              {{
-                trans.app.blog
-              }}
+              News
             </router-link>
           </li>
           <li class="nav-item">

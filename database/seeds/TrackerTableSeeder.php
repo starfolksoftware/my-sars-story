@@ -29,6 +29,12 @@ class TrackerTableSeeder extends Seeder
                 "class" => "lead",
             ],
             [
+                "type" => "checkbox",
+                "name" => "is_anonymous",
+                "v-model" => "is_anonymous",
+                "label" => "Anonymous Submission",
+            ],
+            [
                 "type" => "text",
                 "name" => "name",
                 "label" => "Full Name",
@@ -70,6 +76,14 @@ class TrackerTableSeeder extends Seeder
                 "help" => "Keep it under 255 characters.",
             ],
             [
+                "type" => "text",
+                "name" => "nationality",
+                "label" => "Nationality",
+                "placeholder" => "What is the person's nationality?",
+                "help" => "If left blank, Nigerian will be assumed.",
+                "error-behavior" => "live"
+            ],
+            [
                 "name" => "status",
                 "v-model" => "status",
                 "options" => [
@@ -98,7 +112,7 @@ class TrackerTableSeeder extends Seeder
                 "type" => "text",
                 "name" => "reference_title",
                 "label" => "Reference Title",
-                "placeholder" => "Sample placeholder",
+                "placeholder" => "Reference title",
                 "help" => "Give your external reference a short title",
                 // "validation" => "required",
                 // "error-behavior" => "live"
@@ -156,6 +170,12 @@ class TrackerTableSeeder extends Seeder
                 "class" => "lead",
             ],
             [
+                "type" => "checkbox",
+                "name" => "is_anonymous",
+                "v-model" => "is_anonymous",
+                "label" => "Anonymous Submission",
+            ],
+            [
                 "type" => "text",
                 "name" => "name",
                 "label" => "Full Name",
@@ -173,6 +193,14 @@ class TrackerTableSeeder extends Seeder
                 "validation" => "required|number",
                 "min" => "1",
                 "error-behavior" => "live",
+            ],
+            [
+                "type" => "text",
+                "name" => "nationality",
+                "label" => "Nationality",
+                "placeholder" => "What is the person's nationality?",
+                "help" => "If left blank, 'Nigerian' will be assumed.",
+                "error-behavior" => "live"
             ],
             [
                 "type" => "date",
@@ -208,7 +236,7 @@ class TrackerTableSeeder extends Seeder
                 "type" => "text",
                 "name" => "reference_title",
                 "label" => "Reference Title",
-                "placeholder" => "Sample placeholder",
+                "placeholder" => "Reference title",
                 "help" => "Give your external reference a short title",
                 // "validation" => "required",
                 // "error-behavior" => "live"
@@ -267,6 +295,12 @@ class TrackerTableSeeder extends Seeder
                 "class" => "lead",
             ],
             [
+                "type" => "checkbox",
+                "name" => "is_anonymous",
+                "v-model" => "is_anonymous",
+                "label" => "Anonymous Submission",
+            ],
+            [
                 "type" => "text",
                 "name" => "property",
                 "label" => "Property",
@@ -316,7 +350,7 @@ class TrackerTableSeeder extends Seeder
                 "type" => "text",
                 "name" => "reference_title",
                 "label" => "Reference Title",
-                "placeholder" => "Sample placeholder",
+                "placeholder" => "Reference title",
                 "help" => "Give your external reference a short title",
                 // "validation" => "required",
                 // "error-behavior" => "live"
@@ -350,7 +384,7 @@ class TrackerTableSeeder extends Seeder
         ];
         $tracker->has_bot = "0";
         $tracker->has_location = "1";
-        $tracker->has_user_reporting = "1";
+        $tracker->has_user_reporting = "0";
         $tracker->id = NULL;
         $tracker->name = "Vandalism";
         $tracker->user_id = 1;
@@ -372,6 +406,12 @@ class TrackerTableSeeder extends Seeder
                 "id" => "id-2",
                 "children" => "Report a case of looting",
                 "class" => "lead",
+            ],
+            [
+                "type" => "checkbox",
+                "name" => "is_anonymous",
+                "v-model" => "is_anonymous",
+                "label" => "Anonymous Submission",
             ],
             [
                 "type" => "textarea",
@@ -424,7 +464,7 @@ class TrackerTableSeeder extends Seeder
                 "type" => "text",
                 "name" => "reference_title",
                 "label" => "Reference Title",
-                "placeholder" => "Sample placeholder",
+                "placeholder" => "Reference title",
                 "help" => "Give your external reference a short title",
                 // "validation" => "required",
                 // "error-behavior" => "live"
@@ -458,7 +498,7 @@ class TrackerTableSeeder extends Seeder
         ];
         $tracker->has_bot = "0";
         $tracker->has_location = "1";
-        $tracker->has_user_reporting = "1";
+        $tracker->has_user_reporting = "0";
         $tracker->id = NULL;
         $tracker->name = "Lootings";
         $tracker->user_id = 1;
@@ -480,6 +520,12 @@ class TrackerTableSeeder extends Seeder
                 "id" => "id-2",
                 "children" => "Report a Judicial Inquiry into police brutality",
                 "class" => "lead",
+            ],
+            [
+                "type" => "checkbox",
+                "name" => "is_anonymous",
+                "v-model" => "is_anonymous",
+                "label" => "Anonymous Submission",
             ],
             [
                 "type" => "number",
@@ -512,7 +558,7 @@ class TrackerTableSeeder extends Seeder
                 "type" => "text",
                 "name" => "reference_title",
                 "label" => "Reference Title",
-                "placeholder" => "Sample placeholder",
+                "placeholder" => "Reference title",
                 "help" => "Give your external reference a short title",
                 // "validation" => "required",
                 // "error-behavior" => "live"
@@ -546,7 +592,7 @@ class TrackerTableSeeder extends Seeder
         ];
         $tracker->has_bot = "0";
         $tracker->has_location = "1";
-        $tracker->has_user_reporting = "1";
+        $tracker->has_user_reporting = "0";
         $tracker->id = NULL;
         $tracker->name = "Judicial Inquiry";
         $tracker->user_id = 1;
