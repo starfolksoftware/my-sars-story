@@ -195,6 +195,7 @@
 </template>
 
 <script>
+import hljs from "highlight.js";
 import Vue from "vue";
 import $ from "jquery";
 import moment from "moment";

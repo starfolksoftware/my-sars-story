@@ -70,6 +70,30 @@
             </router-link>
           </p>
 
+          <p>
+            <router-link to="/memorial">
+              {{ trans.app.memorial }}
+            </router-link>
+          </p>
+
+          <p>
+            <router-link :to="{name: 'trackerItems-main', params: { trackerId: 1 }}">
+              {{ trans.app.maps }}
+            </router-link>
+          </p>
+
+          <p>
+            <router-link :to="{name: 'blog-topic-posts', params: { slug: 'Infographics' }}">
+              {{ trans.app.infographics }}
+            </router-link>
+          </p>
+
+          <p>
+            <router-link to="/resources">
+              {{ trans.app.downloads }}
+            </router-link>
+          </p>
+
         </div>
         <!-- Grid column -->
 

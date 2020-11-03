@@ -253,6 +253,7 @@
 </template>
 
 <script>
+import hljs from "highlight.js";
 import _ from "lodash";
 import $ from "jquery";
 import Quill from "quill";
