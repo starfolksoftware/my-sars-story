@@ -20,10 +20,22 @@
       <div class="col-xl-10 offset-xl-1 px-xl-5 col-12">
         <div class="row">
           <div class="col-12 col-md-4">
-            <h1 class="text-primary">
-              {{ tracker.name }}
-              <hr>
-            </h1>
+            <div class="form-group mb-5">
+              <select
+                class="form-control float-right"
+                v-model="trId"
+                @change="$router.push({ name: 'trackerItems-main', params: { trackerId: trId }})">
+                <option value="" disabled>{{ trans.app.select }}</option> 
+                <option 
+                  v-for="(tracker, index) in trackers" 
+                  :key="index" 
+                  :value="tracker.id"
+                  >
+                  {{ tracker.name }}
+                </option>
+              </select>
+            </div>
+            <hr>
             <p class="lead text-secondary" v-html="tracker.description"></p>
             <div class="p-3">
               <div v-for="(field, index) in tracker.fields" :key="index">
@@ -89,6 +101,8 @@ export default {
     return {
       trackerItems: [],
       tracker: {},
+      trId: this.$route.params.trackerId,
+      trackers: CurrentTenant.trackers || [],
       trans: JSON.parse(CurrentTenant.translations),
       query: "",
       url: `/api/v1/trackerItems/${this.$route.params.trackerId}?forMap=1`,

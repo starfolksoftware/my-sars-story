@@ -55,6 +55,12 @@ export default {
     this.fetchData();
   },
 
+  watch: {
+    $route(to, from) {
+      this.fetchData()
+    }
+  },
+
   methods: {
     fetchData() {
       this.request()

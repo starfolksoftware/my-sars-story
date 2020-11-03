@@ -31,7 +31,9 @@
         <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
           <li class="nav-item">
             <router-link class="nav-link text-primary" to="/blog">
-              News
+              {{
+                trans.app.stories
+              }}
             </router-link>
           </li>
           <li class="nav-item">
@@ -44,40 +46,115 @@
           <li class="nav-item dropdown">
             <a 
               class="nav-link text-primary dropdown-toggle" 
-              href="#" id="trackerDropdown" 
+              href="#" id="watchDropdown" 
               role="button" 
               data-toggle="dropdown" 
               aria-haspopup="true" 
               aria-expanded="false"
             >
-              {{ trans.app.maps }}
+              {{ trans.app.watch }}
             </a>
             <div 
               class="dropdown-menu" 
-              aria-labelledby="trackerDropdown"
+              aria-labelledby="watchDropdown"
             >
               <router-link 
-                v-for="(tracker, index) in trackers"
-                :key="index"
                 class="dropdown-item text-primary" 
-                :to="{name: 'trackerItems-main', params: { trackerId: tracker.id }}">
-                {{ tracker.name }}
+                :to="{name: 'blog-topic-posts', params: { slug: 'video-testimonies' }}">
+                {{ trans.app.testimonies }}
+              </router-link>
+              <router-link 
+                class="dropdown-item text-primary" 
+                :to="{name: 'blog-topic-posts', params: { slug: 'video-docs' }}">
+                {{ trans.app.video_docs }}
               </router-link>
             </div>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link text-primary" to="/resources">
-              {{
-                trans.app.resources
-              }}
-            </router-link>
+          <li class="nav-item dropdown">
+            <a 
+              class="nav-link text-primary dropdown-toggle" 
+              href="#" id="readDropdown" 
+              role="button" 
+              data-toggle="dropdown" 
+              aria-haspopup="true" 
+              aria-expanded="false"
+            >
+              {{ trans.app.read }}
+            </a>
+            <div 
+              class="dropdown-menu" 
+              aria-labelledby="readDropdown"
+            >
+              <router-link 
+                class="dropdown-item text-primary" 
+                :to="{name: 'blog-topic-posts', params: { slug: 'narratives' }}">
+                {{ trans.app.narratives }}
+              </router-link>
+              <router-link 
+                class="dropdown-item text-primary" 
+                :to="{name: 'blog-topic-posts', params: { slug: 'investigations' }}">
+                {{ trans.app.investigations }}
+              </router-link>
+            </div>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link text-primary" to="/contact">
-              {{
-                trans.app.contact
-              }}
-            </router-link>
+          <li class="nav-item dropdown">
+            <a 
+              class="nav-link text-primary dropdown-toggle" 
+              href="#" id="listenDropdown" 
+              role="button" 
+              data-toggle="dropdown" 
+              aria-haspopup="true" 
+              aria-expanded="false"
+            >
+              {{ trans.app.listen }}
+            </a>
+            <div 
+              class="dropdown-menu" 
+              aria-labelledby="listenDropdown"
+            >
+              <router-link 
+                class="dropdown-item text-primary" 
+                :to="{name: 'blog-topic-posts', params: { slug: 'audio-testimonies' }}">
+                {{ trans.app.testimonies }}
+              </router-link>
+              <router-link 
+                class="dropdown-item text-primary" 
+                :to="{name: 'blog-topic-posts', params: { slug: 'audio-stories' }}">
+                {{ trans.app.audio_stories }}
+              </router-link>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a 
+              class="nav-link text-primary dropdown-toggle" 
+              href="#" id="resourcesDropdown" 
+              role="button" 
+              data-toggle="dropdown" 
+              aria-haspopup="true" 
+              aria-expanded="false"
+            >
+              {{ trans.app.resources }}
+            </a>
+            <div 
+              class="dropdown-menu" 
+              aria-labelledby="resourcesDropdown"
+            >
+              <router-link 
+                class="dropdown-item text-primary" 
+                :to="{name: 'trackerItems-main', params: { trackerId: 1 }}">
+                {{ trans.app.maps }}
+              </router-link>
+              <router-link 
+                class="dropdown-item text-primary" 
+                :to="{name: 'blog-topic-posts', params: { slug: 'Infographics' }}">
+                {{ trans.app.infographics }}
+              </router-link>
+              <router-link 
+                class="dropdown-item text-primary" 
+                :to="{name: 'resources-main'}">
+                {{ trans.app.downloads }}
+              </router-link>
+            </div>
           </li>
           <li v-if="!CurrentTenant.user" class="nav-item d-block d-md-none">
             <a
