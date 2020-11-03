@@ -11,6 +11,11 @@ let mainRoutes = [
     component: require('../../screens/main/home/HomeIndex').default,
   },
   {
+    path: '/add-your-voice',
+    name: 'add-your-voice',
+    component: require('../../screens/main/cta/AddYourVoice').default,
+  },
+  {
     path: '/about',
     name: 'about',
     component: require('../../screens/main/about/AboutIndex').default,

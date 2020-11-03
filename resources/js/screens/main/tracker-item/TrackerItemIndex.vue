@@ -95,40 +95,7 @@ export default {
       from: "",
       to: "",
       total: "",
-      markers: [
-        {
-          id: 'm1',
-          position: { lat: 9.0765, lng: 7.3986 },
-          details: "<button class='btn btn-primary'>A button</button>",
-          tooltip: "A Button",
-          draggable: true,
-          visible: true,
-        },
-        {
-          id: 'm2',
-          position: { lat: 9.8765, lng: 7.3986 },
-          details: "<button class='btn btn-primary'>A button</button>",
-          tooltip: "A Button",
-          draggable: true,
-          visible: false,
-        },
-        {
-          id: 'm3',
-          position: { lat: 9.0865, lng: 7.3986 },
-          details: "<button class='btn btn-primary'>A button</button>",
-          tooltip: "A Button",
-          draggable: true,
-          visible: true,
-        },
-        {
-          id: 'm4',
-          position: { lat: 9.0765, lng: 7.3986 },
-          details: "<button class='btn btn-primary'>A button</button>",
-          tooltip: "A Button",
-          draggable: true,
-          visible: false,
-        },
-      ]
+      markers: []
     };
   },
 

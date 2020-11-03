@@ -163,7 +163,7 @@ Vue.use(VueFormulate.default, {
         case "button":
           return "btn btn-primary";
         case "box":
-          return "";
+          return "form-control";
         default:
           return "form-control";
       }

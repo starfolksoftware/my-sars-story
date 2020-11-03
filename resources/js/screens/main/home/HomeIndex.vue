@@ -2,7 +2,28 @@
   <div>
     <page-header></page-header>
     
-    
+    <main class="container mt-5 mb-9">
+      <div class="page-title w-full text-center">
+        <h2 class="font-weight-900 display-4 text-primary mt-5">
+          #MySarsStory
+        </h2>
+        <p class="lead">
+          The Special Anti-Robbery Squad (SARS), a unit of the Nigerian Police has a long record 
+          of human rights abuses and violations. Many lives have been lost, dreams shattered 
+          and many others have experienced incalculable losses as a result of their activities. 
+          As part of the #ENDSARS movement, we’re documenting the toll of SARS across Nigeria - 
+          putting names and faces to the numbers.
+        </p>
+        <div class="text-center my-5">
+          <router-link
+            :to="{ name: 'add-your-voice' }"
+            class="btn btn-lg btn-outline-secondary w-50">
+            <i>{{ trans.app.add_your_voice }}</i>
+          </router-link>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </main>
 
     <page-footer></page-footer>
   </div>
@@ -20,29 +41,7 @@ export default {
       trans: JSON.parse(CurrentTenant.translations),
       platform: CurrentTenant.platform,
       partners: CurrentTenant.partners,
-      memorial: [],
-      featuredPosts: [],
-      protest_images: [
-        '/images/protests/protest_1.jpg',
-        '/images/protests/protest_2.jpg',
-        '/images/protests/protest_3.jpg',
-        '/images/protests/protest_4.jpg',
-        '/images/protests/protest_5.jpg',
-        '/images/protests/protest_6.jpg',
-        '/images/protests/protest_7.jpg',
-        '/images/protests/protest_8.jpg',
-        '/images/protests/protest_9.jpg',
-      ],
     };
-  },
-
-  computed: {
-    memorialImages() {
-      return this.memorial.map((currentValue) => currentValue.avatar)
-    },
-    memorialCaptions() {
-      return this.memorial.map((currentValue) => `${currentValue.name}, ${currentValue.profession}, ${currentValue.age}`)
-    }
   },
 
   mounted() {
@@ -50,37 +49,7 @@ export default {
   },
 
   beforeRouteEnter(to, from, next) {
-    next(vm => {
-      vm.fetchPosts()
-      vm.fetchMemorial()
-    })
-  },
-
-  methods: {
-    fetchPosts() {
-      this.request()
-        .get("/api/v1/blog/posts/5")
-        .then(response => {
-          this.featuredPosts = response.data.posts;
-
-          NProgress.done();
-        })
-        .catch(error => {
-          NProgress.done();
-        });
-    },
-    fetchMemorial() {
-      this.request()
-        .get("/api/v1/memorial")
-        .then(response => {
-          this.memorial = response.data.data;
-
-          NProgress.done();
-        })
-        .catch(error => {
-          NProgress.done();
-        });
-    }
+    next(vm => {})
   },
 };
 </script>
