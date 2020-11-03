@@ -9,6 +9,7 @@ return [
   'add_a_new_tag' => 'Add a new tag',
   'add_a_new_topic' => 'Add this as a new topic',
   'add_field' => 'Add field',
+  'add_your_voice' => 'Add your voice',
   'address' => 'Address',
   'admin' => 'Administration',
   'agency' => 'Agency',

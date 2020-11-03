@@ -11,6 +11,11 @@ let mainRoutes = [
     component: require('../../screens/main/home/HomeIndex').default,
   },
   {
+    path: '/about',
+    name: 'about',
+    component: require('../../screens/main/about/AboutIndex').default,
+  },
+  {
     path: '/contact',
     name: 'contact',
     component: require('../../screens/main/contact/ContactIndex').default,
