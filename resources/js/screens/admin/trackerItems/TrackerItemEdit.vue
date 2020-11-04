@@ -222,6 +222,8 @@ Vue.use(VueFormulate.default, {
       switch (context.classification) {
         case 'button':
           return 'btn btn-primary'
+        case "box":
+          return "";
         default:
           return 'form-control'
       }
