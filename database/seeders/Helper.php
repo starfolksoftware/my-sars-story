@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 class Helper {
   public static function csvToArray($filename = '', $delimiter = ',') {
     if (!file_exists($filename) || !is_readable($filename))

@@ -34,13 +34,6 @@ class Platform extends Model
     protected $primaryKey = 'id';
 
     /**
-     * The "type" of the auto-incrementing ID.
-     *
-     * @var string
-     */
-    protected $keyType = 'bigInteger';
-
-    /**
      * Indicates if the IDs are auto-incrementing.
      *
      * @var bool

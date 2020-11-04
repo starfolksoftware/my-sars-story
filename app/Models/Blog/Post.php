@@ -12,10 +12,11 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Str;
 use App\Traits\HasApprovalFlow;
 use StarfolkSoftware\Analytics\Traits\{HasViews, HasVisits};
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
-  use SoftDeletes, HasApprovalFlow, HasViews, HasVisits;
+  use HasFactory, SoftDeletes, HasApprovalFlow, HasViews, HasVisits;
 
   /**
    * The table associated with the model.

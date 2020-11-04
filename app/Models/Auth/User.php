@@ -8,10 +8,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\{HasRoles, HasPermissions};
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-  use HasRoles, HasPermissions, HasApiTokens, Notifiable;
+  use HasFactory, HasRoles, HasPermissions, HasApiTokens, Notifiable;
 
   /**
    * The attributes that are mass assignable.
