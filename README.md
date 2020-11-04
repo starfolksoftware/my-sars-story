@@ -61,10 +61,41 @@ Run the database seeder and you're done
     php artisan migrate:refresh
 
 
+
 ----------
 
+# Production Deployment
 
+```
+Recommendation: For production, we recommend laravel forge + linode. Linode for cloud hosting and laravel forge for server management.
+```
 
+## Server Requirements
+
+If you choose to user other tools than the recommended, here are the server requirements:
+
+- PHP >= 7.3
+- BCMath PHP Extension
+- Ctype PHP Extension
+- Fileinfo PHP Extension
+- JSON PHP Extension
+- Mbstring PHP Extension
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Tokenizer PHP Extension
+- XML PHP Extension
+
+## Steps
+
+- cd /path/to/my-sars-story
+- run `composer install`
+- run `cp .env.example .env` and fill in the the environment fields cc [understanding laravel environment variables](https://scotch.io/tutorials/understanding-laravel-environment-variables)
+- run `php artisan key:generate`
+- run `php artisan migrate --seed && php artisan passport:install && php artisan storage:link`
+- login using email: `selase@tigereyefoundation.org` and password: `password`
+- That's it!
+
+----------
 
 
 # Documentation

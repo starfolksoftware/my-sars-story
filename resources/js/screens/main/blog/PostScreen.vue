@@ -141,7 +141,7 @@
           <post-list :posts="related"></post-list>
         </div>
         <div v-if="post.memorial && post.memorial.id" class='comments'>
-          <Disqus :shortname="'spoorafrica'" :pageConfig='disqusConfig' />
+          <div id="disqus_thread"></div>
         </div>
       </main>
     </div>
@@ -156,7 +156,6 @@ import PostList from "../../../components/blog/PostList";
 import NProgress from "nprogress";
 import vueHeadful from "vue-headful";
 import mediumZoom from "medium-zoom";
-import { Disqus } from 'vue-disqus'
 
 export default {
   name: "post-screen",
@@ -164,7 +163,6 @@ export default {
   components: {
     PostList,
     vueHeadful,
-    Disqus
   },
 
   data () {
@@ -180,9 +178,26 @@ export default {
       isReady: false,
       trans: JSON.parse(CurrentTenant.translations),
       postUrl: window.location.toString(),
-      disqus_shortname: process.env.MIX_DISQUS_SHORTNAME,
       recent_posts: [],
     };
+  },
+
+  mounted() {
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = `https://${process.env.MIX_DISQUS_SHORTNAME}.disqus.com/embed.js`;
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
   },
 
   created () {
@@ -283,13 +298,6 @@ export default {
         return false;
       }
     },
-
-    disqusConfig() {
-      return {
-        title: this.trans.app.comments,
-        slug: this.post.slug
-      }
-    }
   }
 };
 </script>
