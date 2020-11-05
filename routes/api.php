@@ -142,7 +142,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('/memorial', 'MemorialController@index');
     Route::get('/memorial/{id?}', 'MemorialController@show');
     Route::post('/memorial/{id}', 'MemorialController@store')
-      ->middleware(['auth:api', 'permission:create_memorial']);
+      ->middleware(['auth:api', 'permission:create_memorial'])->name('memorial.store');
     Route::delete('/memmemorialbers/{id}', 'MemorialController@destroy')
       ->middleware(['auth:api', 'permission:delete_memorial']);
   });
