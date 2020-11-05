@@ -11,7 +11,16 @@
 |
 */
 
-Auth::routes(['register'=>false]);
+Auth::routes([
+    "verify" => true,
+    // "register" => false
+]);
+
+// admin route
+Route::get('/admin/stats', 'Controller')->name('admin');
+
+// home oroute
+Route::get('/', 'Controller')->name('home');
 
 // contact us route
 Route::get('/contact', 'Controller')->name('contact');
