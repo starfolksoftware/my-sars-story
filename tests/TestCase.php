@@ -62,7 +62,7 @@ abstract class TestCase extends BaseTestCase
     protected function update($attributes = [], $model = '', $route = '') {
         $this->withoutExceptionHandling();
 
-        $route = $this->baseRoute ? "{$this->baseRoute}.update" : $route;
+        $route = $this->baseRoute ? "{$this->baseRoute}.store" : $route;
         $model = $this->baseModel ?? $model;
 
         $model = create($model, $attributes);
@@ -71,11 +71,7 @@ abstract class TestCase extends BaseTestCase
             $this->expectException(\Illuminate\Auth\AuthenticationException::class);
         }
 
-        $id = $model->id ?? 'create';
-
-        $response = $this->postJson(route($route, $model->id), $model->toArray())->assertSuccessful();
-
-        $model = new $model;
+        $response = $this->postJson(route($route, $model->id), $model->toArray());
 
         tap($model->fresh(), function($model) use ($attributes) {
             collect($attributes)->each(function($value, $key) use ($model) {
@@ -87,6 +83,8 @@ abstract class TestCase extends BaseTestCase
     }
 
     protected function destroy($model = '', $route = '') {
+        $this->withoutExceptionHandling();
+
         $route = $this->baseRoute ? "{$this->baseRoute}.destroy" : $route;
         $model = $this->baseModel ?? $model;
 

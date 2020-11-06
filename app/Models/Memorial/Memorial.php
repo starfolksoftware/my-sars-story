@@ -34,7 +34,7 @@ class Memorial extends Model
     parent::boot();
 
     static::deleting(function ($item) {
-      //
+      $item->post()->delete();
     });
   }
 }
