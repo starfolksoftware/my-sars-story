@@ -23,7 +23,8 @@ class MemorialFactory extends Factory
     public function definition()
     {
         return [
-            "name" => $this->faker->name() ,
+            "id" => NULL,
+            "name" => $this->faker->name(),
             "profession" => $this->faker->company,
             "age" => $this->faker->randomNumber(),
             "post_id" => Post::factory(),
